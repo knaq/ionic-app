@@ -49,8 +49,10 @@
     </ion-segment-button>
   </ion-segment>
 </ion-toolbar>
- <div [ngSwitch]="pet">
-    <ion-list *ngSwitchWhen="'puppies'">
+
+
+ <div ng-switch on="pet">
+    <ion-list ng-switch-when="puppies">
       <ion-item>
         <ion-thumbnail item-left>
           <img src="img/thumbnail-puppy-1.jpg">
@@ -77,7 +79,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-list *ngSwitchWhen="'kittens'">
+    <ion-list ng-switch-when="kittens">
       <ion-item>
         <ion-thumbnail item-left>
           <img src="img/thumbnail-kitten-1.jpg">
@@ -104,7 +106,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-list *ngSwitchWhen="'ducklings'">
+    <ion-list ng-switch-when="ducklings">
       <ion-item>
         <ion-thumbnail item-left>
           <img src="img/thumbnail-duckling-1.jpg">
@@ -129,6 +131,13 @@
         </ion-thumbnail>
         <h2>Louie</h2>
       </ion-item>
+    </ion-list>
+
+    <ion-list ng-switch-default>
+      <ion-item>
+        <h2>Alien Pet</h2>
+      </ion-item>
+      
     </ion-list>
   </div>
     
