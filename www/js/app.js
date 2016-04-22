@@ -1,11 +1,11 @@
-// Ionic Starter App
+// Ionic knaq App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// 'knaq' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+// 'knaq.services' is found in services.js
+// 'knaq.controllers' is found in controllers.js
+angular.module('knaq', ['ionic', 'knaq.controllers', 'knaq.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
