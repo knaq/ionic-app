@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'knaq.services' is found in services.js
 // 'knaq.controllers' is found in controllers.js
-angular.module('knaq', ['ionic', 'knaq.controllers', 'knaq.services'])
+angular.module('knaq', ['ionic', 'knaq.controllers', 'knaq.services', 'firebase'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
