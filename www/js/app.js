@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'knaq.services' is found in services.js
 // 'knaq.controllers' is found in controllers.js
-angular.module('knaq', ['ionic', 'knaq.controllers', 'knaq.services', 'firebase'])
+angular.module('knaq', ['firebase','ionic', 'knaq.controllers', 'knaq.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -31,8 +31,20 @@ angular.module('knaq', ['ionic', 'knaq.controllers', 'knaq.services', 'firebase'
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-  // setup an abstract state for the tabs directive
-    .state('tab', {
+  // setup an abstract state for the register page
+  .state('signup', {
+    url: '/signup',
+    templateUrl: 'templates/signup.html',
+    controller: 'SignUpCtrl'
+  })
+
+  .state('signin', {
+    url: '/signin',
+    templateUrl: 'templates/signin.html',
+    controller: 'SignInCtrl'
+  })
+
+  .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
@@ -80,6 +92,6 @@ angular.module('knaq', ['ionic', 'knaq.controllers', 'knaq.services', 'firebase'
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/profile');
+  $urlRouterProvider.otherwise('/signin');
 
 });

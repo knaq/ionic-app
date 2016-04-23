@@ -49,9 +49,9 @@ angular.module('knaq.services', [])
   };
 })
 
-.factory('myAuth', function($firebaseAuth) {
+.factory('MyAuth', function($firebaseAuth) {
 
-  var ref = new Firebase('https://knaq.firebaseio.com/');
+  var ref = new Firebase('https://knaq.firebaseio.com');
   var fbAuth = $firebaseAuth(ref);
   var getAuth = fbAuth.$getAuth();
 
@@ -61,5 +61,47 @@ angular.module('knaq.services', [])
   }
 
   return myAuth;
+
+})
+
+.factory('UserService', function($firebaseArray) {
+
+  var refUsers = new Firebase('https://knaq.firebaseio.com/users');
+  var fbRef = $firebaseArray(refUsers);
+  var current = {};
+
+  var userService = {
+    addUser: function  (id, username) {
+      fbRef.$add({
+        loginID: id,
+        user: username,
+        online: 'false'
+      });
+    },
+    setCurrentUser:function  (user) {
+      current = user;
+    },
+    getCurrentUser:function  () {
+      return current;
+    },
+    getUser:function  () {
+      return fbRef;
+    },
+    userOnline: function  (id) {
+      var theID = fbRef.$getRecord(id);
+      theID.online = 'true',
+      fbRef.$save(theID);
+    },
+    userOffline: function (id) {
+      var theID = fbRef.$getRecord(id);
+      theID.online = 'false',
+      fbRef.$save(theID);
+    },
+    clearCurrent:function  (arguments) {
+      current = '';
+    }
+  }
+
+  return userService;
 
 });
