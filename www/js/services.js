@@ -47,4 +47,19 @@ angular.module('knaq.services', [])
       return null;
     }
   };
+})
+
+.factory('myAuth', function($firebaseAuth) {
+
+  var ref = new Firebase('https://knaq.firebaseio.com/');
+  var fbAuth = $firebaseAuth(ref);
+  var getAuth = fbAuth.$getAuth();
+
+  var myAuth = {
+    grabAuth: getAuth,
+    authRef: fbAuth
+  }
+
+  return myAuth;
+
 });

@@ -1,6 +1,6 @@
 angular.module('knaq.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('ProfileCtrl', function($scope) {})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
@@ -26,3 +26,7 @@ angular.module('knaq.controllers', [])
     enableFriends: true
   };
 });
+
+// .controller('startController', function($scope, myAuth, $firebaseAuth) {
+
+// });
