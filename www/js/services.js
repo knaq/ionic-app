@@ -49,57 +49,43 @@ angular.module('knaq.services', [])
   };
 })
 
-.factory('MyAuth', function($firebaseAuth) {
+.factory('MyAuth', function($firebaseArray) {
 
   var ref = new Firebase('https://knaq.firebaseio.com');
-  var fbAuth = $firebaseAuth(ref);
-  var getAuth = fbAuth.$getAuth();
-
-  var myAuth = {
-    grabAuth: getAuth,
-    authRef: fbAuth
-  }
-
-  return myAuth;
-
-})
-
-.factory('UserService', function($firebaseArray) {
-
-  var refUsers = new Firebase('https://knaq.firebaseio.com/users');
-  var fbRef = $firebaseArray(refUsers);
-  var current = {};
 
   var userService = {
-    addUser: function  (id, username) {
-      fbRef.$add({
-        loginID: id,
-        user: username,
-        online: 'false'
+
+    addUser: function(email, password) {
+      ref.createUser({
+        email: email,
+        password: password
+      }, function(error, userData) {
+        if (error) {
+
+          console.log("Error creating user:", error);
+
+        } else {
+
+          console.log("Successfully created user account with uid:", userData.uid);
+
+        }
       });
     },
-    setCurrentUser:function  (user) {
-      current = user;
-    },
-    getCurrentUser:function  () {
-      return current;
-    },
-    getUser:function  () {
-      return fbRef;
-    },
-    userOnline: function  (id) {
-      var theID = fbRef.$getRecord(id);
-      theID.online = 'true',
-      fbRef.$save(theID);
-    },
-    userOffline: function (id) {
-      var theID = fbRef.$getRecord(id);
-      theID.online = 'false',
-      fbRef.$save(theID);
-    },
-    clearCurrent:function  (arguments) {
-      current = '';
+    signInUser: function(email, password) {
+
+      ref.authWithPassword({
+        email: email,
+        password: password
+      }, function(error, authData) {
+        if (error) {
+          console.log("Login Failed!", error);
+        } else {
+          console.log("Authenticated successfully with payload:", authData);
+        }
+      });
+      
     }
+
   }
 
   return userService;
