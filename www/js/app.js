@@ -54,6 +54,9 @@ angular.module('knaq', ['firebase','ionic', 'knaq.controllers', 'knaq.services']
 
   .state('tab.profile', {
     url: '/profile',
+    params:{
+    	userSignedInID: null
+    },
     views: {
       'tab-profile': {
         templateUrl: 'templates/tab-profile.html',

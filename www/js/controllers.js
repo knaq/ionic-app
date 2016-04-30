@@ -2,8 +2,7 @@ angular.module('knaq.controllers', [])
 
 .controller('ProfileCtrl', function($scope, $state, MyAuth, $firebaseAuth) {
 
-    $scope.theUser = {}
-
+	console.log($state.params.userSignedInID)
   })
   .controller('SignUpCtrl', function($scope, $firebaseObject, $state, MyAuth) {
 
@@ -36,8 +35,7 @@ angular.module('knaq.controllers', [])
 		email: $scope.signup.email,
 		online: 'true'
 	});
-          $state.go('signin');
-        }
+                  }
       });
 
     }
@@ -67,7 +65,7 @@ angular.module('knaq.controllers', [])
         console.log("Login Failed!", error);
       } else {
         console.log("Authenticated successfully with payload:", authData);
-        $state.go('tab.profile');
+	$state.go('tab.profile', {userSignedInID:authData.uid});
       }
     });
 
