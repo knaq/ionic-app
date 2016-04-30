@@ -2,17 +2,17 @@ angular.module('knaq.controllers', [])
 
 .controller('ProfileCtrl', function($scope, $state, MyAuth, $firebaseAuth) {
 
-	var ref = new Firebase("https://knaq.firebaseio.com/users");
-	
-	var userID = $state.params.userSignedInID
-	$scope.signedInUser = null;
-	ref.on("value", function(snapshot){ 
-		console.log(userID);
-		$scope.signedInUser = snapshot.val()[userID]
-		console.log($scope.signedInUser)
-}, function (errorObject) {
-  console.log("The read failed: " + errorObject.code);
-});
+    var ref = new Firebase("https://knaq.firebaseio.com/users");
+
+    var userID = $state.params.userSignedInID
+    $scope.signedInUser = null;
+    ref.on("value", function(snapshot) {
+      console.log(userID);
+      $scope.signedInUser = snapshot.val()[userID]
+      console.log($scope.signedInUser)
+    }, function(errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
 
 
   })
@@ -29,9 +29,9 @@ angular.module('knaq.controllers', [])
 
     }
     $scope.signUp = function() {
-	
-	var ref = new Firebase("https://knaq.firebaseio.com");
-	var refToUsers = ref.child('users');
+
+      var ref = new Firebase("https://knaq.firebaseio.com");
+      var refToUsers = ref.child('users');
 
       ref.createUser({
         email: $scope.signup.email,
@@ -41,13 +41,13 @@ angular.module('knaq.controllers', [])
           console.log("Error creating user:", error);
         } else {
           console.log("Successfully created user account with uid:", userData.uid);
-	
-	refToUsers.child(userData.uid).set({
-		username: $scope.signup.username,
-		email: $scope.signup.email,
-		online: 'true'
-	});
-                  }
+
+          refToUsers.child(userData.uid).set({
+            username: $scope.signup.username,
+            email: $scope.signup.email,
+            online: 'true'
+          });
+        }
       });
 
     }
@@ -77,7 +77,9 @@ angular.module('knaq.controllers', [])
         console.log("Login Failed!", error);
       } else {
         console.log("Authenticated successfully with payload:", authData);
-	$state.go('tab.profile', {userSignedInID:authData.uid});
+        $state.go('tab.profile', {
+          userSignedInID: authData.uid
+        });
       }
     });
 
