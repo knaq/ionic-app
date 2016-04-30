@@ -2,7 +2,19 @@ angular.module('knaq.controllers', [])
 
 .controller('ProfileCtrl', function($scope, $state, MyAuth, $firebaseAuth) {
 
-	console.log($state.params.userSignedInID)
+	var ref = new Firebase("https://knaq.firebaseio.com/users");
+	
+	var userID = $state.params.userSignedInID
+	$scope.signedInUser = null;
+	ref.on("value", function(snapshot){ 
+		console.log(userID);
+		$scope.signedInUser = snapshot.val()[userID]
+		console.log($scope.signedInUser)
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+
+
   })
   .controller('SignUpCtrl', function($scope, $firebaseObject, $state, MyAuth) {
 
