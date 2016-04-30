@@ -5,7 +5,7 @@ angular.module('knaq.controllers', [])
     $scope.theUser = {}
 
   })
-  .controller('SignUpCtrl', function($scope, $state, MyAuth) {
+  .controller('SignUpCtrl', function($scope, $firebaseObject, $state, MyAuth) {
 
     $scope.signup = {};
 
@@ -14,11 +14,13 @@ angular.module('knaq.controllers', [])
       $scope.signup.email = "";
       $scope.signup.password = "";
       $scope.signup.passwordConfirmation = "";
+      $scope.signup.username = "";
 
     }
     $scope.signUp = function() {
-
-      var ref = new Firebase("https://knaq.firebaseio.com");
+	
+	var ref = new Firebase("https://knaq.firebaseio.com");
+	var refToUsers = ref.child('users');
 
       ref.createUser({
         email: $scope.signup.email,
@@ -28,6 +30,12 @@ angular.module('knaq.controllers', [])
           console.log("Error creating user:", error);
         } else {
           console.log("Successfully created user account with uid:", userData.uid);
+	
+	refToUsers.child(userData.uid).set({
+		username: $scope.signup.username,
+		email: $scope.signup.email,
+		online: 'true'
+	});
           $state.go('signin');
         }
       });
