@@ -1,26 +1,29 @@
 angular.module('knaq.controllers', [])
 
-.controller('ProfileCtrl', function($scope, $state, MyAuth, $firebaseAuth) {
+  .controller('ProfileCtrl', function ($scope, $state, MyAuth, $firebaseAuth) {
 
     var ref = new Firebase("https://knaq.firebaseio.com/users");
 
     var userID = $state.params.userSignedInID
     $scope.signedInUser = null;
-    ref.on("value", function(snapshot) {
+    ref.on("value", function (snapshot) {
       console.log(userID);
       $scope.signedInUser = snapshot.val()[userID]
       console.log($scope.signedInUser)
-    }, function(errorObject) {
+    }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
-
+    
+    $scope.click = function (view) {
+      $scope.selection = view;
+    }
 
   })
-  .controller('SignUpCtrl', function($scope, $firebaseObject, $state, MyAuth) {
+  .controller('SignUpCtrl', function ($scope, $firebaseObject, $state, MyAuth) {
 
     $scope.signup = {};
 
-    $scope.reset = function() {
+    $scope.reset = function () {
 
       $scope.signup.email = "";
       $scope.signup.password = "";
@@ -28,7 +31,7 @@ angular.module('knaq.controllers', [])
       $scope.signup.username = "";
 
     }
-    $scope.signUp = function() {
+    $scope.signUp = function () {
 
       var ref = new Firebase("https://knaq.firebaseio.com");
       var refToUsers = ref.child('users');
@@ -36,7 +39,7 @@ angular.module('knaq.controllers', [])
       ref.createUser({
         email: $scope.signup.email,
         password: $scope.signup.password
-      }, function(error, userData) {
+      }, function (error, userData) {
         if (error) {
           console.log("Error creating user:", error);
         } else {
@@ -53,65 +56,65 @@ angular.module('knaq.controllers', [])
     }
   })
 
-.controller('SignInCtrl', function($scope, $state, MyAuth) {
+  .controller('SignInCtrl', function ($scope, $state, MyAuth) {
 
-  var tmpUser = {};
+    var tmpUser = {};
 
-  $scope.signin = {};
+    $scope.signin = {};
 
-  $scope.reset = function() {
+    $scope.reset = function () {
 
-    $scope.signin.email = "";
-    $scope.signin.password = "";
+      $scope.signin.email = "";
+      $scope.signin.password = "";
 
-  }
-  $scope.signIn = function() {
+    }
+    $scope.signIn = function () {
 
-    var ref = new Firebase("https://knaq.firebaseio.com");
+      var ref = new Firebase("https://knaq.firebaseio.com");
 
-    ref.authWithPassword({
-      email: $scope.signin.email,
-      password: $scope.signin.password
-    }, function(error, authData) {
-      if (error) {
-        console.log("Login Failed!", error);
-      } else {
-        console.log("Authenticated successfully with payload:", authData);
-        $state.go('tab.profile', {
-          userSignedInID: authData.uid
-        });
-      }
-    });
+      ref.authWithPassword({
+        email: $scope.signin.email,
+        password: $scope.signin.password
+      }, function (error, authData) {
+        if (error) {
+          console.log("Login Failed!", error);
+        } else {
+          console.log("Authenticated successfully with payload:", authData);
+          $state.go('tab.profile', {
+            userSignedInID: authData.uid
+          });
+        }
+      });
 
-  }
-  $scope.signup = function() {
-    $state.go('signup');
-  }
+    }
+    $scope.signup = function () {
+      $state.go('signup');
+    }
 
 
-})
+  })
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+  .controller('ChatsCtrl', function ($scope, Chats) {
+    // With the new view caching in Ionic, Controllers are only called
+    // when they are recreated or on app start, instead of every page change.
+    // To listen for when this page is active (for example, to refresh data),
+    // listen for the $ionicView.enter event:
+    //
+    //$scope.$on('$ionicView.enter', function(e) {
+    //});
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
+    $scope.chats = Chats.all();
+    $scope.remove = function (chat) {
+      Chats.remove(chat);
+    };
+  })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+  .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
+    $scope.chat = Chats.get($stateParams.chatId);
+  })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
+  .controller('AccountCtrl', function ($scope) {
+    $scope.settings = {
+      enableFriends: true
+    };
+  });

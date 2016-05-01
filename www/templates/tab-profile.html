@@ -1,17 +1,54 @@
 <ion-view view-title="Profile">
   <ion-content class="padding">
-    
+
     <div class="list">
 
       <div class="item item-divider">
         Welcome, {{signedInUser.username}}
       </div>
 
-        <a class="item" href="#" ng-repeat="user in allUsers">
+      <a class="item" href="#" ng-repeat="user in allUsers">
           {{user.user}} is <span ng-show="user.online == 'true'">Online</span><span ng-show="user.online == 'false'">Offline</span>
         </a>
 
     </div>
-    
+
+    <ion-item class="item-avatar" type="item-text-wrap">
+      <img ng-src="../img/adam.jpg">
+      <h2>Hello</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi asperiores sequi quaerat dolores enim qui doloremque,
+        molestias fuga error obcaecati nesciunt quis laborum dolore, mollitia ratione ab. Illo beatae, quibusdam! Lorem ipsum
+        dolor sit amet, consectetur adipisicing elit. Ad vel incidunt, quae dolore tempore odit excepturi repellendus suscipit!
+        Pariatur facere laudantium maxime veritatis itaque nulla ea quasi minima quis ullam.</p>
+    </ion-item>
+    <div class="button-bar">
+      <a class="button" ng-click="click('reviews')" ng-class="{'button-positive':selection=='reviews'}" value="reviews">Reviews</a>
+      <a class="button" ng-click="click('portfolio')" ng-class="{'button-positive':selection=='portfolio'}" value="portfolio">Portfolio</a>
+      <a class="button" ng-click="click('skills')" ng-class="{'button-positive':selection=='skills'}" value="skills">Skills</a>
+    </div>
+    <div class="list" ng-switch on="selection">
+
+      <a class="item item-avatar" href="#" ng-switch-default>
+        <img src="../img/ben.png">
+        <h2>Great Job</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos dolor saepe nemo optio voluptas ea labore autem
+          animi, excepturi consectetur. Esse beatae, consectetur reiciendis dolores, voluptatum ipsum voluptas autem maxime.</p>
+      </a>
+      <a class="item item-avatar" href="#" ng-switch-when="portfolio">
+        <img src="../img/max.png">
+        <h2>Excellent</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla quidem maxime illum, molestias saepe necessitatibus,
+          incidunt nihil rerum vitae magni neque ipsum nobis eaque sit tempora recusandae! Quibusdam, voluptatibus, provident.</p>
+      </a>
+      <a class="item item-avatar" href="#" ng-switch-when="skills">
+        <img src="../img/perry.png">
+        <h2>Wonderful</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum ab, fugit quos impedit in minus hic voluptatum quae,
+          necessitatibus et, debitis repellat. Debitis distinctio, itaque iure hic, repellendus necessitatibus sapiente.</p>
+      </a>
+
+
+
+    </div>
   </ion-content>
 </ion-view>
