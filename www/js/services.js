@@ -1,47 +1,47 @@
 angular.module('knaq.services', [])
 
-.factory('Chats', function() {
+.factory('Gigs', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-  var chats = [{
+  var gigs = [{
     id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
+    company: 'Ben Sparrow',
+    description: 'You on your way?',
+    photo: 'img/ben.png'
   }, {
     id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
+    company: 'Max Lynx',
+    description: 'Hey, it\'s me',
+    photo: 'img/max.png'
   }, {
     id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
+    company: 'Adam Bradleyson',
+    description: 'I should buy a boat',
+    photo: 'img/adam.jpg'
   }, {
     id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
+    company: 'Perry Governor',
+    description: 'Look at my mukluks!',
+    photo: 'img/perry.png'
   }, {
     id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
+    company: 'Mike Harrington',
+    description: 'This is wicked good ice cream.',
+    photo: 'img/mike.png'
   }];
 
   return {
     all: function() {
-      return chats;
+      return gigs;
     },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
+    remove: function(gig) {
+      gigs.splice(gigs.indexOf(gig), 1);
     },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+    get: function(gigId) {
+      for (var i = 0; i < gigs.length; i++) {
+        if (gigs[i].id === parseInt(gigId)) {
+          return gigs[i];
         }
       }
       return null;

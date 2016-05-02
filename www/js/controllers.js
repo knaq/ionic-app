@@ -91,7 +91,7 @@ angular.module('knaq.controllers', [])
 
 })
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('GigsCtrl', function($scope, Gigs) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -100,14 +100,14 @@ angular.module('knaq.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
+  $scope.gigs = Gigs.all();
+  $scope.remove = function(gig) {
+    Gigs.remove(gig);
   };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('GigDetailCtrl', function($scope, $stateParams, Gigs) {
+  $scope.gig = Gigs.get($stateParams.gigId);
 })
 
 .controller('AccountCtrl', function($scope) {

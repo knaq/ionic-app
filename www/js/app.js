@@ -65,21 +65,21 @@ angular.module('knaq', ['firebase', 'ionic', 'knaq.controllers', 'knaq.services'
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.gigs', {
+      url: '/gigs',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-gigs': {
+          templateUrl: 'templates/tab-gigs.html',
+          controller: 'GigsCtrl'
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+    .state('tab.gig-detail', {
+      url: '/gigs/:gigId',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+        'tab-gigs': {
+          templateUrl: 'templates/gig-detail.html',
+          controller: 'GigDetailCtrl'
         }
       }
     })
