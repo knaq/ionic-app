@@ -66,7 +66,7 @@ angular.module('knaq', ['firebase', 'ionic', 'knaq.controllers', 'knaq.services'
       })
       
       .state('tab.skill-detail', {
-        url: '/profile/skill/:skillID',
+        url: '/profile/skill/:skillId',
         views: {
           'tab-profile': {
             templateUrl: 'templates/skill-detail.html',
