@@ -50,7 +50,7 @@ angular.module('knaq.services', [])
 })
 .factory('Auth', function () {
    if (window.localStorage['session']) {
-      var _user = JSON.parse(window.localStorage['session']);
+      var _user = window.localStorage['session'];
    }
    var setUser = function (session) {
       _user = session;
