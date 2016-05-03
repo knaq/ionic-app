@@ -1,6 +1,6 @@
 angular.module('knaq.controllers', [])
 
-.controller('ProfileCtrl', function($scope, $state, MyAuth, $firebaseAuth) {
+.controller('ProfileCtrl', function($scope, $state, $firebaseAuth) {
 
     var ref = new Firebase("https://knaq.firebaseio.com/users");
 
@@ -16,7 +16,7 @@ angular.module('knaq.controllers', [])
 
 
   })
-  .controller('SignUpCtrl', function($scope, $firebaseObject, $state, MyAuth) {
+  .controller('SignUpCtrl', function($scope, $firebaseObject, $state) {
 
     $scope.signup = {};
 
@@ -53,7 +53,7 @@ angular.module('knaq.controllers', [])
     }
   })
 
-.controller('SignInCtrl', function($scope, $state, MyAuth) {
+.controller('SignInCtrl', function($scope, $state) {
 
   var tmpUser = {};
 
