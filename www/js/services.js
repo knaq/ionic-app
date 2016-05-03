@@ -56,23 +56,28 @@ angular.module('knaq.services', [])
     var skills = [{
       id: 0,
       name: 'Web Design',
-      endorsements: 5
+      endorsements: 5,
+      people: ['Ionic', 'Ben', 'Max', 'Mike', 'Perry']
     }, {
         id: 1,
         name: 'Lifting',
-        endorsements: 3
+        endorsements: 3,
+        people: ['Ionic', 'Ben', 'Max']
       }, {
         id: 2,
         name: 'Database Management',
-        endorsements: 4
+        endorsements: 4,
+        people: ['Ionic', 'Ben', 'Max', 'Mike']
       }, {
         id: 3,
         name: 'Entertaining',
-        endorsements: 2
+        endorsements: 2,
+        people: ['Ionic', 'Ben']
       }, {
         id: 4,
         name: 'Studying',
-        endorsements: 1
+        endorsements: 1,
+        people: ['Ionic']
       }];
 
     return {
@@ -99,7 +104,7 @@ angular.module('knaq.services', [])
     // Some fake testing data
     var reviews = [{
       id: 0,
-      name: 'Web Design',
+      name: 'Adam',
       rating: 4,
       title: 'Good Job!',
       text: 'Lorem ipsum dolor sit amet, ne qui putent iriure, doctus urbanitas vim et, vim dicam vivendo deseruisse ea. An postea minimum contentiones eam, utinam alienum vix ei, vis denique appareat cu. Eirmod utroque philosophia ea vis. Sale reprimique reformidans has ad, no debet tation impedit ius, et vim debet error. Stet case menandri qui an, vix viderer elaboraret at. Altera laboramus ex vim, malis graeco omittantur vel ad.'

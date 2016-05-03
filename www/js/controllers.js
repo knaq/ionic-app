@@ -24,8 +24,14 @@ angular.module('knaq.controllers', [])
     $scope.rating = {};
     $scope.rating.rate = 3;
     $scope.rating.max = 5;
+    $scope.readOnly = true;
+
+    $scope.ratingsCallback = function (rating) {
+      console.log('Selected rating is : ', rating);
+    };
+
     $scope.skills = Skills.all();
-    $scope.reviews = Reviews.all(); 
+    $scope.reviews = Reviews.all();
     $scope.remove = function (skill) {
       Skills.remove(skill);
     };
