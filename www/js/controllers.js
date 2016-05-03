@@ -1,6 +1,6 @@
 angular.module('knaq.controllers', [])
 
-  .controller('ProfileCtrl', function ($scope, $state, MyAuth, $firebaseAuth) {
+  .controller('ProfileCtrl', function ($scope, $state, MyAuth, $firebaseAuth, Skills, Reviews) {
 
     var ref = new Firebase("https://knaq.firebaseio.com/users");
 
@@ -13,12 +13,28 @@ angular.module('knaq.controllers', [])
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
-    
+
+    $scope.selection = 'reviews';
+
     $scope.click = function (view) {
       $scope.selection = view;
     }
 
+    // set the rate and max variables
+    $scope.rating = {};
+    $scope.rating.rate = 3;
+    $scope.rating.max = 5;
+    $scope.skills = Skills.all();
+    $scope.reviews = Reviews.all(); 
+    $scope.remove = function (skill) {
+      Skills.remove(skill);
+    };
   })
+
+  .controller('SkillDetailCtrl', function ($scope, $stateParams, Skills) {
+    $scope.skill = Skills.get($stateParams.skillId);
+  })
+
   .controller('SignUpCtrl', function ($scope, $firebaseObject, $state, MyAuth) {
 
     $scope.signup = {};
