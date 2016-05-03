@@ -47,7 +47,12 @@ angular.module('knaq', ['firebase', 'ionic', 'knaq.controllers', 'knaq.services'
   .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'templates/tabs.html',
+    onEnter: function($state, Auth){
+        if(!Auth.isLoggedIn()){
+           $state.go('signin');
+        }
+    }
   })
 
   // Each tab has its own nav history stack:

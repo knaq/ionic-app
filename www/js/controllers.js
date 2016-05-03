@@ -1,18 +1,14 @@
 angular.module('knaq.controllers', [])
 
-.controller('ProfileCtrl', function($scope, $state, $firebaseAuth) {
+.controller('ProfileCtrl', function($scope, $state, $firebaseAuth, Auth) {
 
-    var ref = new Firebase("https://knaq.firebaseio.com/users");
+    console.log(Auth.getUser());
 
-    var userID = $state.params.userSignedInID
-    $scope.signedInUser = null;
-    ref.on("value", function(snapshot) {
-      console.log(userID);
-      $scope.signedInUser = snapshot.val()[userID]
-      console.log($scope.signedInUser)
-    }, function(errorObject) {
-      console.log("The read failed: " + errorObject.code);
-    });
+    $scope.signout = function  (arguments) {
+      Auth.logout();
+      $state.go('signin');
+    }
+
 
 
   })
@@ -53,7 +49,7 @@ angular.module('knaq.controllers', [])
     }
   })
 
-.controller('SignInCtrl', function($scope, $state) {
+.controller('SignInCtrl', function($scope, $state, Auth) {
 
   var tmpUser = {};
 
@@ -77,9 +73,13 @@ angular.module('knaq.controllers', [])
         console.log("Login Failed!", error);
       } else {
         console.log("Authenticated successfully with payload:", authData);
-        $state.go('tab.profile', {
-          userSignedInID: authData.uid
-        });
+
+        Auth.setUser(authData.uid);
+        $state.go('tab.profile');
+        
+        $scope.signin.email = "";
+        $scope.signin.password = "";
+
       }
     });
 
