@@ -1,14 +1,23 @@
 angular.module('knaq.controllers', [])
 
-.controller('ProfileCtrl', function($scope, $state, $firebaseAuth, Auth) {
+.controller('ProfileCtrl', function($scope, $state, $firebaseAuth, Auth, Data) {
 
-    console.log(Auth.getUser());
+    
+    $scope.allUsers = null;
+    $scope.signedInUser = null;
+    
+    Data.getAllUsers().then(function (data) {
+      $scope.allUsers = data
+    })
+
+    Data.getUser(Auth.getUser()).then(function (data) {
+      $scope.signedInUser = data
+    });
 
     $scope.signout = function  (arguments) {
       Auth.logout();
       $state.go('signin');
     }
-
 
 
   })

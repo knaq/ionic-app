@@ -71,4 +71,26 @@ angular.module('knaq.services', [])
          _user = null;
       }
    }
+})
+.factory('Data', function($firebaseObject, $firebaseArray){
+
+  var ref = new Firebase("https://knaq.firebaseio.com/users");
+  var usersData = $firebaseArray(ref);
+
+  return {
+
+    getAllUsers: function(){
+
+      return usersData.$loaded();
+
+    },
+    getUser: function(userid){
+
+      return $firebaseObject(ref.child(userid)).$loaded();
+
+    }
+
+
+  }
+
 });
