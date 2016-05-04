@@ -1,0 +1,32 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="Create a new gig">
+    <ion-content class="padding">
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Job title</span>
+                <input type="text" placeholder="Job title"></input>
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Hourly Pay</span>
+                <input type="number" placeholder="Hourly pay"></input>
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Gig location</span>
+                <input type="text" placeholder="Gig location"></input>
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Job Description</span>
+                <textarea placeholder="Job Description"></textarea>
+            </label>
+        </div>
+        
+        <button class="button button-block button-positive" ng-click="postGig()">
+            Post your gig!
+        </button>
+    </ion-content>
+</ion-view>

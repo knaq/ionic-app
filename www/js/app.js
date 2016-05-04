@@ -6,7 +6,6 @@
 // 'knaq.services' is found in services.js
 // 'knaq.controllers' is found in controllers.js
 angular.module('knaq', ['firebase', 'ionic', 'knaq.controllers', 'knaq.services'])
-
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -80,6 +79,16 @@ angular.module('knaq', ['firebase', 'ionic', 'knaq.controllers', 'knaq.services'
         'tab-gigs': {
           templateUrl: 'templates/gig-detail.html',
           controller: 'GigDetailCtrl'
+        }
+      }
+    })
+    
+    .state('tab.gig-new', {
+      url: '/gigs/new',
+      views: {
+        'tab-gigs': {
+          templateUrl: 'templates/gig-new.html',
+          controller: 'NewGigCtrl'
         }
       }
     })
