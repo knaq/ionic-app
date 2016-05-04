@@ -50,7 +50,7 @@ angular.module('knaq.controllers', [])
           refToUsers.child(userData.uid).set({
             username: $scope.signup.username,
             email: $scope.signup.email,
-            online: 'true'
+            online: 'false'
           });
         }
       });
