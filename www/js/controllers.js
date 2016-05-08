@@ -1,6 +1,6 @@
 angular.module('knaq.controllers', [])
 
-  .controller('ProfileCtrl', function ($scope, $state, MyAuth, $firebaseAuth, Skills, Reviews) {
+  .controller('ProfileCtrl', function ($scope, $state, MyAuth, $firebaseAuth, Skills, Reviews, Portfolio) {
 
     var ref = new Firebase("https://knaq.firebaseio.com/users");
 
@@ -19,7 +19,7 @@ angular.module('knaq.controllers', [])
     $scope.click = function (view) {
       $scope.selection = view;
     }
-
+    
     // set the rate and max variables
     $scope.rating = {};
     $scope.rating.rate = 3;
@@ -31,10 +31,14 @@ angular.module('knaq.controllers', [])
     };
 
     $scope.skills = Skills.all();
+    console.log($scope.skills);
+    console.log($scope.signedInUser.skills)
     $scope.reviews = Reviews.all();
+    $scope.portfolio = Portfolio.all();
     $scope.remove = function (skill) {
       Skills.remove(skill);
     };
+    
   })
 
   .controller('SkillDetailCtrl', function ($scope, $stateParams, Skills) {

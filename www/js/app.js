@@ -64,13 +64,23 @@ angular.module('knaq', ['firebase', 'ionic', 'knaq.controllers', 'knaq.services'
           }
         }
       })
-      
+
       .state('tab.skill-detail', {
         url: '/profile/skill/:skillId',
         views: {
           'tab-profile': {
             templateUrl: 'templates/skill-detail.html',
             controller: 'SkillDetailCtrl'
+          }
+        }
+      })
+      
+      .state('tab.portfolio-detail', {
+        url: '/profile/portfolio/:portfolioItemId',
+        views: {
+          'tab-profile': {
+            templateUrl: 'templates/portfolio-detail.html',
+            controller: 'PortfolioDetailCtrl'
           }
         }
       })
