@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'knaq.services' is found in services.js
 // 'knaq.controllers' is found in controllers.js
-angular.module('knaq', ['firebase', 'ionic', 'knaq.controllers', 'knaq.services', 'ionic.rating'])
+angular.module('knaq', ['firebase', 'ionic', 'knaq.controllers', 'knaq.services', 'profile.controllers', 'profile.services', 'ionic.rating'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -60,7 +60,7 @@ angular.module('knaq', ['firebase', 'ionic', 'knaq.controllers', 'knaq.services'
         views: {
           'tab-profile': {
             templateUrl: 'templates/tab-profile.html',
-            controller: 'ProfileCtrl'
+            controller: 'ProfilePageCtrl'
           }
         }
       })
