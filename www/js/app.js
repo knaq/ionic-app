@@ -68,8 +68,7 @@ angular.module('knaq', ['firebase', 'ionic', 'gig.services','gig.controllers', '
       url: '/gigs',
       views: {
         'tab-gigs': {
-          templateUrl: 'templates/tab-gigs.html',
-          controller: 'GigsCtrl'
+          templateUrl: 'templates/tab-gigs.html'
         }
       }
     })
@@ -87,8 +86,7 @@ angular.module('knaq', ['firebase', 'ionic', 'gig.services','gig.controllers', '
       url: '/gigs/new',
       views: {
         'tab-gigs': {
-          templateUrl: 'templates/gig-new.html',
-          controller: 'NewGigCtrl'
+          templateUrl: 'templates/gig-new.html'
         }
       }
     })
