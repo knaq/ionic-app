@@ -1,4 +1,20 @@
-angular.module('gig.services', [])
+angular.module('gig.services', ["firebase"])
+.service('GigFirebaseConnection', function($firebaseArray) {
+  this.firebaseReference = new Firebase("https://knaq.firebaseio.com/gigs");
+  console.log(this.firebaseReference);
+  this.gigs = $firebaseArray(this.firebaseReference);
+  
+  this.add = function(title, pay, location, description, userId) {
+     this.gigs.$add({
+       title: title,
+       pay: pay,
+       location: location,
+       description: description,
+       userId: userId
+     });
+  }
+})
+
 
 .factory('Gigs', function() {
   // Might use a resource here that returns a JSON array
