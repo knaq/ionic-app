@@ -1,4 +1,4 @@
-angular.module('gig.controllers', [])
+angular.module('gig.controllers', ['gig.services'])
 
 .controller('GigsCtrl', function($scope, Gigs, $state) {
   // With the new view caching in Ionic, Controllers are only called
@@ -23,8 +23,12 @@ angular.module('gig.controllers', [])
   $scope.gig = Gigs.get($stateParams.gigId);
 })
 
-.controller('NewGigCtrl', function($scope, $state, $ionicHistory) {
-  $scope.postGig = function() {
+.controller('NewGigCtrl', function($state, $ionicHistory, GigFirebaseConnection) {
+ 
+  this.postGig = function() {
+    console.log(this.location);
+    /*Todo: Connect  userId to firebase authentication data*/
+    GigFirebaseConnection.add(this.title, this.pay, this.location, this.description, 11111);
     $ionicHistory.goBack();  
   }
 });
