@@ -23,11 +23,10 @@ angular.module('gig.controllers', ['gig.services'])
   $scope.gig = Gigs.get($stateParams.gigId);
 })
 
-.controller('NewGigCtrl', function($state, $ionicHistory, GigFirebaseConnection) {
+.controller('NewGigCtrl', function($ionicHistory, GigFirebaseConnection) {
  
+  /*Todo: Connect  userId to firebase authentication data*/ 
   this.postGig = function() {
-    console.log(this.location);
-    /*Todo: Connect  userId to firebase authentication data*/
     GigFirebaseConnection.add(this.title, this.pay, this.location, this.description, 11111);
     $ionicHistory.goBack();  
   }
