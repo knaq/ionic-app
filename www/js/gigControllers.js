@@ -27,7 +27,7 @@ angular.module('gig.controllers', ['gig.services'])
  
   /*Todo: Connect  userId to firebase authentication data*/ 
   this.postGig = function() {
-    GigFirebaseConnection.add(this.title, this.pay, this.location, this.description, 11111);
+    GigFirebaseConnection.add(this.title, this.pay, this.location, this.description, "954a5f56-7fdb-4039-a9a1-e5afa2a5e338");
     $ionicHistory.goBack();  
   }
 });
