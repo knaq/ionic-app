@@ -5,12 +5,12 @@
       </button>
   </ion-nav-buttons>
 
-  <ion-content>
+  <ion-content ng-controller="GigsCtrl as gigController">
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="gig in gigs" type="item-text-wrap" href="#/tab/gigs/{{gig.id}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="gig in gigController.gigs" type="item-text-wrap" href="#/tab/gigs/{{gig.$id}}">
         <img ng-src="{{gig.photo}}">
-        <h2>{{gig.company}}</h2>
-        <p>{{gig.position}}</p>
+        <h2>{{gig.userId}}</h2>
+        <p>{{gig.title}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
