@@ -1,4 +1,4 @@
-angular.module('knaq.controllers', [])
+  angular.module('knaq.controllers', [])
 
 .controller('ProfileCtrl', function($scope, $state, $firebaseAuth, Auth, Data) {
 
@@ -52,6 +52,10 @@ angular.module('knaq.controllers', [])
             email: $scope.signup.email,
             online: 'false'
           });
+
+          $state.go('signin');
+
+
         }
       });
 
@@ -94,7 +98,9 @@ angular.module('knaq.controllers', [])
 
   }
   $scope.signup = function() {
+
     $state.go('signup');
+
   }
 
 
