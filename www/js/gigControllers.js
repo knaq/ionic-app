@@ -1,6 +1,6 @@
 angular.module('gig.controllers', ['gig.services'])
 
-.controller('GigsCtrl', function(GigFirebaseConnection, $state) {
+.controller('GigsCtrl', function(GigFirebaseConnection, $state, $stateParams) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -9,15 +9,31 @@ angular.module('gig.controllers', ['gig.services'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  this.gigs = GigFirebaseConnection.getAll();
+  this.gigLoadPromise = GigFirebaseConnection.getAll();
+  this.gigs = null;
+
+  this.gigLoadPromise.then(function(result) {
+    this.gigs = result;
+    
+  }.bind(this), function(error) {
+    alert("Couldn't load gig: " + error);  
+  })
   
   this.createNewGig = function() {
     $state.go('tab.gig-new');
   }
 })
 
-.controller('GigDetailCtrl', function(GigFirebaseConnection) {
-  this.gigs = GigFirebaseConnection.get();
+.controller('GigDetailCtrl', function(GigFirebaseConnection, $stateParams) {
+  this.gigLoadPromise = GigFirebaseConnection.get($stateParams.gigId);
+  this.gig = null;
+  
+  this.gigLoadPromise.then(function(result) {
+    this.gig = result;
+  }.bind(this), function(error) {
+    alert("Couldn't load the gig: " + error);
+  })
+  
 })
 
 .controller('NewGigCtrl', function($ionicHistory, GigFirebaseConnection) {

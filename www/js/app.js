@@ -76,8 +76,7 @@ angular.module('knaq', ['firebase', 'ionic', 'gig.services','gig.controllers', '
       url: '/gigs/:gigId',
       views: {
         'tab-gigs': {
-          templateUrl: 'templates/gig-detail.html',
-          controller: 'GigDetailCtrl'
+          templateUrl: 'templates/gig-detail.html'
         }
       }
     })
