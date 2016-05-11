@@ -1,6 +1,6 @@
   angular.module('knaq.controllers', [])
 
-.controller('ProfileCtrl', function($scope, $state, $firebaseAuth, Auth, Data) {
+.controller('ProfileCtrl', function($scope, $state, $firebaseAuth, Session, Data) {
 
     
     $scope.allUsers = null;
@@ -10,12 +10,15 @@
       $scope.allUsers = data
     })
 
-    Data.getUser(Auth.getUser()).then(function (data) {
+    Data.getUser(Session.getUser()).then(function (data) {
       $scope.signedInUser = data
     });
 
     $scope.signout = function  (arguments) {
-      Auth.logout();
+      Data.setUserOffline(Session.getUser()).then(function(data){
+          console.log("User is offline now!");
+      });
+      Session.logout();
       $state.go('signin');
     }
 
@@ -62,7 +65,7 @@
     }
   })
 
-.controller('SignInCtrl', function($scope, $state, Auth) {
+.controller('SignInCtrl', function($scope, $state, Session, Data) {
 
   var tmpUser = {};
 
@@ -85,9 +88,16 @@
       if (error) {
         console.log("Login Failed!", error);
       } else {
-        console.log("Authenticated successfully with payload:", authData);
+        //console.log("Authenticated successfully with payload:", authData);
 
-        Auth.setUser(authData.uid);
+        //Passing authenticated users id to Auth Service
+        Session.setUser(authData.uid);
+
+        Data.setUserOnline(authData.uid).then(function(data){
+          //console.log(data);
+          console.log("User with the following id" +authData.uid+"is successfully authenticated!");
+        });
+
         $state.go('tab.profile');
         
         $scope.signin.email = "";
