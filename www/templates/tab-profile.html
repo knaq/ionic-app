@@ -6,7 +6,6 @@
       <div class="item item-divider">
         Welcome, {{signedInUser.username}}
       </div>
-
       <a class="item" href="#" ng-repeat="user in allUsers">
           {{user.username}} is <span ng-show="user.online == 'true'" style="color: green">Online</span><span ng-show="user.online == 'false'" style="color: red">Offline</span>
         </a>
@@ -29,7 +28,7 @@
     <div ng-switch on="selection">
       <div href="#" ng-switch-default>
         <ion-list>
-          <ion-item class="item item-avatar" ng-repeat="review in reviews">
+          <ion-item class="item item-avatar" ng-repeat="review in signedInUser.reviews">
             <img src="../img/ben.png">
             <h2>{{review.title}}</h2>
             <p>{{review.text}}
@@ -40,53 +39,32 @@
         </ion-list>
       </div>
       <div href="#" ng-switch-when="portfolio">
-        <div class="list card">
-
+        <div class="list card" ng-repeat="portfolioItem in signedInUser.portfolio">
           <div class="item">
-            <h2>Project 1</h2>
-            <p>November 05, 1955</p>
+            <h2>{{portfolioItem.title}}</h2>
+            <p>{{portfolioItem.date | date:'short'}}</p>
           </div>
-
           <div class="item item-thumbnail-left text-right">
             <img class="full-image" src="../img/ionic.png">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam provident accusamus, amet quia, minima fugit vel voluptatum
-              necessitatibus incidunt at quae, iure. Odit illum perferendis voluptatem, quasi libero ipsum praesentium.
+              {{portfolioItem.text}}
             </p>
           </div>
-
         </div>
-        <div class="list card">
-
-          <div class="item">
-            <h2>Project 2</h2>
-            <p>November 05, 1955</p>
-          </div>
-
-          <div class="item item-thumbnail-left text-right">
-            <img class="full-image" src="../img/ionic.png">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam provident accusamus, amet quia, minima fugit vel voluptatum
-              necessitatibus incidunt at quae, iure. Odit illum perferendis voluptatem, quasi libero ipsum praesentium.
-            </p>
-          </div>
-
-        </div>
-
       </div>
       <div href="#" ng-switch-when="skills">
 
         <ion-list>
-          <ion-item class="list card" ng-repeat="skill in skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.id}}">
+          <p>{{signedInUser.skills}}</p>
+          <!--<p>{{signedInUser.skills[0].endorsements[0].id}}</p>-->
+          <ion-item class="list card" ng-repeat="skill in signedInUser.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
             <h2>{{skill.name}}</h2>
-            <span class="badge badge-assertive">{{skill.endorsements}}</span>
+            <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
           </ion-item>
         </ion-list>
-
+        <a class="button button-icon icon ion-plus-circled" ng-click="showPopup()"></a>
       </div>
     </div>
-    <button class="button button-full button-assertive" ng-model="user.signout" ng-click="signout()">
-      Sign out
-    </button>
+
   </ion-content>
 </ion-view>

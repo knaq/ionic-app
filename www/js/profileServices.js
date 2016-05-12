@@ -1,52 +1,83 @@
-  angular.module('profile.services', [])
-  .factory('Skills', function () {
-    // Might use a resource here that returns a JSON array
+angular.module('profile.services', ["firebase"])
+    .service('SkillsFirebaseConnection', function ($firebaseArray) {
+        // this.firebaseReference = new Firebase("https://knaq.firebaseio.com/users");
+        this.firebaseReference = new Firebase("https://knaq.firebaseio.com/users/221fa728-0d3c-4ef2-a502-e37ccd21928a/skills");
+        this.skills = $firebaseArray(this.firebaseReference);
+        
+        this.getAll = function () {
+            return this.skills;
+        };
 
-    // Some fake testing data
-    var skills = [{
-        id: 0,
-        name: 'Web Design',
-        endorsements: 5,
-        people: ['Ionic', 'Ben', 'Max', 'Mike', 'Perry']
-    }, {
-            id: 1,
-            name: 'Lifting',
-            endorsements: 3,
-            people: ['Ionic', 'Ben', 'Max']
-        }, {
-            id: 2,
-            name: 'Database Management',
-            endorsements: 4,
-            people: ['Ionic', 'Ben', 'Max', 'Mike']
-        }, {
-            id: 3,
-            name: 'Entertaining',
-            endorsements: 2,
-            people: ['Ionic', 'Ben']
-        }, {
-            id: 4,
-            name: 'Studying',
-            endorsements: 1,
-            people: ['Ionic']
-        }];
+        this.get = function (key) {
+            return this.skills.$getRecord(key);
+        };
 
-    return {
-        all: function () {
-            return skills;
-        },
-        remove: function (skill) {
-            skills.splice(chats.indexOf(skill), 1);
-        },
-        get: function (skillId) {
-            for (var i = 0; i < skills.length; i++) {
-                if (skills[i].id === parseInt(skillId)) {
-                    return skills[i];
+        this.remove = function (record) {
+            return this.skills.$remove(record);
+        };
+
+        this.get = function () {
+            this.skills;
+        };
+
+        this.getSkill = function (key) {
+            return this.skills.$getRecord(key);
+        };
+
+        this.addSkill = function (name) {
+            this.skills.$add({
+                name: name
+            });
+        };
+    })
+    .factory('Skills', function () {
+        // Might use a resource here that returns a JSON array
+
+        // Some fake testing data
+        var skills = [{
+            id: 0,
+            name: 'Web Design',
+            endorsements: 5,
+            people: ['Ionic', 'Ben', 'Max', 'Mike', 'Perry']
+        }, {
+                id: 1,
+                name: 'Lifting',
+                endorsements: 3,
+                people: ['Ionic', 'Ben', 'Max']
+            }, {
+                id: 2,
+                name: 'Database Management',
+                endorsements: 4,
+                people: ['Ionic', 'Ben', 'Max', 'Mike']
+            }, {
+                id: 3,
+                name: 'Entertaining',
+                endorsements: 2,
+                people: ['Ionic', 'Ben']
+            }, {
+                id: 4,
+                name: 'Studying',
+                endorsements: 1,
+                people: ['Ionic']
+            }];
+
+        return {
+            all: function () {
+                return skills;
+            },
+            remove: function (skill) {
+                skills.splice(chats.indexOf(skill), 1);
+            },
+            get: function (skillId) {
+                for (var i = 0; i < skills.length; i++) {
+                    if (skills[i].id === parseInt(skillId)) {
+                        return skills[i];
+                    }
                 }
+                return null;
             }
-            return null;
-        }
-    };
-})
+        };
+    })
 
     .factory('Reviews', function () {
         // Might use a resource here that returns a JSON array
