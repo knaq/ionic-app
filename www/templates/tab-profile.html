@@ -8,10 +8,15 @@
       </div>
 
         <a class="item" href="#" ng-repeat="user in allUsers">
-          {{user.user}} is <span ng-show="user.online == 'true'">Online</span><span ng-show="user.online == 'false'">Offline</span>
+          {{user.username}} is <span ng-show="user.online == 'true'" style="color: green">Online</span><span ng-show="user.online == 'false'" style="color: red">Offline</span>
         </a>
 
     </div>
-    
+
+    <button class="button button-full button-assertive" ng-model="user.signout" ng-click="signout()">
+      Sign out
+    </button>
+        
   </ion-content>
+
 </ion-view>

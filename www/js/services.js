@@ -1,44 +1,73 @@
 angular.module('knaq.services', [])
 
-.factory('MyAuth', function($firebaseArray) {
-
-  var ref = new Firebase('https://knaq.firebaseio.com');
-
-  var userService = {
-
-    addUser: function(email, password) {
-      ref.createUser({
-        email: email,
-        password: password
-      }, function(error, userData) {
-        if (error) {
-
-          console.log("Error creating user:", error);
-
-        } else {
-
-          console.log("Successfully created user account with uid:", userData.uid);
-
-        }
-      });
-    },
-    signInUser: function(email, password) {
-
-      ref.authWithPassword({
-        email: email,
-        password: password
-      }, function(error, authData) {
-        if (error) {
-          console.log("Login Failed!", error);
-        } else {
-          console.log("Authenticated successfully with payload:", authData);
-        }
-      });
-      
+  .factory('Session', function() {
+    if (window.localStorage['session']) {
+      var _user = window.localStorage['session'];
+    }
+    var setUser = function(session) {
+      _user = session;
+      window.localStorage['session'] = _user;
     }
 
-  }
+    return {
+      setUser: setUser,
+      isLoggedIn: function() {
+        return _user ? true : false;
+      },
+      getUser: function() {
+        return _user;
+      },
+      logout: function() {
+        window.localStorage.removeItem("session");
+        window.localStorage.removeItem("list_dependents");
+        _user = null;
+      }
+    }
+  })
+  .factory('Data', function($firebaseObject, $firebaseArray) {
 
-  return userService;
+    var ref = new Firebase("https://knaq.firebaseio.com/users");
+    
+    return {
 
-});
+      getAllUsers: function() {
+
+        return $firebaseArray(ref).$loaded();
+
+      },
+      getUser: function(userid) {
+
+        return $firebaseObject(ref.child(userid)).$loaded();
+
+      },
+      setUserOnline: function(userid) {
+
+        var onlineStatus = $firebaseObject(ref.child(userid).child('online'))
+
+        onlineStatus.$loaded().then(function() {
+          console.log(onlineStatus.$value); 
+        });
+
+        onlineStatus.$value = "true"
+
+        return onlineStatus.$save();
+
+      },
+      setUserOffline: function(userid) {
+
+        var onlineStatus = $firebaseObject(ref.child(userid).child('online'))
+
+        onlineStatus.$loaded().then(function() {
+          console.log(onlineStatus.$value); 
+        });
+
+        onlineStatus.$value = "false"
+
+        return onlineStatus.$save();
+
+      }
+
+
+    }
+
+  });
