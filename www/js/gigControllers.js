@@ -64,10 +64,11 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
   this.apply = function() {
     var userId = Session.getUser();
     if (this.gig.applicants == undefined || this.gig.applicants == null) {
-      this.gig.applicants = {userId};
+      this.gig.applicants = [userId];
       this.gig.$save();
     } else {
       this.gig.applicants.push(userId);
+      this.gig.$save();
     }
   }
   
