@@ -34,7 +34,6 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 .controller('GigDetailCtrl', function(GigFirebaseConnection, $stateParams, Session) {
   this.gigLoadPromise = GigFirebaseConnection.get($stateParams.gigId);
   this.gig = null;
-  this.applyState = this.checkApplyState();
   
   this.applyBtnStates = [{
     label: "No function available",
@@ -77,6 +76,7 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
     var index = this.gig.applicants.indexOf(userId); 
     while(index != -1) {
       this.gig.applicants.splice(index, 1);
+      index = this.gig.applicants.indexOf(userId);
     }
     this.gig.$save();
   }
