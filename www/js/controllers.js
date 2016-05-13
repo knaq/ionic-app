@@ -1,5 +1,6 @@
   angular.module('knaq.controllers', [])
 
+
 .controller('ProfileCtrl', function($scope, $state, $firebaseAuth, Session, Data) {
 
     
@@ -28,7 +29,7 @@
 
     $scope.signup = {};
 
-    $scope.reset = function() {
+    $scope.reset = function () {
 
       $scope.signup.email = "";
       $scope.signup.password = "";
@@ -36,7 +37,7 @@
       $scope.signup.username = "";
 
     }
-    $scope.signUp = function() {
+    $scope.signUp = function () {
 
       var ref = new Firebase("https://knaq.firebaseio.com");
       var refToUsers = ref.child('users');
@@ -44,7 +45,7 @@
       ref.createUser({
         email: $scope.signup.email,
         password: $scope.signup.password
-      }, function(error, userData) {
+      }, function (error, userData) {
         if (error) {
           console.log("Error creating user:", error);
         } else {
@@ -67,19 +68,20 @@
 
 .controller('SignInCtrl', function($scope, $state, Session, Data) {
 
-  var tmpUser = {};
+    var tmpUser = {};
 
-  $scope.signin = {};
+    $scope.signin = {};
 
-  $scope.reset = function() {
+    $scope.reset = function () {
 
-    $scope.signin.email = "";
-    $scope.signin.password = "";
+      $scope.signin.email = "";
+      $scope.signin.password = "";
 
-  }
-  $scope.signIn = function() {
+    }
+    $scope.signIn = function () {
 
-    var ref = new Firebase("https://knaq.firebaseio.com");
+      var ref = new Firebase("https://knaq.firebaseio.com");
+
 
     ref.authWithPassword({
       email: $scope.signin.email,
@@ -140,3 +142,4 @@
     enableFriends: true
   };
 });
+

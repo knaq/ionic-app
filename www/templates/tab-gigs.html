@@ -1,0 +1,18 @@
+<ion-view view-title="Gigs" ng-controller="GigsCtrl as gigController">
+  <ion-nav-buttons side="secondary">
+    <button class="button" ng-click="gigController.createNewGig()">
+        <h3><i class="ion-plus-round"></i></h3>
+      </button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="gig in gigController.gigs" type="item-text-wrap" href="#/tab/gigs/{{gig.$id}}">
+        <img ng-src="{{gig.photo}}">
+        <h2>{{gig.userId}}</h2>
+        <p>{{gig.title}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

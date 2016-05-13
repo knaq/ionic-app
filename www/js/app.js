@@ -5,8 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'knaq.services' is found in services.js
 // 'knaq.controllers' is found in controllers.js
-angular.module('knaq', ['firebase', 'ionic', 'knaq.controllers', 'knaq.services'])
-
+angular.module('knaq', ['firebase', 'ionic', 'gig.services','gig.controllers', 'knaq.controllers', 'knaq.services'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -70,21 +69,28 @@ angular.module('knaq', ['firebase', 'ionic', 'knaq.controllers', 'knaq.services'
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.gigs', {
+      url: '/gigs',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-gigs': {
+          templateUrl: 'templates/tab-gigs.html'
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+    .state('tab.gig-detail', {
+      url: '/gigs/:gigId',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+        'tab-gigs': {
+          templateUrl: 'templates/gig-detail.html'
+        }
+      }
+    })
+    
+    .state('tab.gig-new', {
+      url: '/gigs/new',
+      views: {
+        'tab-gigs': {
+          templateUrl: 'templates/gig-new.html'
         }
       }
     })
