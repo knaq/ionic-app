@@ -34,7 +34,7 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 .controller('GigDetailCtrl', function(GigFirebaseConnection, $stateParams, Session) {
   this.gigLoadPromise = GigFirebaseConnection.get($stateParams.gigId);
   this.gig = null;
-  this.applyState = checkApplyState();
+  this.applyState = this.checkApplyState();
   
   this.applyBtnStates = [{
     label: "No function available",
@@ -55,7 +55,7 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
     if (this.gig == undefined || this.gig.applicants == undefined) {
       this.applyState = 0;
     }
-    if (this.gig.applicants.indexOf(Session.getUser()) == -1) {
+    else if (this.gig.applicants.indexOf(Session.getUser()) == -1) {
       this.applyState = 1;
     } else {
       this.applyState = 2;
