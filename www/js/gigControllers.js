@@ -1,4 +1,4 @@
-angular.module('gig.controllers', ['gig.services'])
+angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 
 .controller('GigsCtrl', function(GigFirebaseConnection, $state, $stateParams) {
   // With the new view caching in Ionic, Controllers are only called
@@ -24,23 +24,51 @@ angular.module('gig.controllers', ['gig.services'])
   }
 })
 
-.controller('GigDetailCtrl', function(GigFirebaseConnection, $stateParams) {
+.controller('GigDetailCtrl', function(GigFirebaseConnection, $stateParams, Session) {
   this.gigLoadPromise = GigFirebaseConnection.get($stateParams.gigId);
   this.gig = null;
   
+  this.applyState = function() {
+    if (this.gig == undefined || this.gig.applicants == undefined) return -1;
+    if (this.gig.applicants.indexOf(Session.getUser()) == 0) {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
+  
+  this.apply = function() {
+    var userId = Session.getUser();
+    if (this.gig.applicants == undefined || this.gig.applicants == null) {
+      this.gig.applicants = {userId};
+      this.gig.$save();
+    } else {
+      this.gig.applicants.push(userId);
+    }
+  }
+  
+  this.unapply = function() {
+    var userId = Session.getUser();
+    var index = this.gig.applicants.indexOf(userId); 
+    while(index != -1) {
+      this.gig.applicants.splice(index, 1);
+    }
+    this.gig.$save();
+  }
+  
   this.gigLoadPromise.then(function(result) {
     this.gig = result;
+    console.log(this.gig);
   }.bind(this), function(error) {
     alert("Couldn't load the gig: " + error);
-  })
-  
+  });
 })
 
-.controller('NewGigCtrl', function($ionicHistory, GigFirebaseConnection) {
+.controller('NewGigCtrl', function($ionicHistory, GigFirebaseConnection, Session) {
  
   /*Todo: Connect  userId to firebase authentication data*/ 
   this.postGig = function() {
-    GigFirebaseConnection.add(this.title, this.pay, this.location, this.description, "954a5f56-7fdb-4039-a9a1-e5afa2a5e338");
+    GigFirebaseConnection.add(this.title, this.pay, this.location, this.description, Session.getUser());
     $ionicHistory.goBack();  
   }
 });
