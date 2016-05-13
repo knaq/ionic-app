@@ -1,6 +1,7 @@
 angular.module('knaq.controllers', [])
 
   .controller('ProfileCtrl', function ($scope, $state, $firebaseAuth, Session, Data) {
+
     $scope.allUsers = null;
     $scope.signedInUser = null;
 
@@ -25,6 +26,7 @@ angular.module('knaq.controllers', [])
 
     $scope.signup = {};
     $scope.reset = function () {
+
       $scope.signup.email = "";
       $scope.signup.password = "";
       $scope.signup.passwordConfirmation = "";
@@ -60,8 +62,8 @@ angular.module('knaq.controllers', [])
     }
   })
 
-
   .controller('SignInCtrl', function ($scope, $state, Session, Data) {
+
     var tmpUser = {};
 
     $scope.signin = {};
@@ -76,6 +78,7 @@ angular.module('knaq.controllers', [])
 
       var ref = new Firebase("https://knaq.firebaseio.com");
 
+
       ref.authWithPassword({
         email: $scope.signin.email,
         password: $scope.signin.password
@@ -83,42 +86,30 @@ angular.module('knaq.controllers', [])
         if (error) {
           console.log("Login Failed!", error);
         } else {
-          console.log("Authenticated successfully with payload:", authData);
+          //console.log("Authenticated successfully with payload:", authData);
 
-          ref.authWithPassword({
-            email: $scope.signin.email,
-            password: $scope.signin.password
-          }, function (error, authData) {
-            if (error) {
-              console.log("Login Failed!", error);
-            } else {
-              //console.log("Authenticated successfully with payload:", authData);
+          //Passing authenticated users id to Auth Service
+          Session.setUser(authData.uid);
 
-              //Passing authenticated users id to Auth Service
-              Session.setUser(authData.uid);
-
-              Data.setUserOnline(authData.uid).then(function (data) {
-                //console.log(data);
-                console.log("User with the following id" + authData.uid + "is successfully authenticated!");
-              });
-
-              $state.go('tab.profile');
-
-              $scope.signin.email = "";
-              $scope.signin.password = "";
-            }
+          Data.setUserOnline(authData.uid).then(function (data) {
+            //console.log(data);
+            console.log("User with the following id" + authData.uid + "is successfully authenticated!");
           });
 
-        }
-        $scope.signup = function () {
-          $state.go('signup');
-        }
+          $state.go('tab.profile');
 
+          $scope.signin.email = "";
+          $scope.signin.password = "";
 
-      })
+        }
+      });
 
     }
+    $scope.signup = function () {
 
+      $state.go('signup');
+
+    }
 
 
   })
