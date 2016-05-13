@@ -1,5 +1,5 @@
 angular.module('profile.controllers', ['profile.services', 'knaq.services'])
-    .controller('ProfilePageCtrl', function ($scope, $state, $firebaseAuth, $ionicPopup, Auth, Data, SkillsFirebaseConnection) {
+    .controller('ProfilePageCtrl', function ($scope, $state, $firebaseAuth, $ionicPopup, Session, Data, SkillsFirebaseConnection) {
 
         $scope.selection = 'reviews';
 
@@ -19,7 +19,7 @@ angular.module('profile.controllers', ['profile.services', 'knaq.services'])
 
         $scope.allUsers = null;
 
-        Data.getUser(Auth.getUser()).then(function (data) {
+        Data.getUser(Session.getUser()).then(function (data) {
             $scope.signedInUser = data;
             // console.log('lol');
             // console.log($scope.signedInUser);
@@ -69,8 +69,8 @@ angular.module('profile.controllers', ['profile.services', 'knaq.services'])
             });
         };
     })
-    .controller('SkillDetailCtrl', function ($scope, $location, $stateParams,  SkillsFirebaseConnection, Auth) {
-        $scope.userId = Auth.getUser().$id;
+    .controller('SkillDetailCtrl', function ($scope, $location, $stateParams,  SkillsFirebaseConnection, Session) {
+        $scope.userId = Session.getUser().$id;
         console.log($scope.userId);
         $scope.skillName = $stateParams.skill;
         $scope.endorsements = SkillsFirebaseConnection.get($scope.skillName);

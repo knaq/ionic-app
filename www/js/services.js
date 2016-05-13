@@ -48,7 +48,8 @@ angular.module('knaq.services', [])
       }
     };
   })
-  .factory('Auth', function () {
+
+  .factory('Session', function () {
     if (window.localStorage['session']) {
       var _user = window.localStorage['session'];
     }
@@ -59,6 +60,7 @@ angular.module('knaq.services', [])
 
     return {
       setUser: setUser,
+
       isLoggedIn: function () {
         return _user ? true : false;
       },
@@ -72,21 +74,47 @@ angular.module('knaq.services', [])
       }
     }
   })
+
   .factory('Data', function ($firebaseObject, $firebaseArray) {
 
     var ref = new Firebase("https://knaq.firebaseio.com/users");
-    var usersData = $firebaseArray(ref);
 
     return {
 
       getAllUsers: function () {
 
-        return usersData.$loaded();
+        return $firebaseArray(ref).$loaded();
 
       },
       getUser: function (userid) {
 
         return $firebaseObject(ref.child(userid)).$loaded();
+
+      },
+      setUserOnline: function (userid) {
+
+        var onlineStatus = $firebaseObject(ref.child(userid).child('online'))
+
+        onlineStatus.$loaded().then(function () {
+          console.log(onlineStatus.$value);
+        });
+
+        onlineStatus.$value = "true"
+
+        return onlineStatus.$save();
+
+      },
+      setUserOffline: function (userid) {
+
+        var onlineStatus = $firebaseObject(ref.child(userid).child('online'))
+
+        onlineStatus.$loaded().then(function () {
+          console.log(onlineStatus.$value);
+        });
+
+        onlineStatus.$value = "false"
+
+        return onlineStatus.$save();
 
       }
 
