@@ -1,24 +1,33 @@
-angular.module('gig.services', ["firebase"])
-  .service('GigFirebaseConnection', function ($firebaseArray, $firebaseObject) {
-    this.firebaseReference = new Firebase("https://knaq.firebaseio.com/gigs");
+angular.module('gig.services', [])
+  .factory('GigFirebaseConnection', function($firebaseArray, $firebaseObject) {
 
-    this.getAll = function () {
-      var gigs = $firebaseArray(this.firebaseReference);
-      return gigs.$loaded();
-    };
+    var firebaseReference = new Firebase("https://knaq.firebaseio.com/gigs");
 
-    this.get = function (key) {
-      return $firebaseObject(this.firebaseReference.child(key)).$loaded();
+    return {
+
+      getAll: function() {
+        return $firebaseArray(firebaseReference).$loaded();
+      },
+
+      get: function(key) {
+        console.log(key);
+        return $firebaseObject(firebaseReference.child(key)).$loaded();
+      },
+
+      add: function(title, pay, location, description, userId) {
+        var gigs = $firebaseArray(firebaseReference);
+        gigs.$add({
+          title: title,
+          pay: pay,
+          location: location,
+          description: description,
+          userId: userId
+        });
+      }
+
+
     }
 
-    this.add = function (title, pay, location, description, userId) {
-      var gigs = $firebaseArray(this.firebaseReference);
-      gigs.$add({
-        title: title,
-        pay: pay,
-        location: location,
-        description: description,
-        userId: userId
-      });
-    };
+
+
   });

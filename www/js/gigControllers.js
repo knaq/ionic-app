@@ -1,6 +1,6 @@
 angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 
-.controller('GigsCtrl', function(GigFirebaseConnection, $state, $stateParams, Data) {
+.controller('GigsCtrl', function($scope, GigFirebaseConnection, $state, $stateParams, Data) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -8,13 +8,14 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-  this.gigLoadPromise = GigFirebaseConnection.getAll();
-  this.gigs = null;
 
-  this.gigLoadPromise.then(function(result) {
+  console.log("Gigs running")
 
-    this.gigs = result;
-    this.gigs = this.gigs.map(function(gig) {
+
+  GigFirebaseConnection.getAll().then(function(result) {
+
+    $scope.gigs = result;
+    $scope.gigs = $scope.gigs.map(function(gig) {
 
       Data.getUser(gig.userId).then(function(userData) {
         console.log(userData);
@@ -22,33 +23,53 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
       })
 
       return gig;
-      
+
     })
 
 
-  }.bind(this), function(error) {
-    alert("Couldn't load gig: " + error);
   })
 
-  this.getUserNameFromId = function(userId) {
+  $scope.getUserNameFromId = function(userId) {
     var posterLoadPromise = Data.getUser(user);
     posterLoadPromise.then(function() {
 
     })
   }
 
-  this.createNewGig = function() {
-    $state.go('tab.gig-new');
+  $scope.createNewGig = function() {
+    $state.go('tab.gig-new', {
+      location: false
+    });
+  }
+
+  $scope.viewDetail = function(userId) {
+
+    $state.go('tab.gig-detail', {
+      gigId: userId
+    }, {
+      location: false
+    });
+
   }
 
 })
 
 
-.controller('GigDetailCtrl', function(GigFirebaseConnection, $stateParams, Session) {
-  this.gigLoadPromise = GigFirebaseConnection.get($stateParams.gigId);
-  this.gig = null;
+.controller('GigDetailCtrl', function($scope, GigFirebaseConnection, $stateParams, Session) {
 
-  this.applyBtnStates = [{
+  console.log("Gigs detail running")
+
+  console.log($stateParams.gigId);
+  var gigLoadPromise = GigFirebaseConnection.get($stateParams.gigId);
+
+  gigLoadPromise.then(function(result) {
+    $scope.gig = result;
+    console.log("Gig detail:")
+    console.log($scope.gig);
+  })
+
+
+  $scope.applyBtnStates = [{
     label: "No function available",
     action: "doNothing()",
     style: "button button-block button-light"
@@ -63,49 +84,45 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
   }];
 
 
-  this.checkApplyState = function() {
-    if (this.gig == undefined || this.gig.applicants == undefined) {
-      this.applyState = 0;
-    } else if (this.gig.applicants.indexOf(Session.getUser()) == -1) {
-      this.applyState = 1;
+  $scope.checkApplyState = function() {
+    if ($scope.gig == undefined || $scope.gig.applicants == undefined) {
+      $scope.applyState = 0;
+    } else if ($scope.gig.applicants.indexOf(Session.getUser()) == -1) {
+      $scope.applyState = 1;
     } else {
-      this.applyState = 2;
+      $scope.applyState = 2;
     }
   }
 
-  this.apply = function() {
+  $scope.apply = function() {
     var userId = Session.getUser();
-    if (this.gig.applicants == undefined || this.gig.applicants == null) {
-      this.gig.applicants = [userId];
-      this.gig.$save();
+    if ($scope.gig.applicants == undefined || $scope.gig.applicants == null) {
+      $scope.gig.applicants = [userId];
+      $scope.gig.$save();
     } else {
-      this.gig.applicants.push(userId);
+      $scope.gig.applicants.push(userId);
     }
   }
 
-  this.unapply = function() {
+  $scope.unapply = function() {
     var userId = Session.getUser();
-    var index = this.gig.applicants.indexOf(userId);
+    var index = $scope.gig.applicants.indexOf(userId);
     while (index != -1) {
-      this.gig.applicants.splice(index, 1);
-      index = this.gig.applicants.indexOf(userId);
+      $scope.gig.applicants.splice(index, 1);
+      index = $scope.gig.applicants.indexOf(userId);
     }
-    this.gig.$save();
+    $scope.gig.$save();
   }
 
-  this.gigLoadPromise.then(function(result) {
-    this.gig = result;
-    console.log(this.gig);
-  }.bind(this), function(error) {
-    alert("Couldn't load the gig: " + error);
-  });
+
 })
 
-.controller('NewGigCtrl', function($ionicHistory, GigFirebaseConnection, Session) {
+.controller('NewGigCtrl', function($scope, $ionicHistory, GigFirebaseConnection, Session) {
 
   /*Todo: Connect  userId to firebase authentication data*/
-  this.postGig = function() {
-    GigFirebaseConnection.add(this.title, this.pay, this.location, this.description, Session.getUser());
+  $scope.postGig = function() {
+    GigFirebaseConnection.add($scope.title, $scope.pay, $scope.location, $scope.description, Session.getUser());
     $ionicHistory.goBack();
+    //$state.go('tab.gigs');
   }
 });
