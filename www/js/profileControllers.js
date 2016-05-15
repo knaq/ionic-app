@@ -1,6 +1,5 @@
-angular.module('profile.controllers', ['profile.services', 'knaq.services'])
-    .controller('ProfilePageCtrl', function ($scope, $state, $firebaseAuth, $ionicPopup, Session, Data, SkillsFirebaseConnection) {
-
+angular.module('profile.controllers', ['profile.services', 'knaq.services', 'firebase'])
+    .controller('ProfilePageCtrl', function ($scope, $state, $firebaseAuth, $firebaseArray, $ionicPopup, Session, Data, SkillsFirebaseConnection) {
         $scope.selection = 'reviews';
 
         $scope.click = function (view) {
@@ -9,7 +8,6 @@ angular.module('profile.controllers', ['profile.services', 'knaq.services'])
 
         // set the rate and max variables
         $scope.rating = {};
-        $scope.rating.rate = 3;
         $scope.rating.max = 5;
         $scope.readOnly = true;
 
@@ -21,30 +19,34 @@ angular.module('profile.controllers', ['profile.services', 'knaq.services'])
 
         Data.getUser(Session.getUser()).then(function (data) {
             $scope.signedInUser = data;
-            // console.log('lol');
-            // console.log($scope.signedInUser);
-
+            $scope.userSkillFirebaseReference = new Firebase("https://knaq.firebaseio.com/users" + "/" + $scope.signedInUser.$id + "/skills");
+            $scope.skillsArray = $firebaseArray($scope.userSkillFirebaseReference);
         });
 
         $scope.remove = function (skill) {
             Skills.remove(skill);
         };
 
-        /*Todo: Connect  userId to firebase authentication data*/
-        $scope.newSkill = function () {
-            ProfileFirebaseConnection.add(this.title, this.pay, this.location, this.description, "954a5f56-7fdb-4039-a9a1-e5afa2a5e338");
-            $ionicHistory.goBack();
+        $scope.newSkill = function (newSkillName) {
+            // $scope.skillsArray.$add({
+            //     name: newSkillName
+            // });
+            $scope.skillsArray.$ref().child(newSkillName).set({
+                name: newSkillName
+            });
         }
         // console.log($scope.signedInUser.$id);
 
 
         // Triggered on a button click, or some other target
         $scope.showPopup = function () {
+            console.log($scope.userSkillFirebaseReference);
+
             $scope.data = {};
             console.l
             // An elaborate, custom popup
             var myPopup = $ionicPopup.show({
-                template: '<input type="text" ng-model="data.wifi">',
+                template: '<input type="text" ng-model="data.newSkillName">',
                 title: 'Add new skill!',
                 scope: $scope,
                 buttons: [
@@ -53,12 +55,7 @@ angular.module('profile.controllers', ['profile.services', 'knaq.services'])
                         text: '<b>Save</b>',
                         type: 'button-positive',
                         onTap: function (e) {
-                            if (!$scope.data.wifi) {
-                                //don't allow the user to close unless he enters wifi password
-                                e.preventDefault();
-                            } else {
-                                return $scope.data.wifi;
-                            }
+                            $scope.newSkill($scope.data.newSkillName);
                         }
                     }
                 ]
@@ -69,15 +66,14 @@ angular.module('profile.controllers', ['profile.services', 'knaq.services'])
             });
         };
     })
-    .controller('SkillDetailCtrl', function ($scope, $location, $stateParams,  SkillsFirebaseConnection, Session) {
-        $scope.userId = Session.getUser().$id;
-        console.log($scope.userId);
-        $scope.skillName = $stateParams.skill;
-        $scope.endorsements = SkillsFirebaseConnection.get($scope.skillName);
-        $scope.allEndorsements = SkillsFirebaseConnection.getAll();
+    .controller('SkillDetailCtrl', function ($scope, $location, $stateParams, SkillsFirebaseConnection, Session, Data) {
+        Data.getUser(Session.getUser()).then(function (data) {
+            $scope.skill = data.skills[$stateParams.skill];
+            console.log($scope.skill);
+        });
 
-        console.log($scope.endorsements);
-        console.log($scope.allEndorsements);
+        // $scope.endorsements = SkillsFirebaseConnection.get($scope.skillName);
+        // $scope.allEndorsements = SkillsFirebaseConnection.getAll();
     })
     .controller('PortfolioDetailCtrl', function ($scope, $stateParams, SkillsFirebaseConnection) {
         $scope.skill = Skills.get($stateParams.skillId);

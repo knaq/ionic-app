@@ -1,9 +1,8 @@
-<ion-view view-title="{{skill}}">
+<ion-view view-title="{{skill.name}}">
     <ion-content class="padding">
         <ion-list>
-            <ion-item class="item item-avatar" ng-repeat="person in skill.people">
-                <img ng-src="../img/{{person}}.png">
-                <h2>{{endorsements}}</h2>
+            <ion-item class="item item-avatar" ng-repeat="endorsement in skill.endorsements">
+                <h2>{{endorsement.id}}</h2>
             </ion-item>
         </ion-list>
     </ion-content>

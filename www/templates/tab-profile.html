@@ -55,8 +55,6 @@
       <div href="#" ng-switch-when="skills">
 
         <ion-list>
-          <p>{{signedInUser.skills}}</p>
-          <!--<p>{{signedInUser.skills[0].endorsements[0].id}}</p>-->
           <ion-item class="list card" ng-repeat="skill in signedInUser.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
             <h2>{{skill.name}}</h2>
             <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
