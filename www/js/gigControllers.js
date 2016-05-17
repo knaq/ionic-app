@@ -6,16 +6,26 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 
   GigFirebaseConnection.getAll().then(function(result) {
 
-    $scope.gigs.allGigList = result;
-    $scope.gigs.allGigList = $scope.gigs.allGigList.map(function(gig) {
 
-      Data.getUser(gig.userId).then(function(userData) {
-        gig['username'] = userData.username;
+    var addUsername = function() {
+      $scope.gigs.allGigList = $scope.gigs.retrievedGigList.map(function(gig) {
+
+        Data.getUser(gig.userId).then(function(userData) {
+          gig['username'] = userData.username;
+        })
+
+        return gig;
+
       })
+    }
 
-      return gig;
+    $scope.gigs.retrievedGigList = result;
+    addUsername()
 
+    result.$watch(function() {
+      addUsername();
     })
+
 
 
   })
