@@ -35,19 +35,17 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 
 .controller('GigDetailCtrl', function($scope, GigFirebaseConnection, $stateParams, Session) {
 
-  console.log("Gigs detail running")
+  $scope.gigDetail = {}
 
-  console.log($stateParams.gigId);
   var gigLoadPromise = GigFirebaseConnection.get($stateParams.gigId);
 
   gigLoadPromise.then(function(result) {
-    $scope.gig = result;
+    $scope.gigDetail.gig = result;
     console.log("Gig detail:")
-    console.log($scope.gig);
+    console.log($scope.gigDetail.gig);
   })
 
-
-  $scope.applyBtnStates = [{
+  $scope.gigDetail.applyBtnStates = [{
     label: "No function available",
     action: "doNothing()",
     style: "button button-block button-light"
@@ -62,34 +60,34 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
   }];
 
 
-  $scope.checkApplyState = function() {
-    if ($scope.gig == undefined || $scope.gig.applicants == undefined) {
-      $scope.applyState = 0;
-    } else if ($scope.gig.applicants.indexOf(Session.getUser()) == -1) {
-      $scope.applyState = 1;
+  $scope.gigDetail.checkApplyState = function() {
+    if ($scope.gigDetail.gig == undefined || $scope.gigDetail.gig.applicants == undefined) {
+      $scope.gigDetail.applyState = 0;
+    } else if ($scope.gigDetail.gig.applicants.indexOf(Session.getUser()) == -1) {
+      $scope.gigDetail.applyState = 1;
     } else {
-      $scope.applyState = 2;
+      $scope.gigDetail.applyState = 2;
     }
   }
 
-  $scope.apply = function() {
+  $scope.gigDetail.apply = function() {
     var userId = Session.getUser();
-    if ($scope.gig.applicants == undefined || $scope.gig.applicants == null) {
-      $scope.gig.applicants = [userId];
-      $scope.gig.$save();
+    if ($scope.gigDetail.gig.applicants == undefined || $scope.gigDetail.gig.applicants == null) {
+      $scope.gigDetail.gig.applicants = [userId];
+      $scope.gigDetail.gig.$save();
     } else {
-      $scope.gig.applicants.push(userId);
+      $scope.gigDetail.gig.applicants.push(userId);
     }
   }
 
-  $scope.unapply = function() {
+  $scope.gigDetail.unapply = function() {
     var userId = Session.getUser();
-    var index = $scope.gig.applicants.indexOf(userId);
+    var index = $scope.gigDetail.gig.applicants.indexOf(userId);
     while (index != -1) {
-      $scope.gig.applicants.splice(index, 1);
-      index = $scope.gig.applicants.indexOf(userId);
+      $scope.gigDetail.gig.applicants.splice(index, 1);
+      index = $scope.gigDetail.gig.applicants.indexOf(userId);
     }
-    $scope.gig.$save();
+    $scope.gigDetail.gig.$save();
   }
 
 
