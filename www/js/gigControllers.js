@@ -1,24 +1,14 @@
 angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 
 .controller('GigsCtrl', function($scope, GigFirebaseConnection, $state, $stateParams, Data) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  console.log("Gigs running")
-
 
   GigFirebaseConnection.getAll().then(function(result) {
 
+    console.log(result)
     $scope.gigs = result;
     $scope.gigs = $scope.gigs.map(function(gig) {
 
       Data.getUser(gig.userId).then(function(userData) {
-        console.log(userData);
         gig['username'] = userData.username;
       })
 
@@ -28,29 +18,6 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 
 
   })
-
-  $scope.getUserNameFromId = function(userId) {
-    var posterLoadPromise = Data.getUser(user);
-    posterLoadPromise.then(function() {
-
-    })
-  }
-
-  $scope.createNewGig = function() {
-    $state.go('tab.gig-new', {
-      location: false
-    });
-  }
-
-  $scope.viewDetail = function(userId) {
-
-    $state.go('tab.gig-detail', {
-      gigId: userId
-    }, {
-      location: false
-    });
-
-  }
 
 })
 
@@ -117,12 +84,18 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 
 })
 
-.controller('NewGigCtrl', function($scope, $ionicHistory, GigFirebaseConnection, Session) {
+.controller('NewGigCtrl', function($scope, $state, $ionicHistory, GigFirebaseConnection, Session) {
 
   /*Todo: Connect  userId to firebase authentication data*/
-  $scope.postGig = function() {
+    $scope.newGig = {}
+
+
+  $scope.newGig.postGig = function() {
     GigFirebaseConnection.add($scope.title, $scope.pay, $scope.location, $scope.description, Session.getUser());
-    $ionicHistory.goBack();
-    //$state.go('tab.gigs');
+    $scope.title = ""
+    $scope.pay = ""
+    $scope.location = ""
+    $scope.description = ""
+    $state.go('tab.gigs');
   }
 });

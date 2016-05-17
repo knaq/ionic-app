@@ -9,23 +9,23 @@
         <div class="list">
             <label class="item item-input item-floating-label">
                 <span class="input-label">Position title</span>
-                <input ng-model="title" type="text" placeholder="Position title"></input>
+                <input ng-model="newGig.title" type="text" placeholder="Position title"></input>
             </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Hourly pay</span>
-                <input ng-model="pay" type="number" placeholder="Hourly pay"></input>
+                <input ng-model="newGig.pay" type="number" placeholder="Hourly pay"></input>
             </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Gig location</span>
-                <input ng-model="location" type="text" placeholder="Gig location"></input>
+                <input ng-model="newGig.location" type="text" placeholder="Gig location"></input>
             </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Postion description</span>
-                <textarea ng-model="description" placeholder="Position description"></textarea>
+                <textarea ng-model="newGig.description" placeholder="Position description"></textarea>
             </label>
         </div>
         
-        <button class="button button-block button-positive" ng-click="postGig()">
+        <button class="button button-block button-positive" ng-click="newGig.postGig()">
             Post your gig!
         </button>
     </ion-content>

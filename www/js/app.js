@@ -70,26 +70,26 @@ angular.module('knaq', ['firebase', 'ionic', 'gig.services','gig.controllers', '
   })
 
   .state('tab.gigs', {
-    url: '/gigs',
-    views: {
-      'tab-gigs': {
-        templateUrl: 'templates/tab-gigs.html',
-        controller: 'GigsCtrl'
+      url: '/gigs',
+      views: {
+        'tab-gigs': {
+          templateUrl: 'templates/tab-gigs.html',
+          controller: 'GigsCtrl'
+        }
       }
-    }
-  })
-  .state('tab.gig-detail', {
-    url: '/gigs/:gigId',
-    views: {
-      'tab-gigs': {
-        templateUrl: 'templates/tab-gig-detail.html',
-        controller: 'GigDetailCtrl'
+    })
+    .state('tab.gig-detail', {
+      url: '/gigs/:gigId',
+      views: {
+        'tab-gigs': {
+          templateUrl: 'templates/tab-gig-detail.html',
+          controller: 'GigDetailCtrl'
+        }
       }
-    }
-  })
+    })
     
-  .state('tab.gig-new', {
-    url: '/gigs/new',
+  .state('tab.new-gig', {
+    url: '/new-gig',
     views: {
       'tab-gigs': {
         templateUrl: 'templates/tab-gig-new.html',
