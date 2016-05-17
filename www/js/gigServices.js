@@ -15,6 +15,12 @@ angular.module('gig.services', [])
       },
 
       add: function(title, pay, location, description, userId) {
+        console.log(title)
+        console.log(pay)
+        console.log(location)
+        console.log(description)
+        console.log(userId)
+
         var gigs = $firebaseArray(ref);
         gigs.$add({
           title: title,

@@ -2,11 +2,12 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 
 .controller('GigsCtrl', function($scope, GigFirebaseConnection, $state, $stateParams, Data) {
 
+  $scope.gigs = {}
+
   GigFirebaseConnection.getAll().then(function(result) {
 
-    console.log(result)
-    $scope.gigs = result;
-    $scope.gigs = $scope.gigs.map(function(gig) {
+    $scope.gigs.allGigList = result;
+    $scope.gigs.allGigList = $scope.gigs.allGigList.map(function(gig) {
 
       Data.getUser(gig.userId).then(function(userData) {
         gig['username'] = userData.username;
@@ -87,15 +88,15 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 .controller('NewGigCtrl', function($scope, $state, $ionicHistory, GigFirebaseConnection, Session) {
 
   /*Todo: Connect  userId to firebase authentication data*/
-    $scope.newGig = {}
+  $scope.newGig = {}
 
 
   $scope.newGig.postGig = function() {
-    GigFirebaseConnection.add($scope.title, $scope.pay, $scope.location, $scope.description, Session.getUser());
-    $scope.title = ""
-    $scope.pay = ""
-    $scope.location = ""
-    $scope.description = ""
+    GigFirebaseConnection.add($scope.newGig.title, $scope.newGig.pay, $scope.newGig.location, $scope.newGig.description, Session.getUser());
+    $scope.newGig.title = ""
+    $scope.newGig.pay = ""
+    $scope.newGig.location = ""
+    $scope.newGig.description = ""
     $state.go('tab.gigs');
   }
 });
