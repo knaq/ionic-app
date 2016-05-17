@@ -13,7 +13,7 @@
     </div>
 
     <ion-item class="item-avatar" type="item-text-wrap">
-      <img ng-src="../img/adam.jpg">
+      <img ng-src="{{signedInUser.image}}">
       <h2>Hello {{signedInUser.username}}</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi asperiores sequi quaerat dolores enim qui doloremque,
         molestias fuga error obcaecati nesciunt quis laborum dolore, mollitia ratione ab. Illo beatae, quibusdam! Lorem ipsum
@@ -29,7 +29,7 @@
       <div href="#" ng-switch-default>
         <ion-list>
           <ion-item class="item item-avatar" ng-repeat="review in signedInUser.reviews">
-            <img src="../img/ben.png">
+            <img src="{{review.image}}">
             <h2>{{review.title}}</h2>
             <p>{{review.text}}
             </p>
@@ -45,7 +45,7 @@
             <p>{{portfolioItem.date | date:'short'}}</p>
           </div>
           <div class="item item-thumbnail-left text-right">
-            <img class="full-image" src="../img/ionic.png">
+            <img class="full-image" ng-src="{{portfolioItem.image}}">
             <p>
               {{portfolioItem.text}}
             </p>

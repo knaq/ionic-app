@@ -1,2 +1,5 @@
 Ratings
 https://github.com/fraserxu/ionic-rating
+
+Image converter
+https://www.base64-image.de/
