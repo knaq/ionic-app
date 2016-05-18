@@ -72,11 +72,13 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services', 'knaq.contro
 
   $scope.gigDetail.apply = function() {
     var userId = Session.getUser();
+
     if ($scope.gigDetail.gig.applicants == undefined || $scope.gigDetail.gig.applicants == null) {
       $scope.gigDetail.gig.applicants = [userId];
       $scope.gigDetail.gig.$save();
     } else {
       $scope.gigDetail.gig.applicants.push(userId);
+      $scope.gigDetail.gig.$save();
     }
   }
 

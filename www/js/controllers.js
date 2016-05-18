@@ -1,35 +1,23 @@
-  angular.module('knaq.controllers', ['ionic', 'ngCordova'])
-
+angular.module('knaq.controllers', ['ionic', 'ngCordova'])
 
 .controller('ProfileCtrl', function($scope, $state, $firebaseAuth, Session, Data) {
 
-    
     $scope.allUsers = null;
     $scope.signedInUser = null;
-    
-    Data.getAllUsers().then(function (data) {
+
+    Data.getAllUsers().then(function(data) {
       $scope.allUsers = data
     })
 
-    Data.getUser(Session.getUser()).then(function (data) {
+    Data.getUser(Session.getUser()).then(function(data) {
       $scope.signedInUser = data
     });
-
-    $scope.signout = function  (arguments) {
-      Data.setUserOffline(Session.getUser()).then(function(data){
-          console.log("User is offline now!");
-      });
-      Session.logout();
-      $state.go('signin');
-    }
-
 
   })
   .controller('SignUpCtrl', function($scope, $firebaseObject, $state) {
 
     $scope.signup = {};
-
-    $scope.reset = function () {
+    $scope.reset = function() {
 
       $scope.signup.email = "";
       $scope.signup.password = "";
@@ -37,7 +25,7 @@
       $scope.signup.username = "";
 
     }
-    $scope.signUp = function () {
+    $scope.signUp = function() {
 
       var ref = new Firebase("https://knaq.firebaseio.com");
       var refToUsers = ref.child('users');
@@ -45,7 +33,7 @@
       ref.createUser({
         email: $scope.signup.email,
         password: $scope.signup.password
-      }, function (error, userData) {
+      }, function(error, userData) {
         if (error) {
           console.log("Error creating user:", error);
         } else {
@@ -68,19 +56,19 @@
 
 .controller('SignInCtrl', function($scope, $state, Session, Data) {
 
-    var tmpUser = {};
+  var tmpUser = {};
 
-    $scope.signin = {};
+  $scope.signin = {};
 
-    $scope.reset = function () {
+  $scope.reset = function() {
 
-      $scope.signin.email = "";
-      $scope.signin.password = "";
+    $scope.signin.email = "";
+    $scope.signin.password = "";
 
-    }
-    $scope.signIn = function () {
+  }
+  $scope.signIn = function() {
 
-      var ref = new Firebase("https://knaq.firebaseio.com");
+    var ref = new Firebase("https://knaq.firebaseio.com");
 
 
     ref.authWithPassword({
@@ -95,13 +83,13 @@
         //Passing authenticated users id to Auth Service
         Session.setUser(authData.uid);
 
-        Data.setUserOnline(authData.uid).then(function(data){
+        Data.setUserOnline(authData.uid).then(function(data) {
           //console.log(data);
-          console.log("User with the following id" +authData.uid+"is successfully authenticated!");
+          console.log("User with the following id" + authData.uid + "is successfully authenticated!");
         });
 
         $state.go('tab.profile');
-        
+
         $scope.signin.email = "";
         $scope.signin.password = "";
 
@@ -139,5 +127,17 @@
             alert("Failed to take picture");
         });
     }
-});
+})
 
+
+.controller('AccountCtrl', function($scope, $state, Data, Session) {
+  $scope.account = {};
+  $scope.account.signout = function(arguments) {
+    console.log("signing out")
+      Data.setUserOffline(Session.getUser()).then(function(data) {
+        console.log("User is offline now!");
+      });
+      Session.logout();
+      $state.go('signin');
+    }
+});
