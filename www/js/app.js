@@ -6,7 +6,7 @@
 // 'knaq.services' is found in services.js
 // 'knaq.controllers' is found in controllers.js
 
-angular.module('knaq', ['firebase', 'ngCordova', 'ionic', 'gig.services', 'gig.controllers', 'profile.controllers', 'profile.services', 'knaq.controllers', 'knaq.services'])
+angular.module('knaq', ['gig.controllers', 'profile.controllers', 'knaq.controllers'])
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
