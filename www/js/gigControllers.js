@@ -1,4 +1,4 @@
-angular.module('gig.controllers', ['gig.services', 'knaq.services'])
+angular.module('gig.controllers', ['gig.services', 'knaq.services', 'knaq.controllers'])
 
 .controller('GigsCtrl', function($scope, GigFirebaseConnection, $state, $stateParams, Data) {
 
