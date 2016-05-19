@@ -126,7 +126,7 @@ angular.module('knaq', [
   .state('tab.new-gig', {
     url: '/new-gig',
     views: {
-      'tab-gigs': {
+      'tab-discover-gigs': {
         templateUrl: 'templates/tab-gig-new.html',
         controller: 'NewGigCtrl'
       }

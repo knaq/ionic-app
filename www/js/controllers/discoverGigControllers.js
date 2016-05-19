@@ -105,6 +105,6 @@ angular.module('knaq.gigControllers',[])
     $scope.newGig.pay = ""
     $scope.newGig.location = ""
     $scope.newGig.description = ""
-    $state.go('tab.gigs');
+    $state.go('tab.discover-gigs');
   }
 });
