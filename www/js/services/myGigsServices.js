@@ -10,16 +10,44 @@ angular.module('knaq.myGigsServices', [])
       },
 
       getInProgress: function() {
-        console.log(Auth.getUser())
+        return this.getAll().then(function(gigs) {
+          return gigs.filter(function(gig) {
+            if (gig.acceptedCandidate == Auth.getUser() && gig.completed=="false") {
+              return gig
+            }
+
+          }, function(error) {
+            return error;
+          })
+        })
+
       },
-      getApplied: function(key) {
-        console.log(Auth.getUser())
+      getApplied: function() {
+        return this.getAll().then(function(gigs) {
+          return gigs.filter(function(gig) {
+            if (gig.applicants.indexOf(Auth.getUser())) {
+              return gig
+            }
+
+          }, function(error) {
+            return error;
+          })
+        })
       },
-      getPosts: function(key) {
-        console.log(Auth.getUser())
+      getPosts: function() {
+
+        return this.getAll().then(function(gigs) {
+          return gigs.filter(function(gig) {
+            if (gig.userId == Auth.getUser()) {
+              return gig
+            }
+
+          }, function(error) {
+            return error;
+          })
+        })
+
       }
-
-
 
     }
 

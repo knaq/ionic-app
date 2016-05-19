@@ -6,7 +6,18 @@ angular.module('knaq.myGigsControllers', [])
 		$scope.myGigs.tabClick = function(selection) {
 
 			$scope.myGigs.tabSelection = selection;
-			console.log(selection)
+			
+			switch($scope.myGigs.tabSelection){
+				case "tab-myposts":
+					console.log("Now in myposts")
+					console.log(MyGigsServices.getPosts())
+					break;
+				case "tab-applied":
+					console.log("Now applied")
+					break;
+				default:
+					console.log("Now inprogress")
+			}
 		}
 		$scope.myGigs.pageTitle = "My gigs go here"
 

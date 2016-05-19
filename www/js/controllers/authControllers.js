@@ -54,6 +54,8 @@ angular.module('knaq.authControllers', [])
     };
     $scope.signIn = function() {
 
+        console.log("Trying to sign in")
+
         var ref = new Firebase("https://knaq.firebaseio.com");
 
 
@@ -64,7 +66,7 @@ angular.module('knaq.authControllers', [])
             if (error) {
                 console.log("Login Failed!", error);
             } else {
-                //console.log("Authenticated successfully with payload:", authData);
+                console.log("Authenticated successfully with payload:", authData);
 
                 //Passing authenticated users id to Auth Service
                 Auth.setUser(authData.uid);
