@@ -1,16 +1,19 @@
 angular.module('knaq.services', [])
 
-.factory('Session', function() {
+.factory('Auth', function($firebaseObject, $firebaseArray) {
+
+    var ref = new Firebase("https://knaq.firebaseio.com/users");
+
     if (window.localStorage.session) {
         var _user = window.localStorage.session;
     }
-    var setUser = function(session) {
-        _user = session;
-        window.localStorage.session = _user;
-    };
 
     return {
-        setUser: setUser,
+        setUser: function(session) {
+            _user = session;
+            window.localStorage.session = _user;
+            this.setUserOnline();
+        },
 
         isLoggedIn: function() {
             return _user ? true : false;
@@ -19,9 +22,37 @@ angular.module('knaq.services', [])
             return _user;
         },
         logout: function() {
+            this.setUserOffline();
             window.localStorage.removeItem("session");
             window.localStorage.removeItem("list_dependents");
+
             _user = null;
+        },
+        setUserOnline: function() {
+
+            var onlineStatus = $firebaseObject(ref.child(_user).child('online'))
+
+            onlineStatus.$loaded().then(function() {
+                console.log(onlineStatus.$value);
+            });
+
+            onlineStatus.$value = "true"
+
+            return onlineStatus.$save();
+
+        },
+        setUserOffline: function() {
+
+            var onlineStatus = $firebaseObject(ref.child(_user).child('online'))
+
+            onlineStatus.$loaded().then(function() {
+                console.log(onlineStatus.$value);
+            });
+
+            onlineStatus.$value = "false"
+
+            return onlineStatus.$save();
+
         }
     };
 })
@@ -41,34 +72,7 @@ angular.module('knaq.services', [])
 
             return $firebaseObject(ref.child(userid)).$loaded();
 
-        },
-        setUserOnline: function(userid) {
-
-            var onlineStatus = $firebaseObject(ref.child(userid).child('online'))
-
-            onlineStatus.$loaded().then(function() {
-                console.log(onlineStatus.$value);
-            });
-
-            onlineStatus.$value = "true"
-
-            return onlineStatus.$save();
-
-        },
-        setUserOffline: function(userid) {
-
-            var onlineStatus = $firebaseObject(ref.child(userid).child('online'))
-
-            onlineStatus.$loaded().then(function() {
-                console.log(onlineStatus.$value);
-            });
-
-            onlineStatus.$value = "false"
-
-            return onlineStatus.$save();
-
         }
-
 
     }
 

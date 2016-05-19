@@ -48,8 +48,8 @@ angular.module('knaq', ['firebase', 'ionic', 'knaq.services', 'gig.services', 'p
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html',
-    onEnter: function($state, Session) {
-      if (!Session.isLoggedIn()) {
+    onEnter: function($state, Auth) {
+      if (!Auth.isLoggedIn()) {
         $state.go('signin');
       }
     }

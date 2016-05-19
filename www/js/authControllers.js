@@ -40,7 +40,7 @@ angular.module('knaq.controllers', [])
     };
 })
 
-.controller('SignInCtrl', function($scope, $state, Session, Data) {
+.controller('SignInCtrl', function($scope, $state, Auth, Data) {
 
     var tmpUser = {};
 
@@ -67,12 +67,7 @@ angular.module('knaq.controllers', [])
                 //console.log("Authenticated successfully with payload:", authData);
 
                 //Passing authenticated users id to Auth Service
-                Session.setUser(authData.uid);
-
-                Data.setUserOnline(authData.uid).then(function(data) {
-                    //console.log(data);
-                    console.log("User with the following id" + authData.uid + "is successfully authenticated!");
-                });
+                Auth.setUser(authData.uid);
 
                 $state.go('tab.profile');
 

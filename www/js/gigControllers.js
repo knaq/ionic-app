@@ -33,7 +33,7 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 })
 
 
-.controller('GigDetailCtrl', function($scope, GigFirebaseConnection, $stateParams, Session) {
+.controller('GigDetailCtrl', function($scope, GigFirebaseConnection, $stateParams, Auth) {
 
   $scope.gigDetail = {}
 
@@ -63,7 +63,7 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
   $scope.gigDetail.checkApplyState = function() {
     if ($scope.gigDetail.gig == undefined || $scope.gigDetail.gig.applicants == undefined) {
       $scope.gigDetail.applyState = 0;
-    } else if ($scope.gigDetail.gig.applicants.indexOf(Session.getUser()) == -1) {
+    } else if ($scope.gigDetail.gig.applicants.indexOf(Auth.getUser()) == -1) {
       $scope.gigDetail.applyState = 1;
     } else {
       $scope.gigDetail.applyState = 2;
@@ -71,7 +71,7 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
   }
 
   $scope.gigDetail.apply = function() {
-    var userId = Session.getUser();
+    var userId = Auth.getUser();
 
     if ($scope.gigDetail.gig.applicants == undefined || $scope.gigDetail.gig.applicants == null) {
       $scope.gigDetail.gig.applicants = [userId];
@@ -83,7 +83,7 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
   }
 
   $scope.gigDetail.unapply = function() {
-    var userId = Session.getUser();
+    var userId = Auth.getUser();
     var index = $scope.gigDetail.gig.applicants.indexOf(userId);
     while (index != -1) {
       $scope.gigDetail.gig.applicants.splice(index, 1);
@@ -95,14 +95,14 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
 
 })
 
-.controller('NewGigCtrl', function($scope, $state, $ionicHistory, GigFirebaseConnection, Session) {
+.controller('NewGigCtrl', function($scope, $state, $ionicHistory, GigFirebaseConnection, Auth) {
 
   /*Todo: Connect  userId to firebase authentication data*/
   $scope.newGig = {}
 
 
   $scope.newGig.postGig = function() {
-    GigFirebaseConnection.add($scope.newGig.title, $scope.newGig.pay, $scope.newGig.location, $scope.newGig.description, Session.getUser());
+    GigFirebaseConnection.add($scope.newGig.title, $scope.newGig.pay, $scope.newGig.location, $scope.newGig.description, Auth.getUser());
     $scope.newGig.title = ""
     $scope.newGig.pay = ""
     $scope.newGig.location = ""

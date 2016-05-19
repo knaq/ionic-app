@@ -1,5 +1,5 @@
 angular.module('profile.controllers', ['profile.services', 'knaq.services', 'firebase'])
-    .controller('ProfilePageCtrl', function ($scope, $state, $firebaseAuth, $firebaseArray, $ionicPopup, Session, Data, SkillsFirebaseConnection) {
+    .controller('ProfilePageCtrl', function ($scope, $state, $firebaseAuth, $firebaseArray, $ionicPopup, Auth, Data, SkillsFirebaseConnection) {
         $scope.selection = 'reviews';
 
         $scope.click = function (view) {
@@ -17,7 +17,7 @@ angular.module('profile.controllers', ['profile.services', 'knaq.services', 'fir
 
         $scope.allUsers = null;
 
-        Data.getUser(Session.getUser()).then(function (data) {
+        Data.getUser(Auth.getUser()).then(function (data) {
             $scope.signedInUser = data;
             $scope.userSkillFirebaseReference = new Firebase("https://knaq.firebaseio.com/users" + "/" + $scope.signedInUser.$id + "/skills");
             $scope.skillsArray = $firebaseArray($scope.userSkillFirebaseReference);
@@ -66,8 +66,8 @@ angular.module('profile.controllers', ['profile.services', 'knaq.services', 'fir
             });
         };
     })
-    .controller('SkillDetailCtrl', function ($scope, $location, $stateParams, SkillsFirebaseConnection, Session, Data) {
-        Data.getUser(Session.getUser()).then(function (data) {
+    .controller('SkillDetailCtrl', function ($scope, $location, $stateParams, SkillsFirebaseConnection, Auth, Data) {
+        Data.getUser(Auth.getUser()).then(function (data) {
             $scope.skill = data.skills[$stateParams.skill];
             console.log($scope.skill);
         });
