@@ -17,6 +17,7 @@ angular.module('knaq', [
 
   'knaq.profileControllers',
   'knaq.authControllers',
+  'knaq.myGigsController',
   'knaq.gigControllers',
   'knaq.accountControllers'
 
@@ -104,6 +105,16 @@ angular.module('knaq', [
       }
     })
 
+
+  .state('tab.my-gigs', {
+    url: '/my-gigs',
+    views: {
+      'tab-my-gigs': {
+        templateUrl: 'templates/tab-my-gigs.html',
+        controller: 'MyGigsCtrl'
+      }
+    }
+  })
   .state('tab.discover-gigs', {
       url: '/discover-gigs',
       views: {
