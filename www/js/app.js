@@ -14,6 +14,7 @@ angular.module('knaq', [
   'knaq.authServices',
   'knaq.gigServices',
   'knaq.profileServices',
+  'knaq.myGigsServices',
 
   'knaq.profileControllers',
   'knaq.authControllers',

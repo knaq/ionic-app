@@ -1,16 +1,21 @@
 <ion-view view-title="My Gigs">
 	<div class="tabs tabs-top">
-		<a class="tab-item" ng-click="myGigs.tabClick(1)">
+		<a class="tab-item " ng-click="myGigs.tabClick('tab-inprogress')">
 			In Progress
 		</a>
-		<a class="tab-item" ng-click="myGigs.tabClick(2)">
+		<a class="tab-item" ng-click="myGigs.tabClick('tab-applied')">
 			Applied
 		</a>
-		<a class="tab-item" ng-click="myGigs.tabClick(3)">
+		<a class="tab-item" ng-click="myGigs.tabClick('tab-myposts')">
 			My Posts
 		</a>
 	</div>
 	<ion-content>
 		<h1>{{myGigs.pageTitle}}</h1>
-	</ion-content>
+		<div class="animate-switch-container" ng-switch on="myGigs.tabSelection">
+			<div class="animate-switch" ng-switch-default>In Progress</div>
+			<div class="animate-switch" ng-switch-when="tab-applied">Applied</div>
+			<div class="animate-switch" ng-switch-when="tab-myposts">My posts</div>
+		</div>
+</ion-content>
 </ion-view>
