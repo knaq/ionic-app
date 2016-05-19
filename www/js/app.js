@@ -104,19 +104,19 @@ angular.module('knaq', [
       }
     })
 
-  .state('tab.gigs', {
-      url: '/gigs',
+  .state('tab.discover-gigs', {
+      url: '/discover-gigs',
       views: {
-        'tab-gigs': {
-          templateUrl: 'templates/tab-gigs.html',
-          controller: 'GigsCtrl'
+        'tab-discover-gigs': {
+          templateUrl: 'templates/tab-discover-gigs.html',
+          controller: 'DiscoverGigsCtrl'
         }
       }
     })
     .state('tab.gig-detail', {
-      url: '/gigs/:gigId',
+      url: '/discover-gigs/:gigId',
       views: {
-        'tab-gigs': {
+        'tab-discover-gigs': {
           templateUrl: 'templates/tab-gig-detail.html',
           controller: 'GigDetailCtrl'
         }

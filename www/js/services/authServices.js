@@ -16,6 +16,7 @@ angular.module('knaq.authServices', [])
         },
 
         isLoggedIn: function() {
+            console.log(_user)
             return _user ? true : false;
         },
         getUser: function() {

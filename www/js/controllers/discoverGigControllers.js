@@ -1,6 +1,6 @@
 angular.module('knaq.gigControllers',[])
 
-.controller('GigsCtrl', function($scope, GigFirebaseConnection, $state, $stateParams, Data) {
+.controller('DiscoverGigsCtrl', function($scope, GigFirebaseConnection, $state, $stateParams, Data) {
 
   $scope.gigs = {}
 
