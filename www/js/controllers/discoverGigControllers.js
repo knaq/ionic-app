@@ -1,4 +1,4 @@
-angular.module('knaq.gigControllers',[])
+angular.module('knaq.discoverGigsControllers',[])
 
 .controller('DiscoverGigsCtrl', function($scope, GigFirebaseConnection, $state, $stateParams, Data) {
 

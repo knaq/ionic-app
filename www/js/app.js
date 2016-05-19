@@ -17,8 +17,8 @@ angular.module('knaq', [
 
   'knaq.profileControllers',
   'knaq.authControllers',
-  'knaq.myGigsController',
-  'knaq.gigControllers',
+  'knaq.myGigsControllers',
+  'knaq.discoverGigsControllers',
   'knaq.accountControllers'
 
   ])
