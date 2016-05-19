@@ -1,4 +1,4 @@
-angular.module('gig.controllers', ['gig.services', 'knaq.services'])
+angular.module('knaq.gigControllers',[])
 
 .controller('GigsCtrl', function($scope, GigFirebaseConnection, $state, $stateParams, Data) {
 
@@ -25,8 +25,6 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services'])
     result.$watch(function() {
       addUsername();
     })
-
-
 
   })
 

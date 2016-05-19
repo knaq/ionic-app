@@ -1,4 +1,4 @@
-angular.module('knaq.controllers', [])
+angular.module('knaq.authControllers', [])
 
 .controller('SignUpCtrl', function($scope, $firebaseObject, $state) {
 

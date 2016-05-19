@@ -1,4 +1,4 @@
-angular.module('gig.services', [])
+angular.module('knaq.gigServices', [])
   .factory('GigFirebaseConnection', function($firebaseArray, $firebaseObject) {
 
     var ref = new Firebase("https://knaq.firebaseio.com/gigs");

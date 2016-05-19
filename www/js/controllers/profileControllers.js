@@ -1,4 +1,5 @@
-angular.module('profile.controllers', ['profile.services', 'knaq.services', 'firebase'])
+angular.module('knaq.profileControllers',[])
+
     .controller('ProfilePageCtrl', function ($scope, $state, $firebaseAuth, $firebaseArray, $ionicPopup, Auth, Data, SkillsFirebaseConnection) {
         $scope.selection = 'reviews';
 

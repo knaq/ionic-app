@@ -5,7 +5,23 @@
 // the 2nd parameter is an array of 'requires'
 // 'knaq.services' is found in services.js
 // 'knaq.controllers' is found in controllers.js
-angular.module('knaq', ['firebase', 'ionic', 'knaq.services', 'gig.services', 'profile.services', 'profile.controllers', 'knaq.controllers',  'gig.controllers', 'knaq.accountControllers'])
+angular.module('knaq', [
+  'firebase',
+  'ionic',
+
+
+  'knaq.dataServices',
+  'knaq.authServices',
+  'knaq.gigServices',
+  'knaq.profileServices',
+
+  'knaq.profileControllers',
+  'knaq.authControllers',
+  'knaq.gigControllers',
+  'knaq.accountControllers'
+
+  ])
+
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
