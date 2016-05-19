@@ -1,4 +1,4 @@
-angular.module('knaq.controllers', ['ionic', 'ngCordova'])
+angular.module('knaq.controllers', ['ionic'])
 
   .controller('ProfileCtrl', function ($scope, $state, $firebaseAuth, Session, Data) {
 
@@ -105,25 +105,6 @@ angular.module('knaq.controllers', ['ionic', 'ngCordova'])
 
 
   })
-
-  .controller('ImagePickerCtrl', function ($scope, $cordovaImagePicker) {
-    $scope.getPicture = function () {
-      var options = {
-        maximumImagesCount: 1,
-        width: 800,
-        height: 800,
-        quality: 80
-      };
-
-      $cordovaImagePicker.getPictures(options)
-        .then(function (results) {
-          $scope.imageURI = results[0];
-        }, function (error) {
-          alert("Error getting photo");
-        });
-    }
-  })
-
 
   .controller('AccountCtrl', function ($scope, $state, Data, Session) {
     $scope.account = {};
