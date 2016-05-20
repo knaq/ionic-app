@@ -66,11 +66,16 @@ angular.module('knaq.discoverGigsControllers',[])
     
     GigFirebaseConnection.addApplicant(paramGigId, userId);
 
+    $scope.gigDetail.applied = true;
+
+
   }
 
   $scope.gigDetail.unapply = function() {
 
     GigFirebaseConnection.removeApplicant(paramGigId, userId);
+
+    $scope.gigDetail.applied = false;
 
   }
 
