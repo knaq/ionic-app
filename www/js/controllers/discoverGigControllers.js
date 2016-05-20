@@ -69,13 +69,9 @@ angular.module('knaq.discoverGigsControllers',[])
   }
 
   $scope.gigDetail.unapply = function() {
-    var userId = Auth.getUser();
-    var index = $scope.gigDetail.gig.applicants.indexOf(userId);
-    while (index != -1) {
-      $scope.gigDetail.gig.applicants.splice(index, 1);
-      index = $scope.gigDetail.gig.applicants.indexOf(userId);
-    }
-    $scope.gigDetail.gig.$save();
+
+    GigFirebaseConnection.removeApplicant(paramGigId, userId);
+
   }
 
 

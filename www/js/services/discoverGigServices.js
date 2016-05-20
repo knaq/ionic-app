@@ -35,6 +35,11 @@ angular.module('knaq.gigServices', [])
           appliedAt: Firebase.ServerValue.TIMESTAMP
         })
       },
+      removeApplicant: function(gigId, userId) {
+        
+        ref.child(gigId).child('applicants').child(userId).remove();
+        
+      },
 
       getApplicants: function(gigId, userId) {
         return $firebaseArray(ref.child(gigId).child('applicants')).$loaded()
