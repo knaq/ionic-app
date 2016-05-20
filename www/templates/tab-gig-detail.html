@@ -10,8 +10,12 @@
     <p>
       {{gigDetail.gig.description}}
     </p>
-    <button class="button button-block button-positive" ng-click="gigDetail.apply()">
+    <h1>{{gigDetail.applied}}</h1>
+    <button class="button button-block button-positive" ng-hide="gigDetail.applied" ng-click="gigDetail.apply()">
       Apply
+    </button>
+    <button class="button button-block button-positive" ng-show="gigDetail.applied" ng-click="gigDetail.unapply()">
+      Withdraw Application
     </button>
   </ion-content>
 </ion-view>

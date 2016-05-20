@@ -1,5 +1,5 @@
 angular.module('knaq.gigServices', [])
-  .factory('GigFirebaseConnection', function($firebaseArray, $firebaseObject) {
+  .factory('GigFirebaseConnection', function($firebaseArray, $firebaseObject, $q) {
 
     var ref = new Firebase("https://knaq.firebaseio.com/gigs");
 
@@ -30,10 +30,30 @@ angular.module('knaq.gigServices', [])
           userId: userId
         });
       },
+      addApplicant: function(gigId, userId) {
+        ref.child(gigId).child('applicants').child(userId).set({
+          appliedAt: Firebase.ServerValue.TIMESTAMP
+        })
+      },
 
-      addApplicant: function (gigId, userId) {
-         return $firebaseArray(ref.child(gigId).child('applicants')).$add(userId)
+      getApplicants: function(gigId, userId) {
+        return $firebaseArray(ref.child(gigId).child('applicants')).$loaded()
+      },
+
+      isApplied:  function(gigId, userId) {
+        var deferred = $q.defer();
+
+        $firebaseArray(ref.child(gigId).child('applicants')).$loaded().then(function (applicants) {
+          deferred.resolve(applicants.$indexFor(userId))
+        },function (error) {
+          deferred.reject(error);
+        })
+
+        return deferred.promise
       }
+
+
+
 
 
     }

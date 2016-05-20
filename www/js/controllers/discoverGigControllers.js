@@ -33,9 +33,25 @@ angular.module('knaq.discoverGigsControllers',[])
 
 .controller('GigDetailCtrl', function($scope, GigFirebaseConnection, $stateParams, Auth) {
 
+  
+  var userId = Auth.getUser();
+  var paramGigId = $stateParams.gigId;
+
   $scope.gigDetail = {}
 
-  var paramGigId = $stateParams.gigId;
+  var isAppliedPromise = GigFirebaseConnection.isApplied(paramGigId, userId)
+
+  isAppliedPromise.then(function (result) {
+    
+    if(result == -1){
+      $scope.gigDetail.applied = false;
+    }else{
+      $scope.gigDetail.applied = true;
+    }
+    console.log($scope.gigDetail.applied)
+  });
+
+  
 
   var gigLoadPromise = GigFirebaseConnection.get(paramGigId);
 
@@ -45,47 +61,11 @@ angular.module('knaq.discoverGigsControllers',[])
     console.log($scope.gigDetail.gig);
   })
 
-  $scope.gigDetail.applyBtnStates = [{
-    label: "No function available",
-    action: "doNothing()",
-    style: "button button-block button-light"
-  }, {
-    label: "Apply",
-    action: "apply()",
-    style: "button button-block button-positive"
-  }, {
-    label: "Unapply",
-    action: "unapply()",
-    style: "button button-block button-assertive"
-  }];
-
-
-  $scope.gigDetail.checkApplyState = function() {
-    if ($scope.gigDetail.gig == undefined || $scope.gigDetail.gig.applicants == undefined) {
-      $scope.gigDetail.applyState = 0;
-    } else if ($scope.gigDetail.gig.applicants.indexOf(Auth.getUser()) == -1) {
-      $scope.gigDetail.applyState = 1;
-    } else {
-      $scope.gigDetail.applyState = 2;
-    }
-  }
 
   $scope.gigDetail.apply = function() {
-    var userId = Auth.getUser();
+    
+    GigFirebaseConnection.addApplicant(paramGigId, userId);
 
-    // if ($scope.gigDetail.gig.applicants == undefined || $scope.gigDetail.gig.applicants == null) {
-    //   $scope.gigDetail.gig.applicants = [userId];
-    //   $scope.gigDetail.gig.$save();
-    // } else {
-    //   $scope.gigDetail.gig.applicants.push(userId);
-    //   $scope.gigDetail.gig.$save();
-    // }
-
-    GigFirebaseConnection.addApplicant(paramGigId,userId).then(function (successfull) {
-      console.log("successfull application")
-    }, function (error) {
-      console.error("unsuccessfull application")
-    })
   }
 
   $scope.gigDetail.unapply = function() {
