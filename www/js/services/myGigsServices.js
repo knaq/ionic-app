@@ -1,5 +1,5 @@
 angular.module('knaq.myGigsServices', [])
-  .factory('MyGigsServices', function($firebaseArray, $firebaseObject, Auth) {
+  .factory('MyGigsServices', function($q, $firebaseArray, $firebaseObject, Auth) {
 
     var ref = new Firebase("https://knaq.firebaseio.com/gigs");
 
@@ -12,7 +12,7 @@ angular.module('knaq.myGigsServices', [])
       getInProgress: function() {
         return this.getAll().then(function(gigs) {
           return gigs.filter(function(gig) {
-            if (gig.acceptedCandidate == Auth.getUser() && gig.completed=="false") {
+            if (gig.acceptedCandidate == Auth.getUser() && gig.completed == "false") {
               return gig
             }
 
@@ -23,16 +23,37 @@ angular.module('knaq.myGigsServices', [])
 
       },
       getApplied: function() {
-        return this.getAll().then(function(gigs) {
-          return gigs.filter(function(gig) {
-            if (gig.applicants.indexOf(Auth.getUser())) {
-              return gig
-            }
 
-          }, function(error) {
-            return error;
-          })
-        })
+        var deferred = $q.defer();
+
+        this.getAll().then(
+          function(gigs) {
+
+            var appliedGigs = gigs.filter(function(gig) {
+
+
+              if (gig.hasOwnProperty('applicants')) {
+
+                if (gig.applicants.hasOwnProperty(Auth.getUser())) {
+
+                  return gig;
+                }
+
+              }
+
+
+            });
+
+            deferred.resolve(appliedGigs)
+
+          },
+          function(error) {
+            deferred.reject(error)
+          }
+        );
+
+        return deferred.promise
+
       },
       getPosts: function() {
 

@@ -17,7 +17,11 @@ angular.module('knaq.myGigsControllers', [])
 					})
 					break;
 				case "tab-applied":
-					console.log("Now applied")
+					MyGigsServices.getApplied().then(function (myAppliedGigs) {
+						$scope.myGigs.myAppliedGigs = myAppliedGigs
+					},function (error) {
+						console.log(error)
+					})
 					break;
 				default:
 					console.log("Now inprogress")
