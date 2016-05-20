@@ -10,16 +10,28 @@ angular.module('knaq.myGigsServices', [])
       },
 
       getInProgress: function() {
-        return this.getAll().then(function(gigs) {
-          return gigs.filter(function(gig) {
-            if (gig.acceptedCandidate == Auth.getUser() && gig.completed == "false") {
-              return gig
-            }
 
-          }, function(error) {
-            return error;
-          })
-        })
+        var deferred = $q.defer();
+        
+        this.getAll().then(
+          function  (gigs) {
+
+            var gigsInProgress = gigs.filter(function (gig) {
+              if(gig.hasOwnProperty('acceptedCandidate')){
+                if(gig.acceptedCandidate==Auth.getUser()){
+                  return gig;
+                }
+              }
+            });
+
+            deferred.resolve(gigsInProgress)
+          },
+          function (error) {
+            deferred.reject(gigsInProgress)
+          }
+        )
+
+        return deferred.promise
 
       },
       getApplied: function() {
@@ -30,18 +42,11 @@ angular.module('knaq.myGigsServices', [])
           function(gigs) {
 
             var appliedGigs = gigs.filter(function(gig) {
-
-
               if (gig.hasOwnProperty('applicants')) {
-
                 if (gig.applicants.hasOwnProperty(Auth.getUser())) {
-
                   return gig;
                 }
-
               }
-
-
             });
 
             deferred.resolve(appliedGigs)

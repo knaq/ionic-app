@@ -15,7 +15,12 @@
 		<div class="animate-switch-container" ng-switch on="myGigs.tabSelection">
 			<div class="animate-switch" ng-switch-default>
 
-				In Progress
+				<div class="list">
+					<a class="item item-avatar" href="#" ng-repeat="gigInProgress in myGigs.gigsInProgress">
+						<h2>{{gigInProgress.title}}</h2>
+						<p>{{gigInProgress.description}}</p>
+					</a>
+				</div>
 
 			</div>
 			<div class="animate-switch" ng-switch-when="tab-applied">

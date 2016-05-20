@@ -9,7 +9,6 @@ angular.module('knaq.myGigsControllers', [])
 			
 			switch($scope.myGigs.tabSelection){
 				case "tab-myposts":
-					console.log("Now in myposts")
 					MyGigsServices.getPosts().then(function (myPosts) {
 						$scope.myGigs.myPosts = myPosts 
 					}, function (error) {
@@ -20,11 +19,15 @@ angular.module('knaq.myGigsControllers', [])
 					MyGigsServices.getApplied().then(function (myAppliedGigs) {
 						$scope.myGigs.myAppliedGigs = myAppliedGigs
 					},function (error) {
-						console.log(error)
+						console.error(error)
 					})
 					break;
 				default:
-					console.log("Now inprogress")
+					MyGigsServices.getInProgress().then(function (gigsInProgress) {
+						$scope.myGigs.gigsInProgress = gigsInProgress
+					},function (error) {
+						console.error(error)
+					})
 			}
 		}
 		$scope.myGigs.pageTitle = "My gigs go here"
