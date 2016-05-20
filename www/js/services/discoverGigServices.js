@@ -29,6 +29,10 @@ angular.module('knaq.gigServices', [])
           description: description,
           userId: userId
         });
+      },
+
+      addApplicant: function (gigId, userId) {
+         return $firebaseArray(ref.child(gigId).child('applicants')).$add(userId)
       }
 
 

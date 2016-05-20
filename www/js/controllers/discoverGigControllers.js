@@ -35,7 +35,9 @@ angular.module('knaq.discoverGigsControllers',[])
 
   $scope.gigDetail = {}
 
-  var gigLoadPromise = GigFirebaseConnection.get($stateParams.gigId);
+  var paramGigId = $stateParams.gigId;
+
+  var gigLoadPromise = GigFirebaseConnection.get(paramGigId);
 
   gigLoadPromise.then(function(result) {
     $scope.gigDetail.gig = result;
@@ -71,13 +73,19 @@ angular.module('knaq.discoverGigsControllers',[])
   $scope.gigDetail.apply = function() {
     var userId = Auth.getUser();
 
-    if ($scope.gigDetail.gig.applicants == undefined || $scope.gigDetail.gig.applicants == null) {
-      $scope.gigDetail.gig.applicants = [userId];
-      $scope.gigDetail.gig.$save();
-    } else {
-      $scope.gigDetail.gig.applicants.push(userId);
-      $scope.gigDetail.gig.$save();
-    }
+    // if ($scope.gigDetail.gig.applicants == undefined || $scope.gigDetail.gig.applicants == null) {
+    //   $scope.gigDetail.gig.applicants = [userId];
+    //   $scope.gigDetail.gig.$save();
+    // } else {
+    //   $scope.gigDetail.gig.applicants.push(userId);
+    //   $scope.gigDetail.gig.$save();
+    // }
+
+    GigFirebaseConnection.addApplicant(paramGigId,userId).then(function (successfull) {
+      console.log("successfull application")
+    }, function (error) {
+      console.error("unsuccessfull application")
+    })
   }
 
   $scope.gigDetail.unapply = function() {
