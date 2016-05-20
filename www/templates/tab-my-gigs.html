@@ -15,7 +15,14 @@
 		<div class="animate-switch-container" ng-switch on="myGigs.tabSelection">
 			<div class="animate-switch" ng-switch-default>In Progress</div>
 			<div class="animate-switch" ng-switch-when="tab-applied">Applied</div>
-			<div class="animate-switch" ng-switch-when="tab-myposts">My posts</div>
+			<div class="animate-switch" ng-switch-when="tab-myposts">
+			<div class="list">
+				<a class="item item-avatar" href="#" ng-repeat="myPost in myGigs.myPosts">
+					<h2>{{myPost.title}}</h2>
+					<p>{{myPost.description}}</p>
+				</a>
+				</div>
+			</div>
 		</div>
-</ion-content>
+	</ion-content>
 </ion-view>

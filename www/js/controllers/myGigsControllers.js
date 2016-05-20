@@ -10,7 +10,11 @@ angular.module('knaq.myGigsControllers', [])
 			switch($scope.myGigs.tabSelection){
 				case "tab-myposts":
 					console.log("Now in myposts")
-					console.log(MyGigsServices.getPosts())
+					MyGigsServices.getPosts().then(function (myPosts) {
+						$scope.myGigs.myPosts = myPosts 
+					}, function (error) {
+						console.error(error)
+					})
 					break;
 				case "tab-applied":
 					console.log("Now applied")

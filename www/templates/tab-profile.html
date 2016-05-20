@@ -29,7 +29,7 @@
       <div href="#" ng-switch-default>
         <ion-list>
           <ion-item class="item item-avatar" ng-repeat="review in signedInUser.reviews">
-            <img src="{{review.image}}">
+            <img ng-src="{{review.image}}">
             <h2>{{review.title}}</h2>
             <p>{{review.text}}
             </p>
