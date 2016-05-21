@@ -3,7 +3,7 @@
     <ion-nav-back-button></ion-nav-back-button>
   </ion-nav-bar>
 
-  <ion-content class="padding">
+  <ion-content>
 
 
     <div class="list">
@@ -17,16 +17,20 @@
         <input type="password" placeholder="Password" ng-model="signin.password">
       </label>
 
-      <button class="button button-block button-positive" ng-model="signin.submitButton" ng-disabled="!signin.email || !signin.password" ng-click="signIn()">
-        Sign In
-      </button>
-      <button class="button button-block button-light" ng-model="signin.cancelButton" ng-click="reset()">Reset</button>
     </div>
 
-
-
-  </ion-content>
-  <div class="bar bar-footer bar-dark" ng-model="signin.goToSignUp" ng-click="signup()">
-    <div class="title">Sign Up</div>
+    <div class="padding">
+     <button class="button button-block button-positive" ng-model="signin.submitButton" ng-disabled="!signin.email || !signin.password" ng-click="signIn()">
+      Sign In
+    </button>
+    <button class="button button-block button-stable" ng-model="signin.cancelButton" ng-click="reset()">Reset</button>
   </div>
+
+
+
+
+</ion-content>
+<div class="bar bar-footer bar-dark" ng-model="signin.goToSignUp" ng-click="signup()">
+  <div class="title">Sign Up</div>
+</div>
 </ion-view>

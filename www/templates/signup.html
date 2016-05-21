@@ -3,7 +3,7 @@
     <ion-nav-back-button></ion-nav-back-button>
   </ion-nav-bar>
 
-  <ion-content class="padding">
+  <ion-content>
 
 
     <div class="list">
@@ -25,12 +25,14 @@
         <span class="input-label">Password Confirmation</span>
         <input type="password" placeholder="Password Confimation" ng-model="signup.passwordConfirmation">
       </label>
-
+    </div>
+    <div class="padding">
 
       <button class="button button-block button-positive" ng-model="signup.submitButton" ng-disabled="!signup.email || !signup.password || !signup.passwordConfirmation" ng-click="signUp()">
         Sign Up
       </button>
-      <button class="button button-block button-light" ng-model="signup.cancelButton" ng-click="reset()">Reset</button>
+      <button class="button button-block button-stable" ng-model="signup.cancelButton" ng-click="reset()">Reset</button>
+
     </div>
 
   </ion-content>
