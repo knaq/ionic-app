@@ -4,27 +4,25 @@
 	</ion-nav-bar>
 	<div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
 		<div class="tabs">
-			<a class="tab-item active" ng-class="{'active': myGigs.tabSelection =='tab-inprogress'}" ng-click="myGigs.tabClick('tab-inprogress')">
+			<a class="tab-item active"  ng-click="myGigs.tabClick('tab-inprogress')" ng-class="{'active': myGigs.tabSelection =='tab-inprogress'}">
 				In Progress
 			</a>
-			<a class="tab-item" ng-class="{'active': myGigs.tabSelection =='tab-applied'}" ng-click="myGigs.tabClick('tab-applied')">
+			<a class="tab-item" ng-click="myGigs.tabClick('tab-applied')" ng-class="{'active': myGigs.tabSelection =='tab-applied'}">
 				Applied
 			</a>
-			<a class="tab-item" ng-class="{'active': myGigs.tabSelection =='tab-myposts'}" ng-click="myGigs.tabClick('tab-myposts')">
+			<a class="tab-item" ng-click="myGigs.tabClick('tab-myposts')" ng-class="{'active': myGigs.tabSelection =='tab-myposts'}">
 				My Posts
 			</a>
 		</div>
 	</div>
 	<ion-content class="has-tabs-top">
-		
-		<div class="loading padding" ng-show="dataLoader">
+
+		<div class="padding data-loader" ng-show="myGigs.loadingData==true">
 			<ion-spinner icon="ripple"></ion-spinner>
 		</div>
-
+		
 		<div ng-switch on="myGigs.tabSelection">
 			<div ng-switch-default>
-
-
 
 				<div class="list" ng-show="myGigs.gigsInProgress.length > 0">
 					<a class="item item-avatar" href="#" ng-repeat="gigInProgress in myGigs.gigsInProgress">
@@ -74,5 +72,6 @@
 
 			</div>
 		</div>
+		
 	</ion-content>
 </ion-view>

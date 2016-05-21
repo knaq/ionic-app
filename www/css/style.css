@@ -6,6 +6,7 @@
   color: #999;
   text-align: center;
 }
-.loading{
+.data-loader{
+  padding: 50px;
   text-align: center;
 }
