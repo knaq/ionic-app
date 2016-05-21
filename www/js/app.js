@@ -22,23 +22,23 @@ angular.module('knaq', [
   'knaq.discoverGigsControllers',
   'knaq.accountControllers'
 
-  ])
+])
 
-  .run(function($ionicPlatform) {
-    $ionicPlatform.ready(function() {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        cordova.plugins.Keyboard.disableScroll(true);
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.disableScroll(true);
 
-      }
-      if (window.StatusBar) {
-        // org.apache.cordova.statusbar required
-        StatusBar.styleDefault();
-      }
-    });
-  })
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
+})
 
 .config(function($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
 
@@ -77,18 +77,18 @@ angular.module('knaq', [
   // Each tab has its own nav history stack:
 
   .state('tab.profile', {
-    url: '/profile',
-    params: {
-      userSignedInID: null
-    },
-    views: {
-      'tab-profile': {
-        templateUrl: 'templates/tab-profile.html',
-        controller: 'ProfilePageCtrl'
+      url: '/profile',
+      params: {
+        userSignedInID: null
+      },
+      views: {
+        'tab-profile': {
+          templateUrl: 'templates/tab-profile.html',
+          controller: 'ProfilePageCtrl'
+        }
       }
-    }
-  })
-  .state('tab.skill-detail', {
+    })
+    .state('tab.skill-detail', {
       url: '/profile/skill/:skill',
       views: {
         'tab-profile': {
@@ -109,24 +109,27 @@ angular.module('knaq', [
 
 
   .state('tab.my-gigs', {
-    url: '/my-gigs',
-    views: {
-      'tab-my-gigs': {
-        templateUrl: 'templates/tab-my-gigs.html',
-        controller: 'MyGigsCtrl'
+      url: '/my-gigs',
+      views: {
+        'tab-my-gigs': {
+          templateUrl: 'templates/tab-my-gigs.html',
+          controller: 'MyGigsCtrl'
+        }
       }
-    }
-  })
-  .state('tab.my-gig-detail', {
-    url: '/my-gigs/:gigId',
-    views: {
-      'tab-my-gigs': {
-        templateUrl: 'templates/tab-my-gig-detail.html',
-        controller: 'MyGigDetailCtrl'
+    })
+    .state('tab.my-gig-detail', {
+      url: '/my-gigs/my-gig-detail',
+      params: {
+        myGigData: null
+      },
+      views: {
+        'tab-my-gigs': {
+          templateUrl: 'templates/tab-my-gig-detail.html',
+          controller: 'MyGigDetailCtrl'
+        }
       }
-    }
-  })
-  .state('tab.discover-gigs', {
+    })
+    .state('tab.discover-gigs', {
       url: '/discover-gigs',
       views: {
         'tab-discover-gigs': {
