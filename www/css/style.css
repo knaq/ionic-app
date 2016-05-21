@@ -13,8 +13,12 @@
 
 .myGigsTab .item-avatar > img{
 	border-radius: 0;
+	margin-top: 2px;
+	transform: scale(0.75);
 }
 
 .discoverGigsTab .item-avatar .item-content> img{
 	border-radius: 0;
+	margin-top: 2px;
+	transform: scale(0.75);
 }

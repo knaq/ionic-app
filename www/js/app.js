@@ -40,12 +40,13 @@ angular.module('knaq', [
     });
   })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+  $urlMatcherFactoryProvider.strictMode(false)
   $stateProvider
 
   // setup an abstract state for the register page
@@ -113,6 +114,15 @@ angular.module('knaq', [
       'tab-my-gigs': {
         templateUrl: 'templates/tab-my-gigs.html',
         controller: 'MyGigsCtrl'
+      }
+    }
+  })
+  .state('tab.my-gig-detail', {
+    url: '/my-gigs/:gigId',
+    views: {
+      'tab-my-gigs': {
+        templateUrl: 'templates/tab-my-gig-detail.html',
+        controller: 'MyGigDetailCtrl'
       }
     }
   })

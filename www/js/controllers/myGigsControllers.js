@@ -44,4 +44,12 @@ angular.module('knaq.myGigsControllers', [])
 			}
 		}
 
-	});
+	})
+	.controller('MyGigDetailCtrl', function($scope, GigFirebaseConnection, $stateParams, Auth) {
+		
+		var userId = Auth.getUser();
+  		var paramGigId = $stateParams.gigId;
+
+  		$scope.myGigDetail = {};
+
+	})

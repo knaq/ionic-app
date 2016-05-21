@@ -1,0 +1,25 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{gigDetail.gig.title}}">
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content class="padding">
+    <img ng-src="{{gigDetail.gig.photo}}" style="width: 64px; height: 64px">
+    <p>
+      {{gigDetail.gig.description}}
+    </p>
+    <div ng-hide="gigDetail.isMyOwnPost">
+      <button class="button button-block button-positive" ng-hide="gigDetail.applied" ng-click="gigDetail.apply()">
+        Apply
+      </button>
+      <button class="button button-block button-positive" ng-show="gigDetail.applied" ng-click="gigDetail.unapply()">
+        Withdraw Application
+      </button>
+    </div>
+  </ion-content>
+</ion-view>
