@@ -31,7 +31,7 @@ angular.module('knaq.discoverGigsControllers',[])
 })
 
 
-.controller('GigDetailCtrl', function($scope, GigFirebaseConnection, $stateParams, Auth) {
+.controller('GigDetailCtrl', function($scope, GigFirebaseConnection, $stateParams, $state, Auth) {
 
   
   var userId = Auth.getUser();
@@ -74,6 +74,8 @@ angular.module('knaq.discoverGigsControllers',[])
 
     $scope.gigDetail.applied = true;
 
+    $state.go('tab.discover-gigs')
+
 
   }
 
@@ -82,6 +84,8 @@ angular.module('knaq.discoverGigsControllers',[])
     GigFirebaseConnection.removeApplicant(paramGigId, userId);
 
     $scope.gigDetail.applied = false;
+
+    $state.go('tab.discover-gigs')
 
   }
 
