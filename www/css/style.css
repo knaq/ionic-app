@@ -1,3 +1,8 @@
 .list .item:first-child{
   border-top:none;
 }
+.message {
+  padding: 20px 0px;
+  color: #999;
+  text-align: center;
+}
