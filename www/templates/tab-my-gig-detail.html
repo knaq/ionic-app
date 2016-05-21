@@ -14,13 +14,16 @@
       {{myGigDetail.myGigData.description}}
     </p>
 
+    <div class="padding data-loader" ng-show="myGigDetail.loadingData==true">
+      <ion-spinner icon="ripple"></ion-spinner>
+    </div>
     <div class="list" ng-show="myGigDetail.myParentState=='myposts'">
 
       <div class="item item-divider">
         Applicants
       </div>
 
-      <a class="item item-avatar" href="#" ng-repeat="applicant in myGigDetail.applicants">
+      <a class="item item-avatar" href="#" ng-repeat="applicant in myGigDetail.allApplicants">
         <img src="../img/adam.jpg">
         <h2>{{applicant.username}}</h2>
         <p>{{applicant.email}}</p>

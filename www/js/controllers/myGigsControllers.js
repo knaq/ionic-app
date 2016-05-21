@@ -66,28 +66,31 @@ angular.module('knaq.myGigsControllers', [])
 		}
 
 	})
-	.controller('MyGigDetailCtrl', function($scope, GigFirebaseConnection, $state, Auth, Data) {
+	.controller('MyGigDetailCtrl', function($scope, $q, GigFirebaseConnection, $state, Auth, Data) {
 
 		$scope.myGigDetail = {};
-		$scope.myGigDetail.applicants = []
+		$scope.myGigDetail.loadingData = true;
+		var applicants = []
 		var userId = Auth.getUser();
 		var gigID = $state.params.myGigData.$id;
 		$scope.myGigDetail.myParentState = $state.params.myParentState
 		$scope.myGigDetail.myGigData = $state.params.myGigData;
 
+
 		angular.forEach($scope.myGigDetail.myGigData.applicants, function(value, userId) {
-			Data.getUser(userId).then(function (userData) {
-				$scope.myGigDetail.applicants.push(userData)
-				console.log($scope.myGigDetail.applicants)
-			},
-			function () {
-				console.log(error)
-			});
-		});
-		
 
+			applicants.push(Data.getUser(userId))
 
-		console.log($scope.myGigDetail.applicants)
+		})
+
+		$q.all(applicants).then(function(allApplicants) {
+			console.log("received all applicants")
+			console.log(allApplicants)
+			$scope.myGigDetail.allApplicants = allApplicants;
+			$scope.myGigDetail.loadingData = false;
+		}, function(error) {
+			console.error(error)
+		})
 
 		$scope.myGigDetail.drop = function() {
 			console.log("Trying to drop gig in progress")
