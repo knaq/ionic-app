@@ -4,9 +4,11 @@ angular.module('knaq.discoverGigsControllers',[])
 
   $scope.gigs = {}
 
+  $scope.gigs.loadingData = true;
+
   GigFirebaseConnection.getAll().then(function(result) {
 
-
+    $scope.gigs.loadingData = false;
     var addUsername = function() {
       $scope.gigs.allGigList = $scope.gigs.retrievedGigList.map(function(gig) {
 
