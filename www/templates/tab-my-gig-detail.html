@@ -23,6 +23,12 @@
         Applicants
       </div>
 
+      <div class="padding message" ng-show="myGigDetail.allApplicants.length == 0 || myGigDetail.allApplicants == null">
+        <p>
+          There is no applicant for this position at this moment.
+        </p>
+      </div>
+
       <a class="item item-avatar" href="#" ng-repeat="applicant in myGigDetail.allApplicants">
         <img src="../img/adam.jpg">
         <h2>{{applicant.username}}</h2>
