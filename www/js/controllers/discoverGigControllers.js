@@ -12,6 +12,10 @@ angular.module('knaq.discoverGigsControllers',[])
     var addMoreFields = function() {
       $scope.gigs.allGigList = $scope.gigs.retrievedGigList.map(function(gig) {
 
+        if(gig.userId ==userId){
+          gig.mypost=true;
+        }
+
         Data.getUser(gig.userId).then(function(userData) {
           gig['username'] = userData.username;
         })
