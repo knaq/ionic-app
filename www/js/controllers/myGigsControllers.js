@@ -52,11 +52,36 @@ angular.module('knaq.myGigsControllers', [])
 		
 		$scope.myGigDetail = {};
 		var userId = Auth.getUser();
+		var gigID = $state.params.myGigData.$id;
 		$scope.myGigDetail.myParentState = $state.params.myParentState
 		$scope.myGigDetail.myGigData = $state.params.myGigData;
 
-		console.log($scope.myGigDetail.myParentState)
+
 		console.log($scope.myGigDetail.myGigData)
+
+		$scope.myGigDetail.drop = function () {
+			console.log("Trying to drop gig in progress")
+			GigFirebaseConnection.removeAcceptedApplicant(gigID).then(function () {
+				console.log("successful drop of gig")
+				$state.go('tab.my-gigs')
+			},function (error) {
+				console.error(error)
+			})
+		}
+		$scope.myGigDetail.unapply = function () {
+			console.log("Trying to unapply")
+			GigFirebaseConnection.removeApplicant(gigID, userId);
+			$state.go('tab.my-gigs')
+		}
+		$scope.myGigDetail.delete = function () {
+			console.log("Trying to delete a post")
+			GigFirebaseConnection.delete(gigID).then(function () {
+				console.log("successful deletion of gig")
+				$state.go('tab.my-gigs')
+			},function (error) {
+				console.error(error)
+			})
+		}
 	
 
 	})

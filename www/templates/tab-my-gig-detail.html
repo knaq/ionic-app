@@ -14,13 +14,13 @@
       {{myGigDetail.myGigData.description}}
     </p>
     
-    <button class="button button-block button-positive" ng-show="myGigDetail.myParentState=='inprogress'" ng-click="myGigDetail.myGigData.drop()">
+    <button class="button button-block button-positive" ng-show="myGigDetail.myParentState=='inprogress'" ng-click="myGigDetail.drop()">
       Drop
     </button>
-    <button class="button button-block button-positive" ng-show="myGigDetail.myParentState=='applied'" ng-click="myGigDetail.myGigData.unapply()">
+    <button class="button button-block button-positive" ng-show="myGigDetail.myParentState=='applied'" ng-click="myGigDetail.unapply()">
       Withdraw Application
     </button>
-    <button class="button button-block button-positive" ng-show="myGigDetail.myParentState=='myposts'" ng-click="myGigDetail.myGigData.delete()">
+    <button class="button button-block button-positive" ng-show="myGigDetail.myParentState=='myposts'" ng-click="myGigDetail.delete()">
       Delete
     </button>
     
