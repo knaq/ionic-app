@@ -13,12 +13,13 @@
     <p>
       {{gigDetail.gig.description}}
     </p>
-    <h1>{{gigDetail.applied}}</h1>
-    <button class="button button-block button-positive" ng-hide="gigDetail.applied" ng-click="gigDetail.apply()">
-      Apply
-    </button>
-    <button class="button button-block button-positive" ng-show="gigDetail.applied" ng-click="gigDetail.unapply()">
-      Withdraw Application
-    </button>
+    <div ng-hide="gigDetail.isMyOwnPost">
+      <button class="button button-block button-positive" ng-hide="gigDetail.applied" ng-click="gigDetail.apply()">
+        Apply
+      </button>
+      <button class="button button-block button-positive" ng-show="gigDetail.applied" ng-click="gigDetail.unapply()">
+        Withdraw Application
+      </button>
+    </div>
   </ion-content>
 </ion-view>
