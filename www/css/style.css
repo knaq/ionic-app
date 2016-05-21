@@ -6,15 +6,10 @@
   display: block
   overflow:hidden;
 }
-
-.animate-switch {
-  padding:10px;
-}
-
 .animate-switch.ng-animate {
   transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s;
 
-  position:absolute;
+  position:relative;
   top:0;
   left:0;
   right:0;

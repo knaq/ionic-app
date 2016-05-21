@@ -1,19 +1,21 @@
 <ion-view view-title="My Gigs">
-	<div class="tabs tabs-top">
-		<a class="tab-item " ng-click="myGigs.tabClick('tab-inprogress')">
-			In Progress
-		</a>
-		<a class="tab-item" ng-click="myGigs.tabClick('tab-applied')">
-			Applied
-		</a>
-		<a class="tab-item" ng-click="myGigs.tabClick('tab-myposts')">
-			My Posts
-		</a>
+
+	<div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
+		<div class="tabs">
+			<a class="tab-item active" ng-class="{'active': myGigs.tabSelection =='tab-inprogress'}" ng-click="myGigs.tabClick('tab-inprogress')">
+				In Progress
+			</a>
+			<a class="tab-item" ng-class="{'active': myGigs.tabSelection =='tab-applied'}" ng-click="myGigs.tabClick('tab-applied')">
+				Applied
+			</a>
+			<a class="tab-item" ng-class="{'active': myGigs.tabSelection =='tab-myposts'}" ng-click="myGigs.tabClick('tab-myposts')">
+				My Posts
+			</a>
+		</div>
 	</div>
-	<ion-content>
-		<h1>{{myGigs.pageTitle}}</h1>
-		<div class="animate-switch-container" ng-switch on="myGigs.tabSelection">
-			<div class="animate-switch" ng-switch-default>
+	<ion-content class="has-tabs-top">
+		<div ng-switch on="myGigs.tabSelection">
+			<div ng-switch-default>
 
 				<div class="list">
 					<a class="item item-avatar" href="#" ng-repeat="gigInProgress in myGigs.gigsInProgress">
@@ -23,7 +25,7 @@
 				</div>
 
 			</div>
-			<div class="animate-switch" ng-switch-when="tab-applied">
+			<div ng-switch-when="tab-applied">
 				
 				<div class="list">
 					<a class="item item-avatar" href="#" ng-repeat="myAppliedGig in myGigs.myAppliedGigs">
@@ -33,8 +35,8 @@
 				</div>
 
 			</div>
-				
-			<div class="animate-switch" ng-switch-when="tab-myposts">
+
+			<div ng-switch-when="tab-myposts">
 
 				<div class="list">
 					<a class="item item-avatar" href="#" ng-repeat="myPost in myGigs.myPosts">
