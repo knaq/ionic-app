@@ -3,11 +3,17 @@ angular.module('knaq.myGigsControllers', [])
 		$scope.myGigs = {};
 		$scope.myGigs.tabSelection = 'tab-inprogress';
 		$scope.myGigs.loadingData = true;
-		MyGigsServices.getInProgress().then(function(gigsInProgress) {
-			$scope.myGigs.gigsInProgress = gigsInProgress
-		}, function(error) {
-			console.error(error)
-		})
+
+		var defaultTabLogic = function(arguments) {
+			MyGigsServices.getInProgress().then(function(gigsInProgress) {
+				$scope.myGigs.gigsInProgress = gigsInProgress
+				$scope.myGigs.loadingData = false;
+			}, function(error) {
+				console.error(error)
+				$scope.myGigs.loadingData = false;
+			})
+		}
+		defaultTabLogic();
 
 		$scope.myGigs.tabClick = function(selection) {
 			console.log("tab change")
@@ -34,13 +40,7 @@ angular.module('knaq.myGigsControllers', [])
 					})
 					break;
 				default:
-					MyGigsServices.getInProgress().then(function(gigsInProgress) {
-						$scope.myGigs.loadingData = false;
-						$scope.myGigs.gigsInProgress = gigsInProgress
-					}, function(error) {
-						$scope.myGigs.loadingData = false;
-						console.error(error)
-					})
+					defaultTabLogic();
 			}
 		}
 
