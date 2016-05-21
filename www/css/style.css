@@ -10,3 +10,11 @@
   padding: 50px;
   text-align: center;
 }
+
+.myGigsTab .item-avatar > img{
+	border-radius: 0;
+}
+
+.discoverGigsTab .item-avatar .item-content> img{
+	border-radius: 0;
+}

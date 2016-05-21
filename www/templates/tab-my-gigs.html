@@ -1,4 +1,4 @@
-<ion-view view-title="My Gigs"> 
+<ion-view view-title="My Gigs" class="myGigsTab"> 
 	<ion-nav-bar class="bar-positive">
 		<ion-nav-back-button></ion-nav-back-button>
 	</ion-nav-bar>
@@ -15,7 +15,7 @@
 			</a>
 		</div>
 	</div>
-	<ion-content class="has-tabs-top">
+	<ion-content class="has-tabs-top" >
 
 		<div class="padding data-loader" ng-show="myGigs.loadingData==true">
 			<ion-spinner icon="ripple"></ion-spinner>
@@ -26,6 +26,7 @@
 
 				<div class="list" ng-show="myGigs.gigsInProgress.length > 0">
 					<a class="item item-avatar" href="#" ng-repeat="gigInProgress in myGigs.gigsInProgress">
+						<img src="../img/moneyBag2.png" alt="">
 						<h2>{{gigInProgress.title}}</h2>
 						<p>{{gigInProgress.description}}</p>
 					</a>
@@ -43,6 +44,7 @@
 				
 				<div class="list" ng-show="myGigs.myAppliedGigs.length > 0">
 					<a class="item item-avatar" href="#" ng-repeat="myAppliedGig in myGigs.myAppliedGigs">
+						<img src="../img/moneyBag2.png" alt="">
 						<h2>{{myAppliedGig.title}}</h2>
 						<p>{{myAppliedGig.description}}</p>
 					</a>
@@ -60,6 +62,7 @@
 
 				<div class="list" ng-show="myGigs.myPosts.length > 0">
 					<a class="item item-avatar" href="#" ng-repeat="myPost in myGigs.myPosts">
+						<img src="../img/moneyBag2.png" alt="">
 						<h2>{{myPost.title}}</h2>
 						<p>{{myPost.description}}</p>
 					</a>

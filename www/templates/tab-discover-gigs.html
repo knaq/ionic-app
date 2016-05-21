@@ -1,4 +1,4 @@
-<ion-view view-title="Gigs">
+<ion-view view-title="Gigs" class="discoverGigsTab">
   <ion-nav-bar class="bar-positive">
     <ion-nav-back-button></ion-nav-back-button>
   </ion-nav-bar>
@@ -17,7 +17,7 @@
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="gig in gigs.allGigList" type="item-text-wrap" href="#/tab/discover-gigs/{{gig.$id}}">
 
-        <img ng-src="{{gig.photo}}">
+        <img src="../img/smallMoney.png" alt="">
         <h2>{{gig.title}}</h2>
         <p>{{gig.username}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
