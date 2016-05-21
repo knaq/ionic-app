@@ -16,8 +16,14 @@
 		</div>
 	</div>
 	<ion-content class="has-tabs-top">
+		
+		<div class="loading padding" ng-show="dataLoader">
+			<ion-spinner icon="ripple"></ion-spinner>
+		</div>
+
 		<div ng-switch on="myGigs.tabSelection">
 			<div ng-switch-default>
+
 
 
 				<div class="list" ng-show="myGigs.gigsInProgress.length > 0">
