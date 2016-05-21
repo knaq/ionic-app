@@ -8,6 +8,8 @@ angular.module('knaq.myGigsControllers', [])
 			MyGigsServices.getInProgress().then(function(gigsInProgress) {
 				$scope.myGigs.gigsInProgress = gigsInProgress
 				$scope.myGigs.loadingData = false;
+
+				//gigsInProgress.$watch()
 			}, function(error) {
 				console.error(error)
 				$scope.myGigs.loadingData = false;

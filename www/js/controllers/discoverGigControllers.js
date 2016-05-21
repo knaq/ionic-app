@@ -24,9 +24,7 @@ angular.module('knaq.discoverGigsControllers',[])
     $scope.gigs.retrievedGigList = result;
     addUsername()
 
-    result.$watch(function() {
-      addUsername();
-    })
+    result.$watch(addUsername)
 
   })
 
