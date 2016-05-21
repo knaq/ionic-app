@@ -8,21 +8,38 @@
   <ion-nav-bar class="bar-positive">
     <ion-nav-back-button></ion-nav-back-button>
   </ion-nav-bar>
-  <ion-content class="padding">
+  <ion-content>
     <img ng-src="{{myGigDetail.myGigData.photo}}" style="width: 64px; height: 64px">
     <p>
       {{myGigDetail.myGigData.description}}
     </p>
+
+    <div class="list" ng-show="myGigDetail.myParentState=='myposts'">
+
+      <div class="item item-divider">
+        Applicants
+      </div>
+
+      <a class="item item-avatar" href="#" ng-repeat="applicant in myGigDetail.applicants">
+        <img src="../img/adam.jpg">
+        <h2>{{applicant.username}}</h2>
+        <p>{{applicant.email}}</p>
+      </a>
+
+
+    </div>
     
-    <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='inprogress'" ng-click="myGigDetail.drop()">
-      Drop
-    </button>
-    <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='applied'" ng-click="myGigDetail.unapply()">
-      Withdraw Application
-    </button>
-    <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='myposts'" ng-click="myGigDetail.delete()">
-      Delete
-    </button>
+    <div class="padding">
+      <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='inprogress'" ng-click="myGigDetail.drop()">
+        Drop
+      </button>
+      <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='applied'" ng-click="myGigDetail.unapply()">
+        Withdraw Application
+      </button>
+      <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='myposts'" ng-click="myGigDetail.delete()">
+        Delete
+      </button>
+    </div>
     
   </ion-content>
 </ion-view>

@@ -1,6 +1,9 @@
 .list .item:first-child{
   border-top:none;
 }
+.list .item:first-child.item-divider{
+  border-top: solid 1px #ddd; 
+}
 .message {
   padding: 20px 0px;
   color: #999;
