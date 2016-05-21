@@ -4,22 +4,25 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{gigDetail.gig.title}}">
+<ion-view view-title="{{myGigDetail.myGigData.title}}">
   <ion-nav-bar class="bar-positive">
     <ion-nav-back-button></ion-nav-back-button>
   </ion-nav-bar>
   <ion-content class="padding">
-    <img ng-src="{{gigDetail.gig.photo}}" style="width: 64px; height: 64px">
+    <img ng-src="{{myGigDetail.myGigData.photo}}" style="width: 64px; height: 64px">
     <p>
-      {{gigDetail.gig.description}}
+      {{myGigDetail.myGigData.description}}
     </p>
-    <div ng-hide="gigDetail.isMyOwnPost">
-      <button class="button button-block button-positive" ng-hide="gigDetail.applied" ng-click="gigDetail.apply()">
-        Apply
-      </button>
-      <button class="button button-block button-positive" ng-show="gigDetail.applied" ng-click="gigDetail.unapply()">
-        Withdraw Application
-      </button>
-    </div>
+    
+    <button class="button button-block button-positive" ng-show="myGigDetail.myParentState=='inprogress'" ng-click="myGigDetail.myGigData.drop()">
+      Drop
+    </button>
+    <button class="button button-block button-positive" ng-show="myGigDetail.myParentState=='applied'" ng-click="myGigDetail.myGigData.unapply()">
+      Withdraw Application
+    </button>
+    <button class="button button-block button-positive" ng-show="myGigDetail.myParentState=='myposts'" ng-click="myGigDetail.myGigData.delete()">
+      Delete
+    </button>
+    
   </ion-content>
 </ion-view>

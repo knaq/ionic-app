@@ -25,7 +25,7 @@
 			<div ng-switch-default>
 
 				<div class="list" ng-show="myGigs.gigsInProgress.length > 0">
-					<a class="item item-avatar" ng-repeat="gigInProgress in myGigs.gigsInProgress" ng-click="myGigs.viewDetail(gigInProgress)">
+					<a class="item item-avatar" ng-repeat="gigInProgress in myGigs.gigsInProgress" ng-click="myGigs.viewDetail('inprogress',gigInProgress)">
 						<img src="../img/dollar2.png" alt="">
 						<h2>{{gigInProgress.title}}</h2>
 						<p>{{gigInProgress.description}}</p>
@@ -43,7 +43,7 @@
 			<div ng-switch-when="tab-applied">
 				
 				<div class="list" ng-show="myGigs.myAppliedGigs.length > 0">
-					<a class="item item-avatar" ng-repeat="myAppliedGig in myGigs.myAppliedGigs" ng-click="myGigs.viewDetail(myAppliedGig)">
+					<a class="item item-avatar" ng-repeat="myAppliedGig in myGigs.myAppliedGigs" ng-click="myGigs.viewDetail('applied',myAppliedGig)">
 						<img src="../img/dollar2.png" alt="">
 						<h2>{{myAppliedGig.title}}</h2>
 						<p>{{myAppliedGig.description}}</p>
@@ -61,7 +61,7 @@
 			<div ng-switch-when="tab-myposts">
 
 				<div class="list" ng-show="myGigs.myPosts.length > 0">
-					<a class="item item-avatar" ng-repeat="myPost in myGigs.myPosts" ng-click="myGigs.viewDetail(myPost)">
+					<a class="item item-avatar" ng-repeat="myPost in myGigs.myPosts" ng-click="myGigs.viewDetail('myposts',myPost)">
 						<img src="../img/dollar2.png" alt="">
 						<h2>{{myPost.title}}</h2>
 						<p>{{myPost.description}}</p>

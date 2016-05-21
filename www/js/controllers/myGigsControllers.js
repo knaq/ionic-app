@@ -43,8 +43,8 @@ angular.module('knaq.myGigsControllers', [])
 					defaultTabLogic();
 			}
 		}
-		$scope.myGigs.viewDetail = function (gigData) {
-			$state.go('tab.my-gig-detail', {myGigData:gigData});
+		$scope.myGigs.viewDetail = function (parentState, gigData) {
+			$state.go('tab.my-gig-detail', {myParentState:parentState, myGigData:gigData});
 		}
 
 	})
@@ -52,9 +52,10 @@ angular.module('knaq.myGigsControllers', [])
 		
 		$scope.myGigDetail = {};
 		var userId = Auth.getUser();
+		$scope.myGigDetail.myParentState = $state.params.myParentState
 		$scope.myGigDetail.myGigData = $state.params.myGigData;
 
-		console.log("Data inherited:")
+		console.log($scope.myGigDetail.myParentState)
 		console.log($scope.myGigDetail.myGigData)
 	
 

@@ -120,6 +120,7 @@ angular.module('knaq', [
     .state('tab.my-gig-detail', {
       url: '/my-gigs/my-gig-detail',
       params: {
+        myParentState: null,
         myGigData: null
       },
       views: {
