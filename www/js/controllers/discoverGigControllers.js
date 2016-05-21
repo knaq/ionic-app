@@ -1,30 +1,43 @@
 angular.module('knaq.discoverGigsControllers',[])
 
-.controller('DiscoverGigsCtrl', function($scope, GigFirebaseConnection, $state, $stateParams, Data) {
+.controller('DiscoverGigsCtrl', function($scope, GigFirebaseConnection, $state, $stateParams, Data, Auth) {
 
+  var userId = Auth.getUser();
   $scope.gigs = {}
 
   $scope.gigs.loadingData = true;
 
   GigFirebaseConnection.getAll().then(function(result) {
 
-    $scope.gigs.loadingData = false;
-    var addUsername = function() {
+    var addMoreFields = function() {
       $scope.gigs.allGigList = $scope.gigs.retrievedGigList.map(function(gig) {
 
         Data.getUser(gig.userId).then(function(userData) {
           gig['username'] = userData.username;
         })
 
+        var isAppliedPromise = GigFirebaseConnection.isApplied(gig.$id, userId)
+
+        isAppliedPromise.then(function (result) {
+          
+          if(result == -1){
+            gig['applied'] = false;
+          }else{
+            gig['applied'] = true;
+          }
+
+        });
+
         return gig;
 
       })
     }
+    $scope.gigs.loadingData = false;
 
     $scope.gigs.retrievedGigList = result;
-    addUsername()
+    addMoreFields()
 
-    result.$watch(addUsername)
+    result.$watch(addMoreFields)
 
   })
 
