@@ -77,15 +77,33 @@ angular.module('knaq.myGigsControllers', [])
 		$scope.myGigDetail.myParentState = $state.params.myParentState
 		$scope.myGigDetail.myGigData = $state.params.myGigData;
 		$scope.myGigDetail.candidateAccepted = false;
-		
 
-		GigFirebaseConnection.get(gigID).then(function (gig) {
-			if(gig.acceptedCandidate!=null){
-				$scope.myGigDetail.candidateAccepted = true;
+		var acceptedCandidateExist = function(acceptedCandidateId) {
+
+			console.log(acceptedCandidateId)
+
+			$scope.myGigDetail.candidateAccepted = true;
+
+			Data.getUser(acceptedCandidateId).then(function(hire) {
+
+				$scope.myGigDetail.hire = hire
+				console.log($scope.myGigDetail.hire)
+
+			}, function(error) {
+				console.log(error)
+			});
+
+		}
+
+		GigFirebaseConnection.get(gigID).then(function(gig) {
+			if (gig.acceptedCandidate != null) {
+
+				acceptedCandidateExist(gig.acceptedCandidate);
+
 			}
-			gig.$watch(function () {
-				if(gig.acceptedCandidate!=null){
-					$scope.myGigDetail.candidateAccepted = true;
+			gig.$watch(function() {
+				if (gig.acceptedCandidate != null) {
+					acceptedCandidateExist(gig.acceptedCandidate);
 				}
 			})
 		});
@@ -106,6 +124,8 @@ angular.module('knaq.myGigsControllers', [])
 			console.error(error)
 		})
 
+
+		//Button Activities
 		$scope.myGigDetail.drop = function() {
 			console.log("Trying to drop gig in progress")
 			GigFirebaseConnection.removeAcceptedApplicant(gigID).then(function() {

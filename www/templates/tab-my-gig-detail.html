@@ -9,6 +9,9 @@
     <ion-nav-back-button></ion-nav-back-button>
   </ion-nav-bar>
   <ion-content>
+
+
+
     <div class="padding gig-detail-information">
       <img ng-src="{{myGigDetail.myGigData.photo}}" style="width: 64px; height: 64px">
       <p>
@@ -16,10 +19,11 @@
       </p>
     </div>
 
-    <div class="padding data-loader" ng-show="myGigDetail.loadingData==true">
-      <ion-spinner icon="ripple"></ion-spinner>
-    </div>
     <div ng-show="myGigDetail.myParentState=='myposts'">
+
+        <div class="padding data-loader" ng-show="myGigDetail.loadingData==true">
+          <ion-spinner icon="ripple"></ion-spinner>
+        </div>
 
       <div class="padding message" ng-show="myGigDetail.candidateAccepted==false && (myGigDetail.allApplicants.length == 0) || (myGigDetail.allApplicants == null)">
         <p>
@@ -28,22 +32,34 @@
       </div>
       
       <div class="list">
-
         <div ng-hide="myGigDetail.candidateAccepted">
-
           <div class="item item-divider" ng-show="myGigDetail.allApplicants.length>0">
             Applicants
           </div> 
-
           <a class="item item-avatar" ng-repeat="applicant in myGigDetail.allApplicants" ng-click="myGigDetail.reviewApplicant(applicant.$id)">
             <img src="../img/adam.jpg">
             <h2>{{applicant.username}}</h2>
             <p>{{applicant.email}}</p>
           </a>
-          
         </div>
-
       </div>
+
+      <div ng-show="myGigDetail.candidateAccepted==true">
+        <div class="list">
+          <div class="item item-divider">
+            Hired Candidate:
+          </div>
+          <a class="item item-avatar" ng-click="myGigDetail.reviewHire()">
+            <img src="../img/adam.jpg">
+            <h2>{{myGigDetail.hire.username}}</h2>
+            <p>{{myGigDetail.hire.email}}</p>
+          </a>
+
+
+        </div>
+        
+      </div>
+
     </div>
 
 
