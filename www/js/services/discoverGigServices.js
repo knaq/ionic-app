@@ -40,6 +40,11 @@ angular.module('knaq.gigServices', [])
         acceptedCandidate.$value = userId;
         return acceptedCandidate.$save();
       },
+      removeAllApplicants: function (gigId) {
+
+        return $firebaseObject(ref.child(gigId).child('applicants')).$remove()
+        
+      },
       removeAcceptedApplicant: function (gigId) {
         return $firebaseObject(ref.child(gigId).child('acceptedCandidate')).$remove()
       },

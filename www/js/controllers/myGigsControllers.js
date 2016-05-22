@@ -6,6 +6,7 @@ angular.module('knaq.myGigsControllers', [])
 
 		var defaultTabAction = function(arguments) {
 			MyGigsServices.getInProgress().then(function(gigsInProgress) {
+
 				$scope.myGigs.gigsInProgress = gigsInProgress
 				$scope.myGigs.loadingData = false;
 			}, function(error) {
@@ -115,44 +116,50 @@ angular.module('knaq.myGigsControllers', [])
 				console.error(error)
 			})
 		}
-		$scope.myGigDetail.reviewApplicant = function (applicant) {
-			
+		$scope.myGigDetail.reviewApplicant = function(applicant) {
+
 			$state.go('tab.review-applicant', {
 				applicantId: applicant,
-				gigId:$scope.myGigDetail.myGigData.$id
+				gigId: $scope.myGigDetail.myGigData.$id
 			});
 			//$state.go('tab.review-applicant');
 		}
 
 
 	})
-	.controller('ReviewApplicant', function($scope, GigFirebaseConnection, $state, Auth, Data) {
+	.controller('ReviewApplicant', function($ionicHistory, $scope, GigFirebaseConnection, $state, Auth, Data) {
 
 
 		$scope.reviewApplicant = {};
 		$scope.reviewApplicant.loadingData = true;
 		$scope.reviewApplicant.applicantId = $state.params.applicantId
 		$scope.reviewApplicant.gigId = $state.params.gigId
+		$scope.reviewApplicant.hired = false;
 
-		Data.getUser($scope.reviewApplicant.applicantId).then(function (applicant) {
-			
+		Data.getUser($scope.reviewApplicant.applicantId).then(function(applicant) {
+
 			$scope.reviewApplicant.applicantData = applicant
+			console.log($scope.reviewApplicant.applicantData)
 			$scope.reviewApplicant.loadingData = false
-			
-		}, function (error) {
+
+
+		}, function(error) {
 			console.log(error)
 		});
 
-		$scope.reviewApplicant.hire = function () {
+		$scope.reviewApplicant.hire = function() {
 			console.log($scope.reviewApplicant.gigId)
 			console.log($scope.reviewApplicant.applicantId)
-			GigFirebaseConnection.hireFromApplicants($scope.reviewApplicant.gigId, $scope.reviewApplicant.applicantId).then(function  (ref) {
-				console.log(ref.key)
-			}, function (error) {
-				console.log(error)
+			GigFirebaseConnection.hireFromApplicants($scope.reviewApplicant.gigId, $scope.reviewApplicant.applicantId).then(function() {
+				console.log("successful hiring")
+				GigFirebaseConnection.removeAllApplicants($scope.reviewApplicant.gigId).then(function() {
+					console.log("removed all applied candidates")
+					$ionicHistory.goBack();
+				});
+			}, function(error) {
+				console.error(error)
 			})
 		}
-
 
 
 
