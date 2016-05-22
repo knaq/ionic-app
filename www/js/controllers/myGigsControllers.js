@@ -115,6 +115,45 @@ angular.module('knaq.myGigsControllers', [])
 				console.error(error)
 			})
 		}
+		$scope.myGigDetail.reviewApplicant = function (applicant) {
+			
+			$state.go('tab.review-applicant', {
+				applicantId: applicant,
+				gigId:$scope.myGigDetail.myGigData.$id
+			});
+			//$state.go('tab.review-applicant');
+		}
+
+
+	})
+	.controller('ReviewApplicant', function($scope, GigFirebaseConnection, $state, Auth, Data) {
+
+
+		$scope.reviewApplicant = {};
+		$scope.reviewApplicant.loadingData = true;
+		$scope.reviewApplicant.applicantId = $state.params.applicantId
+		$scope.reviewApplicant.gigId = $state.params.gigId
+
+		Data.getUser($scope.reviewApplicant.applicantId).then(function (applicant) {
+			
+			$scope.reviewApplicant.applicantData = applicant
+			$scope.reviewApplicant.loadingData = false
+			
+		}, function (error) {
+			console.log(error)
+		});
+
+		$scope.reviewApplicant.hire = function () {
+			console.log($scope.reviewApplicant.gigId)
+			console.log($scope.reviewApplicant.applicantId)
+			GigFirebaseConnection.hireFromApplicants($scope.reviewApplicant.gigId, $scope.reviewApplicant.applicantId).then(function  (ref) {
+				console.log(ref.key)
+			}, function (error) {
+				console.log(error)
+			})
+		}
+
+
 
 
 	})

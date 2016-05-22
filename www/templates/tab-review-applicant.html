@@ -1,0 +1,26 @@
+<ion-view view-title="{{reviewApplicant.applicantData.username}}">
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-content>
+
+    <div class="padding">
+      <img ng-src="{{reviewApplicant.applicantData.photo}}" style="width: 64px; height: 64px">
+      <p>
+        {{reviewApplicant.applicantData.email}}
+      </p>
+    </div>
+
+    <div class="padding data-loader" ng-show="reviewApplicant.loadingData==true">
+      <ion-spinner icon="ripple"></ion-spinner>
+    </div>
+    
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="reviewApplicant.hire()">
+        Hire
+      </button>
+    </div>
+    
+  </ion-content>
+</ion-view>

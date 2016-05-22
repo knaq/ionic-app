@@ -29,7 +29,7 @@
         </p>
       </div>
 
-      <a class="item item-avatar" href="#" ng-repeat="applicant in myGigDetail.allApplicants">
+      <a class="item item-avatar" ng-repeat="applicant in myGigDetail.allApplicants" ng-click="myGigDetail.reviewApplicant(applicant.$id)">
         <img src="../img/adam.jpg">
         <h2>{{applicant.username}}</h2>
         <p>{{applicant.email}}</p>

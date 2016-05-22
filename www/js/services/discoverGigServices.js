@@ -35,6 +35,11 @@ angular.module('knaq.gigServices', [])
           appliedAt: Firebase.ServerValue.TIMESTAMP
         })
       },
+      hireFromApplicants: function (gigId, userId) {
+        var acceptedCandidate = $firebaseObject(ref.child(gigId).child('acceptedCandidate'))
+        acceptedCandidate.$value = userId;
+        return acceptedCandidate.$save();
+      },
       removeAcceptedApplicant: function (gigId) {
         return $firebaseObject(ref.child(gigId).child('acceptedCandidate')).$remove()
       },
