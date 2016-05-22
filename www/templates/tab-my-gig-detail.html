@@ -9,10 +9,12 @@
     <ion-nav-back-button></ion-nav-back-button>
   </ion-nav-bar>
   <ion-content>
-    <img ng-src="{{myGigDetail.myGigData.photo}}" style="width: 64px; height: 64px">
-    <p>
-      {{myGigDetail.myGigData.description}}
-    </p>
+    <div class="padding gig-detail-information">
+      <img ng-src="{{myGigDetail.myGigData.photo}}" style="width: 64px; height: 64px">
+      <p>
+        {{myGigDetail.myGigData.description}}
+      </p>
+    </div>
 
     <div class="padding data-loader" ng-show="myGigDetail.loadingData==true">
       <ion-spinner icon="ripple"></ion-spinner>
