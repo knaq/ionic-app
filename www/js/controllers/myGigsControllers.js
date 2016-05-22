@@ -76,6 +76,19 @@ angular.module('knaq.myGigsControllers', [])
 		var gigID = $state.params.myGigData.$id;
 		$scope.myGigDetail.myParentState = $state.params.myParentState
 		$scope.myGigDetail.myGigData = $state.params.myGigData;
+		$scope.myGigDetail.candidateAccepted = false;
+		
+
+		GigFirebaseConnection.get(gigID).then(function (gig) {
+			if(gig.acceptedCandidate!=null){
+				$scope.myGigDetail.candidateAccepted = true;
+			}
+			gig.$watch(function () {
+				if(gig.acceptedCandidate!=null){
+					$scope.myGigDetail.candidateAccepted = true;
+				}
+			})
+		});
 
 
 		angular.forEach($scope.myGigDetail.myGigData.applicants, function(value, userId) {
