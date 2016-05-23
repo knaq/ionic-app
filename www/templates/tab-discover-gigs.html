@@ -25,6 +25,12 @@
         <i class="icon ion-chevron-right icon-accessory"></i>
         
       </ion-item>
+
     </ion-list>
+    <div class="padding message" ng-show="gigs.allGigList.length == 0 || gigs.allGigList == null">
+      <p>
+        There is no gigs at this moment.
+      </p>
+    </div>
   </ion-content>
 </ion-view>
