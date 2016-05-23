@@ -1,71 +1,66 @@
-<ion-view view-title="Profile">
+<ion-view view-title="My Profile" class="myProfile">
   <ion-nav-bar class="bar-positive">
     <ion-nav-back-button></ion-nav-back-button>
   </ion-nav-bar>
-  <ion-content>
+  <ion-header-bar class="bar bar-subheader">
+    <h1 class="title">{{signedInUser.username}}</h1>
+  </ion-header-bar>
+
+  <ion-content >
 
     <div class="list">
-
-      <div class="item item-divider">
-        Welcome, {{signedInUser.username}}
-      </div>
-      <a class="item" href="#" ng-repeat="user in allUsers">
-        {{user.username}} is <span ng-show="user.online == 'true'" style="color: green">Online</span><span ng-show="user.online == 'false'" style="color: red">Offline</span>
-      </a>
-
+      <ion-item class="item-avatar">
+        <img ng-src="{{signedInUser.image}}" />
+        <h2>{{signedInUser.username}}</h2>
+        <p>Software Developer</p>
+      </ion-item>
     </div>
 
-    <ion-item class="item-avatar" type="item-text-wrap">
-      <img ng-src="{{signedInUser.image}}">
-      <h2>Hello {{signedInUser.username}}</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi asperiores sequi quaerat dolores enim qui doloremque,
-        molestias fuga error obcaecati nesciunt quis laborum dolore, mollitia ratione ab. Illo beatae, quibusdam! Lorem ipsum
-        dolor sit amet, consectetur adipisicing elit. Ad vel incidunt, quae dolore tempore odit excepturi repellendus suscipit!
-        Pariatur facere laudantium maxime veritatis itaque nulla ea quasi minima quis ullam.</p>
-      </ion-item>
-      <div class="button-bar">
-        <a class="button" ng-click="click('reviews')" ng-class="{'button-positive':selection=='reviews'}" value="reviews">Reviews</a>
-        <a class="button" ng-click="click('portfolio')" ng-class="{'button-positive':selection=='portfolio'}" value="portfolio">Portfolio</a>
-        <a class="button" ng-click="click('skills')" ng-class="{'button-positive':selection=='skills'}" value="skills">Skills</a>
-      </div>
-      <div ng-switch on="selection">
-        <div href="#" ng-switch-default>
-          <ion-list>
-            <ion-item class="item item-avatar" ng-repeat="review in signedInUser.reviews">
-              <img ng-src="{{review.image}}">
-              <h2>{{review.title}}</h2>
-              <p>{{review.text}}
-              </p>
-              <rating ng-model="review.rating" max="rating.max" readonly="readOnly"></rating>
+    <div class="button-bar">
+      <a class="button" ng-click="click('reviews')" ng-class="{'button-positive':selection=='reviews'}" value="reviews">Reviews</a>
+      <a class="button" ng-click="click('portfolio')" ng-class="{'button-positive':selection=='portfolio'}" value="portfolio">Portfolio</a>
+      <a class="button" ng-click="click('skills')" ng-class="{'button-positive':selection=='skills'}" value="skills">Skills</a>
+    </div>
 
-            </ion-item>
-          </ion-list>
-        </div>
-        <div href="#" ng-switch-when="portfolio">
-          <div class="list card" ng-repeat="portfolioItem in signedInUser.portfolio">
-            <div class="item">
-              <h2>{{portfolioItem.title}}</h2>
-              <p>{{portfolioItem.date | date:'short'}}</p>
-            </div>
-            <div class="item item-thumbnail-left text-right">
-              <img class="full-image" ng-src="{{portfolioItem.image}}">
-              <p>
-                {{portfolioItem.text}}
-              </p>
-            </div>
+
+    <div ng-switch on="selection">
+      <div href="#" ng-switch-default>
+        <ion-list>
+          <ion-item class="item item-avatar" ng-repeat="review in signedInUser.reviews">
+            <img ng-src="{{review.image}}">
+            <h2>{{review.title}}</h2>
+            <p>{{review.text}}
+            </p>
+            <rating ng-model="review.rating" max="rating.max" readonly="readOnly"></rating>
+
+          </ion-item>
+        </ion-list>
+      </div>
+      <div href="#" ng-switch-when="portfolio">
+        <div class="list card" ng-repeat="portfolioItem in signedInUser.portfolio">
+          <div class="item">
+            <h2>{{portfolioItem.title}}</h2>
+            <p>{{portfolioItem.date | date:'short'}}</p>
+          </div>
+          <div class="item item-thumbnail-left text-right">
+            <img class="full-image" ng-src="{{portfolioItem.image}}">
+            <p>
+              {{portfolioItem.text}}
+            </p>
           </div>
         </div>
-        <div href="#" ng-switch-when="skills">
-
-          <ion-list>
-            <ion-item class="list card" ng-repeat="skill in signedInUser.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
-              <h2>{{skill.name}}</h2>
-              <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
-            </ion-item>
-          </ion-list>
-          <a class="button button-icon icon ion-plus-circled" ng-click="showPopup()"></a>
-        </div>
       </div>
+      <div href="#" ng-switch-when="skills">
 
-    </ion-content>
-  </ion-view>
+        <ion-list>
+          <ion-item class="list card" ng-repeat="skill in signedInUser.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
+            <h2>{{skill.name}}</h2>
+            <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
+          </ion-item>
+        </ion-list>
+        <a class="button button-icon icon ion-plus-circled" ng-click="showPopup()"></a>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>
