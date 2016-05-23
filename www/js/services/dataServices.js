@@ -2,7 +2,7 @@ angular.module('knaq.dataServices', [])
 
 .factory('Data', function($firebaseObject, $firebaseArray) {
 
-    var ref = new Firebase("https://knaq.firebaseio.com/users");
+    var ref = new Firebase("https://knaqapp.firebaseio.com/users");
 
     return {
 

@@ -20,7 +20,7 @@ angular.module('knaq.profileControllers',[])
 
         Data.getUser(Auth.getUser()).then(function (data) {
             $scope.signedInUser = data;
-            $scope.userSkillFirebaseReference = new Firebase("https://knaq.firebaseio.com/users" + "/" + $scope.signedInUser.$id + "/skills");
+            $scope.userSkillFirebaseReference = new Firebase("https://knaqapp.firebaseio.com/users" + "/" + $scope.signedInUser.$id + "/skills");
             $scope.skillsArray = $firebaseArray($scope.userSkillFirebaseReference);
         });
 
