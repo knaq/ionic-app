@@ -52,12 +52,12 @@
       </div>
       <div href="#" ng-switch-when="skills">
 
-        <ion-list>
-          <ion-item class="list card" ng-repeat="skill in signedInUser.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
+        <div class="list">
+          <div class="item item-icon-left item-icon-right" ng-repeat="skill in signedInUser.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
             <h2>{{skill.name}}</h2>
             <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
-          </ion-item>
-        </ion-list>
+          </div>
+        </div>
         <a class="button button-icon icon ion-plus-circled" ng-click="showPopup()"></a>
       </div>
     </div>
