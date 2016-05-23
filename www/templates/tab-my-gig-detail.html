@@ -71,8 +71,11 @@
       <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='applied'" ng-click="myGigDetail.unapply()">
         Withdraw Application
       </button>
+      <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='myposts' && myGigDetail.candidateAccepted" ng-click="myGigDetail.removeAcceptedApplicant()">
+        Fire Worker
+      </button>
       <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='myposts'" ng-click="myGigDetail.delete()">
-        Delete
+        Delete Gig Post
       </button>
     </div>
     
