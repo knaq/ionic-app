@@ -149,6 +149,14 @@ angular.module('knaq.myGigsControllers', [])
 				console.error(error)
 			})
 		}
+		$scope.myGigDetail.removeAcceptedApplicant = function() {
+			GigFirebaseConnection.removeAcceptedApplicant(gigID).then(function() {
+				console.log("successfully removed accepted candidate")
+				$state.go('tab.my-gigs')
+			}, function(error) {
+				console.error(error)
+			})
+		}
 		$scope.myGigDetail.reviewApplicant = function(applicant) {
 
 			$state.go('tab.review-applicant', {
