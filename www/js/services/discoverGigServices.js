@@ -27,7 +27,8 @@ angular.module('knaq.gigServices', [])
           pay: pay,
           location: location,
           description: description,
-          userId: userId
+          userId: userId,
+          posted: "true"
         });
       },
       addApplicant: function(gigId, userId) {

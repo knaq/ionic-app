@@ -130,6 +130,7 @@ angular.module('knaq.myGigsControllers', [])
 			console.log("Trying to drop gig in progress")
 			GigFirebaseConnection.removeAcceptedApplicant(gigID).then(function() {
 				console.log("successful drop of gig")
+
 				$state.go('tab.my-gigs')
 			}, function(error) {
 				console.error(error)
@@ -152,6 +153,7 @@ angular.module('knaq.myGigsControllers', [])
 		$scope.myGigDetail.removeAcceptedApplicant = function() {
 			GigFirebaseConnection.removeAcceptedApplicant(gigID).then(function() {
 				console.log("successfully removed accepted candidate")
+				$scope.myGigDetail.delete()
 				$state.go('tab.my-gigs')
 			}, function(error) {
 				console.error(error)

@@ -47,7 +47,7 @@
       <div ng-show="myGigDetail.candidateAccepted==true">
         <div class="list">
           <div class="item item-divider">
-            Hired Candidate:
+            Worker:
           </div>
           <a class="item item-avatar" ng-click="myGigDetail.reviewHire()">
             <img src="../img/adam.jpg">
@@ -72,10 +72,10 @@
         Withdraw Application
       </button>
       <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='myposts' && myGigDetail.candidateAccepted" ng-click="myGigDetail.removeAcceptedApplicant()">
-        Fire Worker
+        Fire Worker 
       </button>
       <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='myposts'" ng-click="myGigDetail.delete()">
-        Delete Gig Post
+        Delete Post
       </button>
     </div>
     
