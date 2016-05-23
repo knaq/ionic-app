@@ -106,11 +106,6 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services', 'knaq.contro
         $scope.imageURI = results[0];
       });
     }
-    
-    $scope.getImageUri = function () {
-      console.log("running getImageUri");
-      alert($scope.imageURI);
-    }
 
 
     $scope.newGig.postGig = function (imageUrl) {
