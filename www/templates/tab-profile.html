@@ -3,7 +3,7 @@
     <ion-nav-back-button></ion-nav-back-button>
   </ion-nav-bar>
   <ion-header-bar class="bar bar-subheader">
-    <h1 class="title">{{signedInUser.username}}</h1>
+    <h1 class="title">{{signedInUser.firstname}} {{signedInUser.lastname}}</h1>
   </ion-header-bar>
 
   <ion-content >
@@ -11,7 +11,7 @@
     <div class="list">
       <ion-item class="item-avatar">
         <img ng-src="{{signedInUser.image}}" />
-        <h2>{{signedInUser.username}}</h2>
+        <h2>{{signedInUser.firstname}} {{signedInUser.lastname}}</h2>
         <p>Software Developer</p>
       </ion-item>
     </div>

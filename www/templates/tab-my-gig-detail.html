@@ -38,7 +38,7 @@
           </div> 
           <a class="item item-avatar" ng-repeat="applicant in myGigDetail.allApplicants" ng-click="myGigDetail.reviewApplicant(applicant.$id)">
             <img src="../img/adam.jpg">
-            <h2>{{applicant.username}}</h2>
+            <h2>{{applicant.firstname}} {{applicant.lastname}}</h2>
             <p>{{applicant.email}}</p>
           </a>
         </div>
@@ -51,7 +51,7 @@
           </div>
           <a class="item item-avatar" ng-click="myGigDetail.reviewHire()">
             <img src="../img/adam.jpg">
-            <h2>{{myGigDetail.hire.username}}</h2>
+            <h2>{{myGigDetail.hire.firstname}} {{myGigDetail.hire.lastname}}</h2>
             <p>{{myGigDetail.hire.email}}</p>
           </a>
 

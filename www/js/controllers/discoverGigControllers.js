@@ -17,7 +17,8 @@ angular.module('knaq.discoverGigsControllers',[])
         }
 
         Data.getUser(gig.userId).then(function(userData) {
-          gig['username'] = userData.username;
+          gig['firstname'] = userData.firstname;
+          gig['lastname'] = userData.lastname;
         })
 
         var isAppliedPromise = GigFirebaseConnection.isApplied(gig.$id, userId)
