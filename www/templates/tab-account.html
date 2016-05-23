@@ -3,6 +3,28 @@
 		<ion-nav-back-button></ion-nav-back-button>
 	</ion-nav-bar>
 	<ion-content>
+		<ion-list>
+			<ion-item class="item-icon-left" ng-href="#/tab/account/terms_and_policies">
+				<h2>Terms and Policies</h2>
+				<i class="icon ion-ios-compose-outline"></i>
+			</ion-item>
+			<ion-item class="item-icon-left" ng-href="#/tab/account/activity_log">
+				<h2>Activity Log</h2>
+				<i class="icon ion-ios-list-outline"></i>
+			</ion-item>
+			<ion-item class="item-icon-left" ng-href="#/tab/account/gig_preferences">
+				<h2>Gig Preferences</h2>
+				<i class="icon ion-android-contact"></i>
+			</ion-item>
+			<ion-item class="item-icon-left" ng-href="#/tab/account/settings">
+				<h2>Account Settings</h2>
+				<i class="icon ion-gear-b"></i>
+			</ion-item>
+			<ion-item class="item-icon-left" ng-href="#/tab/account/report_problem">
+				<h2>Report a Problem</h2>
+				<i class="icon ion-bug"></i>
+			</ion-item>
+		</ion-list>
 		<button class="button button-full button-assertive" ng-click="account.signout()">
 			Sign out
 		</button>
