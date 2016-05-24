@@ -2,11 +2,11 @@
   <ion-nav-bar class="bar-positive">
     <ion-nav-back-button></ion-nav-back-button>
   </ion-nav-bar>
-<!--   <ion-header-bar class="bar bar-subheader">
+  <!--   <ion-header-bar class="bar bar-subheader">
     <h1 class="title">{{signedInUser.firstname}} {{signedInUser.lastname}}</h1>
   </ion-header-bar> -->
 
-  <ion-content >
+  <ion-content>
 
     <div class="profile">
       <div class="profile-wrapper">
@@ -18,7 +18,11 @@
 
             </div>
           </div>
-          <div class="col"></div>
+          <div class="col">
+            <button class="button button-calm" style="float: right;" ng-click="editProfile()">
+              Edit Profile
+            </button>
+          </div>
         </div>
         <div class="row">
           <div class="col"></div>
@@ -47,7 +51,7 @@
     <div ng-switch on="selection">
       <div href="#" ng-switch-default>
 
-        <div class="list" >
+        <div class="list">
           <a class="item item-avatar" ng-repeat="review in signedInUser.reviews">
             <img ng-src="{{review.image}}">
             <h2>{{review.title}}</h2>
@@ -67,7 +71,7 @@
       </div>
       <div href="#" ng-switch-when="portfolio">
 
-        <div class="list" >
+        <div class="list">
           <a class="item item-thumbnail-left" href="#" ng-repeat="portfolioItem in signedInUser.portfolio">
             <img src="adam.jpg">
             <h2>{{portfolioItem.title}}</h2>

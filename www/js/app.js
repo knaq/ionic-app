@@ -88,6 +88,15 @@ angular.module('knaq', [
           }
         }
       })
+      .state('tab.profile-edit', {
+        url: '/profile/edit',
+        views: {
+          'tab-profile': {
+            templateUrl: 'templates/profile-edit.html',
+            controller: 'ProfilePageCtrl'
+          }
+        }
+      })
       .state('tab.skill-detail', {
         url: '/profile/skill/:skill',
         views: {

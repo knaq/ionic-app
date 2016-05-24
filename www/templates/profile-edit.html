@@ -1,0 +1,30 @@
+<ion-view view-title="Edit Profile">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content class="padding">
+
+        <button class="button button-calm" ng-click="">
+              Update Picture
+        </button>
+        
+        <input type="text" placeholder="{{signedInUser.firstname}}"><br>
+        <button class="button button-calm" ng-click="">
+              Update First Name
+        </button>
+        <input type="text" placeholder="{{signedInUser.lastname}}"><br>
+        <button class="button button-calm" ng-click="">
+              Update Last Name
+        </button>
+        <h3> Skills </h3>
+        <div class="list">
+            <div class="item item-icon-right" ng-repeat="skill in signedInUser.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
+                <h2>{{skill.name}}</h2>
+                <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
+            </div>
+        </div>
+        <button class="button button-calm" ng-click="showPopup()">
+              Add Skill
+        </button>
+    </ion-content>
+</ion-view>

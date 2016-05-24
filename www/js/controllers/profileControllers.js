@@ -1,4 +1,4 @@
-angular.module('knaq.profileControllers',[])
+angular.module('knaq.profileControllers', [])
 
     .controller('ProfilePageCtrl', function ($scope, $state, $firebaseAuth, $firebaseArray, $ionicPopup, Auth, Data, SkillsFirebaseConnection) {
         $scope.selection = 'reviews';
@@ -66,6 +66,11 @@ angular.module('knaq.profileControllers',[])
                 console.log('Tapped!', res);
             });
         };
+        
+        $scope.editProfile = function () {
+            $state.go('tab.profile-edit');
+        }
+        
     })
     .controller('SkillDetailCtrl', function ($scope, $location, $stateParams, SkillsFirebaseConnection, Auth, Data) {
         Data.getUser(Auth.getUser()).then(function (data) {
