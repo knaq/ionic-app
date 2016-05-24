@@ -17,4 +17,3 @@ angular.module('base64.services', [])
             }
         }
     })
-

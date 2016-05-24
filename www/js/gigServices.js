@@ -14,11 +14,12 @@ angular.module('gig.services', [])
         return $firebaseObject(ref.child(key)).$loaded();
       },
 
-      add: function(title, pay, location, description, userId) {
+      add: function(title, pay, location, description, photoUrl, userId) {
         console.log(title)
         console.log(pay)
         console.log(location)
         console.log(description)
+        console.log(photoUrl)
         console.log(userId)
 
         var gigs = $firebaseArray(ref);
@@ -27,6 +28,7 @@ angular.module('gig.services', [])
           pay: pay,
           location: location,
           description: description,
+          photoUrl: photoUrl,
           userId: userId
         });
       }

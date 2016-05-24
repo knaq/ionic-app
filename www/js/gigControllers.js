@@ -1,4 +1,4 @@
-angular.module('gig.controllers', ['gig.services', 'knaq.services', 'knaq.controllers', 'base64.services', 'imageGallery.services'])
+angular.module('gig.controllers', ['gig.services', 'knaq.services', 'knaq.controllers', 'imageGallery.services', 'imgur.services', 'base64.services'])
 
   .controller('GigsCtrl', function ($scope, GigFirebaseConnection, $state, $stateParams, Data) {
 
@@ -95,7 +95,7 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services', 'knaq.contro
 
   })
 
-  .controller('NewGigCtrl', function ($scope, $state, $ionicHistory, GigFirebaseConnection, Session, Base64, ImageGallery) {
+  .controller('NewGigCtrl', function ($scope, $state, $ionicHistory, GigFirebaseConnection, Session, Base64, ImageGallery, ImgurService) {
 
     /*Todo: Connect  userId to firebase authentication data*/
     $scope.newGig = {}
@@ -108,16 +108,22 @@ angular.module('gig.controllers', ['gig.services', 'knaq.services', 'knaq.contro
     }
 
 
-    $scope.newGig.postGig = function (imageUrl) {
-      alert("imageurl: " + imageUrl);
-      var imageData = Base64.getDataUrlFromUrl(imageUrl, function () {
-        //GigFirebaseConnection.add($scope.newGig.title, $scope.newGig.pay, $scope.newGig.location, $scope.newGig.description, imageURI, Session.getUser());
-      }.bind($scope));
-      $scope.newGig.title = ""
-      $scope.newGig.pay = ""
-      $scope.newGig.location = ""
-      $scope.newGig.description = ""
-      $scope.newGig.imageURI = ""
-      $state.go('tab.gigs');
+    $scope.newGig.postGig = function () {
+      Base64.getDataUrlFromUrl($scope.imageURI, function (base64Code) {
+        ImgurService.uploadPhoto(base64Code).then(function (response) {
+          var photoUrl = response.data.data.link
+          //GigFirebaseConnection.add($scope.newGig.title, $scope.newGig.pay, $scope.newGig.location, $scope.newGig.description, photoUrl, Session.getUser())
+          /*$scope.newGig.title = ""
+          $scope.newGig.pay = ""
+          $scope.newGig.location = ""
+          $scope.newGig.description = ""
+          $scope.newGig.imageURI = ""*/
+          $state.go('tab.gigs');
+
+          alert(photoUrl)
+        }, function (error) {
+          console.error(error)
+        })
+      })
     }
   });
