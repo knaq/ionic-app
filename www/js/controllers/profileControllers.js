@@ -20,6 +20,9 @@ angular.module('knaq.profileControllers',[])
 
         Data.getUser(Auth.getUser()).then(function (data) {
             $scope.signedInUser = data;
+            if($scope.signedInUser.image==null){
+                $scope.signedInUser.image = "img/profile-image-ph.jpg";
+            }
             $scope.userSkillFirebaseReference = new Firebase("https://knaqapp.firebaseio.com/users" + "/" + $scope.signedInUser.$id + "/skills");
             $scope.skillsArray = $firebaseArray($scope.userSkillFirebaseReference);
         });
