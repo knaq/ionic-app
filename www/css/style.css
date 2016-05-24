@@ -1,3 +1,9 @@
+.under-profile-button .button.button-block, .button.button-full{
+  margin: 0;
+  border-radius: 0;
+  background-color: #3A83FF;
+}
+}
 .list .item:first-child {
     border-top: none;
 }
@@ -73,7 +79,9 @@
   background-repeat: no-repeat;
   margin: 0 auto;
   border: 5px solid rgba(0,0,0,0.5);
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2)
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+  background-image:url('../img/profile-image-ph.jpg');
+  background-color: #333;
 }
 
 .profile .profile-wrapper .title{

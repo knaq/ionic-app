@@ -174,6 +174,11 @@ angular.module('knaq.myGigsControllers', [])
 
 
 		$scope.reviewApplicant = {};
+		$scope.reviewApplicant.selection = 'reviews';
+
+		$scope.reviewApplicant.click = function(view) {
+			$scope.reviewApplicant.selection = view;
+		}
 		$scope.reviewApplicant.loadingData = true;
 		$scope.reviewApplicant.applicantId = $state.params.applicantId
 		$scope.reviewApplicant.gigId = $state.params.gigId
