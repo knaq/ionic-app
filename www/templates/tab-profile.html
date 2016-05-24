@@ -10,7 +10,7 @@
 
     <div class="profile">
       <div class="profile-wrapper">
-        
+
         <div class="row">
           <div class="col"></div>
           <div class="col col-50 profile-img">
@@ -46,16 +46,24 @@
 
     <div ng-switch on="selection">
       <div href="#" ng-switch-default>
-        <ion-list>
-          <ion-item class="item item-avatar" ng-repeat="review in signedInUser.reviews">
+
+        <div class="list" >
+          <a class="item item-avatar" ng-repeat="review in signedInUser.reviews">
             <img ng-src="{{review.image}}">
             <h2>{{review.title}}</h2>
             <p>{{review.text}}
             </p>
             <rating ng-model="review.rating" max="rating.max" readonly="readOnly"></rating>
 
-          </ion-item>
-        </ion-list>
+          </a>
+        </div>
+
+        <div class="padding message" ng-show="signedInUser.reviews.length == 0 || signedInUser.reviews == null">
+          <p>
+            You haven't received any reviews at this moment.
+          </p>
+        </div>
+
       </div>
       <div href="#" ng-switch-when="portfolio">
 
@@ -67,6 +75,12 @@
           </a>
         </div>
 
+        <div class="padding message" ng-show="signedInUser.portfolio.length == 0 || signedInUser.portfolio == null">
+          <p>
+            You don't have any works in your portfolio.
+          </p>
+        </div>
+
       </div>
       <div href="#" ng-switch-when="skills">
 
@@ -75,6 +89,12 @@
             <h2>{{skill.name}}</h2>
             <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
           </div>
+        </div>
+
+        <div class="padding message" ng-show="signedInUser.skills.length == 0 || signedInUser.skills == null">
+          <p>
+            You haven't included your skills yet.
+          </p>
         </div>
 
       </div>
