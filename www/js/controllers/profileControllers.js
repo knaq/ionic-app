@@ -1,6 +1,6 @@
 angular.module('knaq.profileControllers', [])
 
-    .controller('ProfilePageCtrl', function ($scope, $state, $firebaseAuth, $firebaseArray, $ionicPopup, Auth, Data, SkillsFirebaseConnection) {
+    .controller('ProfilePageCtrl', function ($scope, $state, $ionicPopup, Auth, Data, SkillsFirebaseConnection, ImageGallery, Imgur, Base64) {
         $scope.selection = 'reviews';
 
         $scope.click = function (view) {
@@ -25,7 +25,8 @@ angular.module('knaq.profileControllers', [])
             $scope.profileEditInfo.firstName = $scope.signedInUser.firstname;
             $scope.profileEditInfo.lastName = $scope.signedInUser.lastname;
             $scope.profileEditInfo.email = $scope.signedInUser.email;
-            
+            $scope.profileEditInfo.image = $scope.signedInUser.image;
+
             $scope.skillsArray = SkillsFirebaseConnection.getAll(data.$id)
         });
 
@@ -68,19 +69,32 @@ angular.module('knaq.profileControllers', [])
         };
 
         $scope.profileEditInfo.apply = function () {
-            console.log($scope.profileEditInfo.firstName)
-            console.log($scope.profileEditInfo.lastName)
-            console.log($scope.profileEditInfo.email)
-            $scope.signedInUser.firstname = $scope.profileEditInfo.firstName;
-            $scope.signedInUser.lastname = $scope.profileEditInfo.lastName;
-            $scope.signedInUser.email = $scope.profileEditInfo.email;
-            $scope.signedInUser.$save();
-            $state.go('tab.profile');
+            Base64.getDataUrlFromUrl($scope.profileEditInfo.image, function (base64Code) {
+                ImgurService.uploadPhoto(base64Code).then(function (response) {
+                    var photoUrl = response.data.data.link;
+                    $scope.signedInUser.firstname = $scope.profileEditInfo.firstName;
+                    $scope.signedInUser.lastname = $scope.profileEditInfo.lastName;
+                    $scope.signedInUser.email = $scope.profileEditInfo.email;
+                    $scope.signedInUser.image = photoUrl;
+                    $scope.signedInUser.$save();
+                    $state.go('tab.profile');
+                }, function (error) {
+                    console.error(error)
+                })
+            })
         }
 
         $scope.editProfile = function () {
             $state.go('tab.profile-edit');
         }
+
+        $scope.getPicture = function () {
+            ImageGallery.getPicture().then(function (results) {
+                $scope.profileEditInfo.image = results[0];
+            });
+        }
+
+
 
     })
     .controller('SkillDetailCtrl', function ($scope, $location, $stateParams, SkillsFirebaseConnection, Auth, Data) {
