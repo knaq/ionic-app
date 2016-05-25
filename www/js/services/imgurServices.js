@@ -1,5 +1,5 @@
-angular.module('imgur.services', [])
-    .factory('ImgurService', function ($http) {
+angular.module('knaq.imgurServices', [])
+    .factory('Imgur', function ($http) {
 
         var clientId = 'INSERT CLIENT ID';
 

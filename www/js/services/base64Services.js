@@ -1,4 +1,4 @@
-angular.module('base64.services', [])
+angular.module('knaq.base64Services', [])
 
     .factory('Base64', function () {
         return {

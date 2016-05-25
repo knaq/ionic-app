@@ -1,4 +1,4 @@
-angular.module('imageGallery.services', ['ngCordova'])
+angular.module('knaq.imageGalleryServices', [])
 
     .factory('ImageGallery', function ($cordovaImagePicker) {
         return {
