@@ -145,6 +145,15 @@ angular.module('knaq', [
           }
         }
       })
+      .state('tab.work-review', {
+        url: '/work-review',
+        views: {
+          'tab-my-gigs': {
+            templateUrl: 'templates/tab-work-review.html',
+            controller: 'WorkReview'
+          }
+        }
+      })
       .state('tab.discover-gigs', {
         url: '/discover-gigs',
         views: {
@@ -173,15 +182,7 @@ angular.module('knaq', [
           }
         }
       })
-      .state('tab.work-review', {
-        url: '/work-review',
-        views: {
-          'tab-discover-gigs': {
-            templateUrl: 'templates/work-review.html',
-            controller: 'WorkReview'
-          }
-        }
-      })
+
 
       .state('tab.account', {
         url: '/account',

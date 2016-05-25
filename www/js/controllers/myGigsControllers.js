@@ -287,3 +287,11 @@ angular.module('knaq.myGigsControllers', [])
 
 
 	})
+	.controller('WorkReview', function($ionicHistory, $scope, GigFirebaseConnection, $state, Auth, Data) {
+		$scope.workReview = {};
+
+	})
+
+
+
+	

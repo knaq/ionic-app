@@ -1,0 +1,32 @@
+<ion-view view-title="Review">
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button></ion-nav-back-button>
+</ion-nav-bar>
+
+<ion-content>
+
+
+    <div class="list">
+
+        <div class="item">
+
+        </div>
+        <label class="item item-input item-floating-label" >
+            <span class="input-label">Review:</span>
+            <textarea rows="4"  ng-model="workReviewreset.reviewInput"  placeholder="Write your review..." >
+            
+            </textarea>
+        </label>
+
+    </div>
+    <div class="padding">
+
+        <button class="button button-block button-positive" ng-disabled="!workReviewreset.reviewInput" ng-click="workReview.submitReview()">
+            Submit
+        </button>
+        <button class="button button-block button-stable" ng-model="workReviewreset.cancelButton" ng-click="workReviewreset()">Cancel</button>
+
+    </div>
+
+</ion-content>
+</ion-view>
