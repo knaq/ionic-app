@@ -8,13 +8,16 @@
 angular.module('knaq', [
   'firebase',
   'ionic',
-
+  'ngCordova',
 
   'knaq.dataServices',
   'knaq.authServices',
   'knaq.gigServices',
   'knaq.profileServices',
   'knaq.myGigsServices',
+  'knaq.base64Services',
+  'knaq.imageGalleryServices',
+  'knaq.imgurServices',
 
   'knaq.profileControllers',
   'knaq.authControllers',

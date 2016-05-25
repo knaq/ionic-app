@@ -1,31 +1,25 @@
 angular.module('knaq.profileServices',[])
+    
     .service('SkillsFirebaseConnection', function ($firebaseArray) {
         // this.firebaseReference = new Firebase("https://knaqapp.firebaseio.com/users");
-        this.firebaseReference = new Firebase("https://knaqapp.firebaseio.com/users/221fa728-0d3c-4ef2-a502-e37ccd21928a/skills");
-        this.skills = $firebaseArray(this.firebaseReference);
+        this.firebaseReference = new Firebase("https://knaqapp.firebaseio.com/users/");
 
-        this.getAll = function () {
-            return this.skills;
+        this.getAll = function (userId) {
+            return $firebaseArray(this.firebaseReference.child(userId).child('skills'))
         };
 
-        this.get = function (key) {
-            return this.skills.$getRecord(key);
+        this.get = function (userId, key) {
+            return $firebaseObject(this.firebaseReference.child(userId).child('skills').child(key))
         };
 
-        this.remove = function (record) {
-            return this.skills.$remove(record);
+        this.remove = function (userId, record) {
+            var skills = $firebaseArray(this.firebaseReference.child(userId).child('skills'))
+            return skills.$remove(record);
         };
 
-        this.get = function () {
-            this.skills;
-        };
-
-        this.getSkill = function (key) {
-            return this.skills.$getRecord(key);
-        };
-
-        this.addSkill = function (name) {
-            this.skills.$add({
+        this.add = function (userId, name) {
+            var skills = $firebaseArray(this.firebaseReference.child(userId).child('skills'))
+            skills.$add({
                 name: name
             });
         };

@@ -6,6 +6,12 @@
     <h1 class="title">{{signedInUser.firstname}} {{signedInUser.lastname}}</h1>
   </ion-header-bar> -->
 
+  <ion-nav-buttons side="secondary">
+    <a class="button" ng-click="editProfile()">
+      <h3><i class="ion-gear-b light"></i></h3>
+    </a>
+  </ion-nav-buttons>
+
   <ion-content>
 
     <div class="profile">
@@ -19,9 +25,6 @@
             </div>
           </div>
           <div class="col">
-            <button class="button button-calm" style="float: right;" ng-click="editProfile()">
-              Edit Profile
-            </button>
           </div>
         </div>
         <div class="row">
