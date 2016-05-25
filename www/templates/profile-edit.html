@@ -20,13 +20,11 @@
                 <div class="row">
                     <div class="col"></div>
                     <div class="col col-50">
-                        <h5 class="title">{{profileEditInfo.firstName}} {{profileEditInfo.lastName}}</h5>
-                        <p class="contact">
-                            <span>
-                                <i class="ion-ios-email"></i>
-                                {{profileEditInfo.email}}
-                            </span>
-                        </p>
+                        <h5 class="title">
+                            <button class="button button-positive" ng-click="getPicture()">
+                                Edit Profile Pic
+                            </button>
+                        </h5>
                     </div>
                     <div class="col"></div>
                 </div>
@@ -60,10 +58,11 @@
                 </div>
                 <div class="item item-icon-right" ng-repeat="skill in signedInUser.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
                     <h2>{{skill.name}}</h2>
+                    <i class="ion-close-round" ng-click="removeSkill({{skill}})"></i>
                     <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
                 </div>
             </div>
-            <button class="button button-calm" ng-click="showPopup()">
+            <button class="button button-block button-positive" ng-click="showPopup()">
               Add Skill
             </button>
 

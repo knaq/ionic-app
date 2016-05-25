@@ -1,6 +1,6 @@
 angular.module('knaq.profileServices',[])
     
-    .service('SkillsFirebaseConnection', function ($firebaseArray) {
+    .service('SkillsFirebaseConnection', function ($firebaseArray, $firebaseObject) {
         // this.firebaseReference = new Firebase("https://knaqapp.firebaseio.com/users");
         this.firebaseReference = new Firebase("https://knaqapp.firebaseio.com/users/");
 
@@ -12,9 +12,9 @@ angular.module('knaq.profileServices',[])
             return $firebaseObject(this.firebaseReference.child(userId).child('skills').child(key))
         };
 
-        this.remove = function (userId, record) {
-            var skills = $firebaseArray(this.firebaseReference.child(userId).child('skills'))
-            return skills.$remove(record);
+        this.remove = function (userId, name) {
+            var skill = $firebaseObject(this.firebaseReference.child(userId).child('skills').child(name))
+            return skill.$remove()
         };
 
         this.add = function (userId, name) {

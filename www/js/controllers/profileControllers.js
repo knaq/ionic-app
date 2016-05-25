@@ -39,6 +39,11 @@ angular.module('knaq.profileControllers', [])
             });
         }
         // console.log($scope.signedInUser.$id);
+        
+        $scope.removeSkill = function (skill) {
+            SkillsFirebaseConnection.remove($scope.signedInUser.$id, skill.name);
+            console.log("Removed " + skill.name + " from " + $scope.signedInUser.firstname);
+        }
 
 
         // Triggered on a button click, or some other target
