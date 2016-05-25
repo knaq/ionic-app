@@ -133,6 +133,7 @@ angular.module('knaq', [
       .state('tab.review-applicant', {
         url: '/my-gigs/review-applicant',
         params: {
+          applicantType: null,
           applicantId: null,
           gigId: null
         },

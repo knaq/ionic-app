@@ -167,11 +167,23 @@ angular.module('knaq.myGigsControllers', [])
 		$scope.myGigDetail.reviewApplicant = function(applicant) {
 
 			$state.go('tab.review-applicant', {
+				applicantType: "Applicant",
 				applicantId: applicant,
 				gigId: $scope.myGigDetail.myGigData.$id
 			});
 			//$state.go('tab.review-applicant');
 		}
+		$scope.myGigDetail.reviewHire = function() {
+
+			//trying to review hire
+			$state.go('tab.review-applicant', {
+				applicantType: "Worker",
+				applicantId: $scope.myGigDetail.myGigData.acceptedCandidate,
+				gigId: $scope.myGigDetail.myGigData.$id
+			});
+			//$state.go('tab.review-applicant');
+		}
+
 
 
 	})
@@ -185,6 +197,7 @@ angular.module('knaq.myGigsControllers', [])
 			$scope.reviewApplicant.selection = view;
 		}
 		$scope.reviewApplicant.loadingData = true;
+		$scope.reviewApplicant.applicantType = $state.params.applicantType
 		$scope.reviewApplicant.applicantId = $state.params.applicantId
 		$scope.reviewApplicant.gigId = $state.params.gigId
 		$scope.reviewApplicant.hired = false;
@@ -201,6 +214,7 @@ angular.module('knaq.myGigsControllers', [])
 		});
 
 		$scope.reviewApplicant.hire = function() {
+			console.log("Hiring")
 			console.log($scope.reviewApplicant.gigId)
 			console.log($scope.reviewApplicant.applicantId)
 			GigFirebaseConnection.hireFromApplicants($scope.reviewApplicant.gigId, $scope.reviewApplicant.applicantId).then(function() {
@@ -209,6 +223,22 @@ angular.module('knaq.myGigsControllers', [])
 					console.log("removed all applied candidates")
 					$ionicHistory.goBack();
 				});
+			}, function(error) {
+				console.error(error)
+			})
+		}
+		$scope.reviewApplicant.fire = function() {
+			console.log("Firing")
+			console.log($scope.reviewApplicant.gigId)
+			console.log($scope.reviewApplicant.applicantId)
+			GigFirebaseConnection.removeAcceptedApplicant($scope.reviewApplicant.gigId).then(function() {
+				console.log("successfully removed accepted candidate")
+				GigFirebaseConnection.delete($scope.reviewApplicant.gigId).then(function() {
+					console.log("successful deletion of gig")
+					$state.go('tab.my-gigs')
+				}, function(error) {
+					console.error(error)
+				})
 			}, function(error) {
 				console.error(error)
 			})
