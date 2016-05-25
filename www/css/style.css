@@ -101,3 +101,16 @@ text-align: center;
   font-weight: 300;
   color: #555;
 }
+.jk-rating-stars-container{
+  text-align: center;
+}
+.jk-rating-stars-container a{
+  text-shadow: none;
+  background-color: transparent;
+  display: none;
+}
+.jk-rating-stars-container .star-button{
+  text-shadow: none;
+  background-color: transparent;
+  display: inline-block;
+}
