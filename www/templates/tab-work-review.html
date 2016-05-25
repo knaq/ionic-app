@@ -6,7 +6,7 @@
 <ion-content>
 
 
-    <h3>How would you rate austin?</h3>
+    <h3>You are reviewing <span class="worker-name">{{workReview.worker.firstname}} {{workReview.worker.lastname}}.</span></h3>
 
     <div class="list">
 
@@ -18,7 +18,7 @@
         </div>
         <label class="item item-input item-floating-label" >
             <span class="input-label">Review:</span>
-            <textarea rows="4"  ng-model="workReview.reviewInput"  placeholder="Write your review..." >
+            <textarea rows="6"  ng-model="workReview.reviewInput"  placeholder="Write your review..." >
             
             </textarea>
         </label>

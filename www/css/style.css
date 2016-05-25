@@ -101,6 +101,13 @@ text-align: center;
   font-weight: 300;
   color: #555;
 }
+.work-review h3 .worker-name{
+  display: block;
+  padding: 15px 0px 10px;
+  font-size: 90%;
+  font-weight: 500;
+}
+
 .jk-rating-stars-container{
   text-align: center;
 }

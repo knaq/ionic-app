@@ -171,16 +171,19 @@ angular.module('knaq.myGigsControllers', [])
 							text: 'Okay'
 						}],
 
-						titleText: 'Give the worker a feedback',
+						titleText: 'Give the worker your review',
 						cancelText: 'Cancel',
 						cancel: function() {
-								$state.go('tab.my-gigs')
+							$state.go('tab.my-gigs')
 								// add cancel code..
 						},
 						buttonClicked: function(index) {
 							if (index == 0) {
 
-								$state.go('tab.work-review')
+								$state.go('tab.work-review', {
+									applicantId: $scope.myGigDetail.myGigData.acceptedCandidate,
+									gigId: $scope.myGigDetail.myGigData.$id
+								})
 
 							}
 							return true;
@@ -289,13 +292,37 @@ angular.module('knaq.myGigsControllers', [])
 	})
 	.controller('WorkReview', function($ionicHistory, $scope, GigFirebaseConnection, $state, Auth, Data) {
 		$scope.workReview = {};
+
+		$scope.workReview.applicantId = $state.params.applicantId
+		$scope.workReview.gigId = $state.params.gigId
+
+		$scope.workReview.worker =null 
+
+		Data.getUser($scope.workReview.applicantId).then(function (workerData) {
+			console.log(workerData)
+			$scope.workReview.worker = workerData
+		})
+
+
 		$scope.workReview.rating = 1
 		$scope.workReview.readOnly = false
-		$scope.workReview.onRating = function () {
+
+		console.log($scope.workReview.applicantId)
+		console.log($scope.workReview.gigId)
+
+
+		$scope.workReview.onRating = function() {
 			console.log($scope.workReview.rating)
+		}
+		$scope.workReview.submitReview = function() {
+			Data.postReview(Auth.getUser(), $scope.workReview.applicantId,$scope.workReview.gigId, $scope.workReview.reviewInput, $scope.workReview.rating).then(
+			function  (successData) {
+				console.log(successData)
+				$state.go('tab.my-gigs')
+			},function  (error) {
+				console.error("error")
+				$state.go('tab.my-gigs')
+			})
 		}
 
 	})
-
-
-
