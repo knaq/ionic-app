@@ -130,6 +130,7 @@ angular.module('knaq', [
           }
         }
       })
+      
       .state('tab.review-applicant', {
         url: '/my-gigs/review-applicant',
         params: {

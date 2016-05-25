@@ -67,7 +67,7 @@ angular.module('knaq.myGigsControllers', [])
 		}
 
 	})
-	.controller('MyGigDetailCtrl', function($scope, $q, $ionicBackdrop, GigFirebaseConnection, $state, Auth, Data) {
+	.controller('MyGigDetailCtrl', function($scope, $q, $ionicActionSheet, GigFirebaseConnection, $state, Auth, Data) {
 
 		$scope.myGigDetail = {};
 		$scope.myGigDetail.loadingData = true;
@@ -77,6 +77,9 @@ angular.module('knaq.myGigsControllers', [])
 		$scope.myGigDetail.myParentState = $state.params.myParentState
 		$scope.myGigDetail.myGigData = $state.params.myGigData;
 		$scope.myGigDetail.candidateAccepted = false;
+
+		console.log($scope.myGigDetail.myGigData)
+
 
 		var acceptedCandidateExist = function(acceptedCandidateId) {
 
@@ -154,6 +157,47 @@ angular.module('knaq.myGigsControllers', [])
 			}, function(error) {
 				console.error(error)
 			})
+		}
+		$scope.myGigDetail.completed = function() {
+			console.log("Trying to complete a project")
+
+			GigFirebaseConnection.get(gigID).then(function(gig) {
+
+				console.log(gig)
+				gig.completed = "true"
+				gig.$save().then(function() {
+					var hideSheet = $ionicActionSheet.show({
+						buttons: [{
+							text: 'Okay'
+						}],
+
+						titleText: 'Give the worker a feedback',
+						cancelText: 'Cancel',
+						cancel: function() {
+							$state.go('tab.my-gigs')
+								// add cancel code..
+						},
+						buttonClicked: function(index) {
+							if (index == 0) {
+
+								$state.go('tab.review-applicant', {
+									applicantType: "Give a review",
+									applicantId: $scope.myGigDetail.myGigData.acceptedCandidate,
+									gigId: $scope.myGigDetail.myGigData.$id
+								});
+
+							}
+							return true;
+						}
+					});
+				})
+
+
+			}, function(error) {
+				console.error(error)
+			});
+
+
 		}
 		$scope.myGigDetail.removeAcceptedApplicant = function() {
 			GigFirebaseConnection.removeAcceptedApplicant(gigID).then(function() {
