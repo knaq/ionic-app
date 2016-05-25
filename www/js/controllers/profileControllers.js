@@ -17,16 +17,17 @@ angular.module('knaq.profileControllers', [])
         };
 
         $scope.allUsers = null;
+        $scope.profileEditInfo = {};
 
         Data.getUser(Auth.getUser()).then(function (data) {
             $scope.signedInUser = data;
-            $scope.userSkillFirebaseReference = new Firebase("https://knaqapp.firebaseio.com/users" + "/" + $scope.signedInUser.$id + "/skills");
-            $scope.skillsArray = $firebaseArray($scope.userSkillFirebaseReference);
-        });
 
-        $scope.remove = function (skill) {
-            Skills.remove(skill);
-        };
+            $scope.profileEditInfo.firstName = $scope.signedInUser.firstname;
+            $scope.profileEditInfo.lastName = $scope.signedInUser.lastname;
+            $scope.profileEditInfo.email = $scope.signedInUser.email;
+            
+            $scope.skillsArray = SkillsFirebaseConnection.getAll(data.$id)
+        });
 
         $scope.newSkill = function (newSkillName) {
             // $scope.skillsArray.$add({
@@ -44,7 +45,6 @@ angular.module('knaq.profileControllers', [])
             console.log($scope.userSkillFirebaseReference);
 
             $scope.data = {};
-            console.l
             // An elaborate, custom popup
             var myPopup = $ionicPopup.show({
                 template: '<input type="text" ng-model="data.newSkillName">',
@@ -66,11 +66,17 @@ angular.module('knaq.profileControllers', [])
                 console.log('Tapped!', res);
             });
         };
-        
+
+        $scope.profileEditInfo.apply = function () {
+            Data.getUser(Auth.getUser()).then(function (currentUser) {
+                console.log(currentUser)
+            })
+        }
+
         $scope.editProfile = function () {
             $state.go('tab.profile-edit');
         }
-        
+
     })
     .controller('SkillDetailCtrl', function ($scope, $location, $stateParams, SkillsFirebaseConnection, Auth, Data) {
         Data.getUser(Auth.getUser()).then(function (data) {
@@ -81,6 +87,6 @@ angular.module('knaq.profileControllers', [])
         // $scope.endorsements = SkillsFirebaseConnection.get($scope.skillName);
         // $scope.allEndorsements = SkillsFirebaseConnection.getAll();
     })
-    .controller('PortfolioDetailCtrl', function ($scope, $stateParams, SkillsFirebaseConnection) {
-        $scope.skill = Skills.get($stateParams.skillId);
+    .controller('PortfolioDetailCtrl', function (Auth, $scope, $stateParams, SkillsFirebaseConnection) {
+        $scope.skill = SkillsFirebaseConnection.get(Auth.getUser(), $stateParams.skillId);
     });
