@@ -39,7 +39,7 @@ angular.module('knaq.profileControllers', [])
             });
         }
         // console.log($scope.signedInUser.$id);
-        
+
         $scope.removeSkill = function (skill) {
             SkillsFirebaseConnection.remove($scope.signedInUser.$id, skill.name);
             console.log("Removed " + skill.name + " from " + $scope.signedInUser.firstname);
@@ -77,33 +77,27 @@ angular.module('knaq.profileControllers', [])
             $scope.signedInUser.firstname = $scope.profileEditInfo.firstName;
             $scope.signedInUser.lastname = $scope.profileEditInfo.lastName;
 
-            if ($scope.profileEditInfo.image != $scope.signedInUser.image) {
-                Base64.getDataUrlFromUrl($scope.profileEditInfo.image, function (base64Code) {
-                    Imgur.uploadPhoto(base64Code).then(function (response) {
-                        var photoUrl = response.data.data.link;
-                        $scope.signedInUser.image = photoUrl;
-                        $scope.signedInUser.$save();
-                        $state.go('tab.profile');
-                    }, function (error) {
-                        alert("There was an issue saving changes");
-                    })
-                })
-            } else {
-                $scope.signedInUser.$save();
-                $state.go('tab.profile');
-            }
-
-
+            $scope.signedInUser.$save();
+            $state.go('tab.profile');
         }
 
         $scope.editProfile = function () {
             $state.go('tab.profile-edit');
         }
 
-        $scope.getPicture = function () {
+        $scope.changeProfilePicture = function () {
             ImageGallery.getPicture().then(function (results) {
                 if (results != undefined && results != null && results.length > 0) {
                     $scope.profileEditInfo.image = results[0];
+                    Base64.getDataUrlFromUrl($scope.profileEditInfo.image, function (base64Code) {
+                        Imgur.uploadPhoto(base64Code).then(function (response) {
+                            var photoUrl = response.data.data.link;
+                            $scope.signedInUser.image = photoUrl;
+                            $scope.signedInUser.$save();
+                        }, function (error) {
+                            alert("There was an issue changing your profile photo");
+                        })
+                    })
                 }
             });
         }
