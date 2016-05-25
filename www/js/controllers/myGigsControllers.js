@@ -174,17 +174,13 @@ angular.module('knaq.myGigsControllers', [])
 						titleText: 'Give the worker a feedback',
 						cancelText: 'Cancel',
 						cancel: function() {
-							$state.go('tab.my-gigs')
+								$state.go('tab.my-gigs')
 								// add cancel code..
 						},
 						buttonClicked: function(index) {
 							if (index == 0) {
 
-								$state.go('tab.review-applicant', {
-									applicantType: "Give a review",
-									applicantId: $scope.myGigDetail.myGigData.acceptedCandidate,
-									gigId: $scope.myGigDetail.myGigData.$id
-								});
+								$state.go('tab.work-review')
 
 							}
 							return true;

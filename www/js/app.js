@@ -130,7 +130,7 @@ angular.module('knaq', [
           }
         }
       })
-      
+
       .state('tab.review-applicant', {
         url: '/my-gigs/review-applicant',
         params: {
@@ -170,6 +170,15 @@ angular.module('knaq', [
           'tab-discover-gigs': {
             templateUrl: 'templates/tab-gig-new.html',
             controller: 'NewGigCtrl'
+          }
+        }
+      })
+      .state('tab.work-review', {
+        url: '/work-review',
+        views: {
+          'tab-discover-gigs': {
+            templateUrl: 'templates/work-review.html',
+            controller: 'WorkReview'
           }
         }
       })
