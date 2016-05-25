@@ -5,6 +5,10 @@
     "ionic": "driftyco/ionic-bower#1.2.4"
   },
   "dependencies": {
-    "ionic-rating": "^0.3.0"
+    "ionic-rating": "^0.3.0",
+    "ngCordova": "^0.1.26-alpha",
+    "firebase": "2.2.4",
+    "angularfire": "^1.2.0",
+    "material-design-icons": "^2.2.3"
   }
 }
