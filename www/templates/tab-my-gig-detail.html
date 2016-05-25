@@ -65,6 +65,9 @@
 
     
     <div class="padding">
+      <button class="button button-block button-calm" ng-show="myGigDetail.myParentState=='inprogress'" ng-click="myGigDetail.notifyCompletion()">
+        Notify Completion
+      </button>
       <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='inprogress'" ng-click="myGigDetail.drop()">
         Drop
       </button>

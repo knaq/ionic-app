@@ -67,7 +67,7 @@ angular.module('knaq.myGigsControllers', [])
 		}
 
 	})
-	.controller('MyGigDetailCtrl', function($scope, $q, GigFirebaseConnection, $state, Auth, Data) {
+	.controller('MyGigDetailCtrl', function($scope, $q, $ionicBackdrop, GigFirebaseConnection, $state, Auth, Data) {
 
 		$scope.myGigDetail = {};
 		$scope.myGigDetail.loadingData = true;
@@ -126,6 +126,11 @@ angular.module('knaq.myGigsControllers', [])
 
 
 		//Button Activities
+		$scope.myGigDetail.notifyCompletion = function() {
+			console.log("Trying to notify employer about the completion of the gig");
+			$ionicBackdrop.release()
+
+		}
 		$scope.myGigDetail.drop = function() {
 			console.log("Trying to drop gig in progress")
 			GigFirebaseConnection.removeAcceptedApplicant(gigID).then(function() {
