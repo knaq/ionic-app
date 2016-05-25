@@ -1,7 +1,7 @@
 angular.module('knaq.imgurServices', [])
     .factory('Imgur', function ($http) {
 
-        var clientId = 'INSERT CLIENT ID';
+        var clientId = 'INSERT_CLIENT_ID_HERE';
 
         return {
             uploadPhoto: function (imageData) {

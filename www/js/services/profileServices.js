@@ -1,7 +1,4 @@
 angular.module('knaq.profileServices',[])
-    .service('ProfileFirebaseConnect', function($firebaseArray) {
-        this.firebaseReference = new Firebase("https://knaqapp.firebaseio.com/users/");
-    }) 
     
     .service('SkillsFirebaseConnection', function ($firebaseArray) {
         // this.firebaseReference = new Firebase("https://knaqapp.firebaseio.com/users");

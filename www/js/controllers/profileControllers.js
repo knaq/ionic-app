@@ -25,7 +25,7 @@ angular.module('knaq.profileControllers', [])
             $scope.profileEditInfo.firstName = $scope.signedInUser.firstname;
             $scope.profileEditInfo.lastName = $scope.signedInUser.lastname;
             $scope.profileEditInfo.email = $scope.signedInUser.email;
-            $scope.profileEditInfo.image = $scope.signedInUser.image;
+            $scope.profileEditInfo.image =  $scope.signedInUser.image;
 
             $scope.skillsArray = SkillsFirebaseConnection.getAll(data.$id)
         });
@@ -70,7 +70,7 @@ angular.module('knaq.profileControllers', [])
 
         $scope.profileEditInfo.apply = function () {
             Base64.getDataUrlFromUrl($scope.profileEditInfo.image, function (base64Code) {
-                ImgurService.uploadPhoto(base64Code).then(function (response) {
+                Imgur.uploadPhoto(base64Code).then(function (response) {
                     var photoUrl = response.data.data.link;
                     $scope.signedInUser.firstname = $scope.profileEditInfo.firstName;
                     $scope.signedInUser.lastname = $scope.profileEditInfo.lastName;
@@ -79,7 +79,7 @@ angular.module('knaq.profileControllers', [])
                     $scope.signedInUser.$save();
                     $state.go('tab.profile');
                 }, function (error) {
-                    console.error(error)
+                    alert("There was an issue saving changes");
                 })
             })
         }
