@@ -25,7 +25,7 @@ angular.module('knaq.profileControllers', [])
             $scope.profileEditInfo.firstName = $scope.signedInUser.firstname;
             $scope.profileEditInfo.lastName = $scope.signedInUser.lastname;
             $scope.profileEditInfo.email = $scope.signedInUser.email;
-            $scope.profileEditInfo.image =  $scope.signedInUser.image;
+            $scope.profileEditInfo.image = $scope.signedInUser.image;
 
             $scope.skillsArray = SkillsFirebaseConnection.getAll(data.$id)
         });
@@ -69,19 +69,26 @@ angular.module('knaq.profileControllers', [])
         };
 
         $scope.profileEditInfo.apply = function () {
-            Base64.getDataUrlFromUrl($scope.profileEditInfo.image, function (base64Code) {
-                Imgur.uploadPhoto(base64Code).then(function (response) {
-                    var photoUrl = response.data.data.link;
-                    $scope.signedInUser.firstname = $scope.profileEditInfo.firstName;
-                    $scope.signedInUser.lastname = $scope.profileEditInfo.lastName;
-                    $scope.signedInUser.email = $scope.profileEditInfo.email;
-                    $scope.signedInUser.image = photoUrl;
-                    $scope.signedInUser.$save();
-                    $state.go('tab.profile');
-                }, function (error) {
-                    alert("There was an issue saving changes");
+            $scope.signedInUser.firstname = $scope.profileEditInfo.firstName;
+            $scope.signedInUser.lastname = $scope.profileEditInfo.lastName;
+
+            if ($scope.profileEditInfo.image != $scope.signedInUser.image) {
+                Base64.getDataUrlFromUrl($scope.profileEditInfo.image, function (base64Code) {
+                    Imgur.uploadPhoto(base64Code).then(function (response) {
+                        var photoUrl = response.data.data.link;
+                        $scope.signedInUser.image = photoUrl;
+                        $scope.signedInUser.$save();
+                        $state.go('tab.profile');
+                    }, function (error) {
+                        alert("There was an issue saving changes");
+                    })
                 })
-            })
+            } else {
+                $scope.signedInUser.$save();
+                $state.go('tab.profile');
+            }
+
+
         }
 
         $scope.editProfile = function () {
@@ -90,7 +97,9 @@ angular.module('knaq.profileControllers', [])
 
         $scope.getPicture = function () {
             ImageGallery.getPicture().then(function (results) {
-                $scope.profileEditInfo.image = results[0];
+                if (results != undefined && results != null && results.length > 0) {
+                    $scope.profileEditInfo.image = results[0];
+                }
             });
         }
 
