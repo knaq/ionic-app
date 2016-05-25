@@ -68,9 +68,14 @@ angular.module('knaq.profileControllers', [])
         };
 
         $scope.profileEditInfo.apply = function () {
-            Data.getUser(Auth.getUser()).then(function (currentUser) {
-                console.log(currentUser)
-            })
+            console.log($scope.profileEditInfo.firstName)
+            console.log($scope.profileEditInfo.lastName)
+            console.log($scope.profileEditInfo.email)
+            $scope.signedInUser.firstname = $scope.profileEditInfo.firstName;
+            $scope.signedInUser.lastname = $scope.profileEditInfo.lastName;
+            $scope.signedInUser.email = $scope.profileEditInfo.email;
+            $scope.signedInUser.$save();
+            $state.go('tab.profile');
         }
 
         $scope.editProfile = function () {
