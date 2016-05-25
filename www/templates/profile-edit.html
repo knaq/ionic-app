@@ -58,7 +58,7 @@
                 </div>
                 <div class="item item-icon-right" ng-repeat="skill in signedInUser.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
                     <h2>{{skill.name}}</h2>
-                    <button class="button ng-click="removeSkill({{skill}})"><i class="ion-close-round""></i></button>
+                    <button class="button" ng-click="removeSkill({{skill}})"><i class="ion-close-round"></i></button>
                     <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
                 </div>
             </div>
