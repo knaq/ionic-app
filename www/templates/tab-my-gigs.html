@@ -25,10 +25,13 @@
 			<div ng-switch-default>
 
 				<div class="list" ng-show="myGigs.gigsInProgress.length > 0">
-					<a class="item item-avatar" ng-repeat="gigInProgress in myGigs.gigsInProgress | orderBy:'-when'" ng-click="myGigs.viewDetail('inprogress',gigInProgress)" ng-show="gigInProgress.completed=='false'">
+					<a class="item item-avatar" ng-repeat="gigInProgress in myGigs.gigsInProgress | orderBy:'-when'" ng-click="myGigs.viewDetail('inprogress',gigInProgress)">
 						<img ng-src="img/dollar2.png" alt="">
+
 						<h2>{{gigInProgress.title}}</h2>
-						<p>{{gigInProgress.description}}</p>
+						<p>{{gigInProgress.location}}</p>
+						
+						<span class="badge badge-balanced" ng-show="gigInProgress.completed=='false'">Completed</span>
 					</a>
 				</div>
 
@@ -46,7 +49,7 @@
 					<a class="item item-avatar" ng-repeat="myAppliedGig in myGigs.myAppliedGigs | orderBy:'-when'" ng-click="myGigs.viewDetail('applied',myAppliedGig)">
 						<img ng-src="img/dollar2.png" alt="">
 						<h2>{{myAppliedGig.title}}</h2>
-						<p>{{myAppliedGig.description}}</p>
+						<p>{{myAppliedGig.location}}</p>
 					</a>
 				</div>
 
@@ -64,7 +67,7 @@
 					<a class="item item-avatar" ng-repeat="myPost in myGigs.myPosts | orderBy:'-when'" ng-click="myGigs.viewDetail('myposts',myPost)">
 						<img ng-src="img/dollar2.png" alt="">
 						<h2>{{myPost.title}}</h2>
-						<p>{{myPost.description}}</p>
+						<p>{{myPost.location}}</p>
 					</a>
 				</div>
 				<div class="padding message" ng-show="myGigs.myPosts.length == 0 || myGigs.myPosts == null">

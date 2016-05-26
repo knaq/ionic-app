@@ -41,6 +41,12 @@
     font-weight: 300;
 }
 
+.badge.badge-balanced {
+    top: 27px;
+    right: 40px;
+    font-weight: 300;
+}
+
 .button-bar > .button:first-child {
     border-radius: 0;
 }
@@ -120,4 +126,25 @@ text-align: center;
   text-shadow: none;
   background-color: transparent;
   display: inline-block;
+}
+.portfolio-works a.item{
+  height: 150px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+
+}
+.portfolio-works a.item h2{
+  color: #fff;
+  background-color: #000;
+  display: inline-block;
+  padding: 4px 8px;
+}
+.portfolio-works a.item p{
+  color: #fff;
+  background-color: #000;
+  display: inline-block;
+  padding: 4px 8px;
+
 }

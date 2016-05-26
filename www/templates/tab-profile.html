@@ -55,7 +55,7 @@
         <div class="list">
           <a class="item item-avatar" ng-repeat="review in signedInUser.reviews">
             <img ng-src="{{review.image}}">
-            <h2>{{review.title}}</h2>
+            <h2>{{review.title}}</h2><br/>
             <p>{{review.text}}
             </p>
             <jk-rating-stars max-rating="5" rating="review.rating" read-only="true">
@@ -70,20 +70,24 @@
         </div>
 
       </div>
-      <div href="#" ng-switch-when="portfolio">
+      <div href="#" ng-switch-when="portfolio" class="portfolio-works">
 
         <div class="list">
-          <a class="item" href="#" ng-repeat="portfolioItem in signedInUser.portfolio">
-            <h2>{{portfolioItem.title}}</h2>
-            <p>{{portfolioItem.text}}</p>
+          <a class="item" href="#" style="background-image:url('https://d13yacurqjgara.cloudfront.net/users/464226/screenshots/2739781/redis_migrate_dribbble.png')">
+            <h2>Video Game UI</h2><br/>
+            <p>HTML5 game ui/ux</p>
+          </a>
+          <a class="item" href="#" style="background-image:url('https://d13yacurqjgara.cloudfront.net/users/107759/screenshots/859316/mobile-portfolio.png')">
+            <h2>MAQ Mobile App</h2><br/>
+            <p>User Testing</p>
+          </a>
+          <a class="item" href="#" style="background-image:url('https://d13yacurqjgara.cloudfront.net/users/37585/screenshots/2739253/helm_shot329.jpg')">
+            <h2>Seattle City Web UI</h2><br/>
+            <p>Graphic UI/UX works</p>
           </a>
         </div>
 
-        <div class="padding message" ng-show="signedInUser.portfolio.length == 0 || signedInUser.portfolio == null">
-          <p>
-            You don't have any works in your portfolio.
-          </p>
-        </div>
+
 
       </div>
       <div href="#" ng-switch-when="skills">
