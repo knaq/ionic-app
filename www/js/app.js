@@ -8,6 +8,7 @@
 angular.module('knaq', [
   'firebase',
   'ionic',
+  'jkAngularRatingStars',
   'ngCordova',
 
   'knaq.dataServices',
@@ -142,9 +143,11 @@ angular.module('knaq', [
           }
         }
       })
+
       .state('tab.review-applicant', {
         url: '/my-gigs/review-applicant',
         params: {
+          applicantType: null,
           applicantId: null,
           gigId: null
         },
@@ -152,6 +155,19 @@ angular.module('knaq', [
           'tab-my-gigs': {
             templateUrl: 'templates/tab-review-applicant.html',
             controller: 'ReviewApplicant'
+          }
+        }
+      })
+      .state('tab.work-review', {
+        url: '/work-review',
+        params: {
+          applicantId: null,
+          gigId: null
+        },
+        views: {
+          'tab-my-gigs': {
+            templateUrl: 'templates/tab-work-review.html',
+            controller: 'WorkReview'
           }
         }
       })
@@ -183,6 +199,7 @@ angular.module('knaq', [
           }
         }
       })
+
 
       .state('tab.account', {
         url: '/account',
