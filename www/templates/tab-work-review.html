@@ -1,37 +1,36 @@
 <ion-view view-title="Review" class="work-review">
-  <ion-nav-bar class="bar-positive">
-    <ion-nav-back-button></ion-nav-back-button>
-</ion-nav-bar>
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar>
 
-<ion-content>
+    <ion-content>
 
 
-    <h3>You are reviewing <span class="worker-name">{{workReview.worker.firstname}} {{workReview.worker.lastname}}.</span></h3>
+        <h3>You are reviewing <span class="worker-name">{{workReview.worker.firstname}} {{workReview.worker.lastname}}.</span></h3>
 
-    <div class="list">
+        <div class="list">
 
-        <div class="item">
+            <div class="item">
+                <jk-rating-stars max-rating="5" rating="workReview.rating" read-only="workReview.readOnly" on-rating="workReview.onRating()">
+                </jk-rating-stars>
+            </div>
 
-        <jk-rating-stars max-rating="5" rating="workReview.rating" read-only="workReview.readOnly" on-rating="workReview.onRating()" >
-</jk-rating-stars>
+            <label class="item item-input">
+                <input type="text" ng-model="workReview.title" placeholder="Title" />
+            </label>
+
+            <label class="item item-input item-floating-label">
+                <textarea rows="6"  ng-model="workReview.text"  placeholder="Description" /></textarea>
+            </label>
+        </div>
+        <div class="padding">
+
+            <button class="button button-block button-positive" ng-disabled="!workReview.text" ng-click="workReview.submitReview()">
+            Submit
+            </button>
+            <button class="button button-block button-stable" ng-model="workReview.cancelButton" ng-click="reset()">Cancel</button>
 
         </div>
-        <label class="item item-input item-floating-label" >
-            <span class="input-label">Review:</span>
-            <textarea rows="6"  ng-model="workReview.reviewInput"  placeholder="Write your review..." >
-            
-            </textarea>
-        </label>
 
-    </div>
-    <div class="padding">
-
-        <button class="button button-block button-positive" ng-disabled="!workReview.reviewInput" ng-click="workReview.submitReview()">
-            Submit
-        </button>
-        <button class="button button-block button-stable" ng-model="workReview.cancelButton" ng-click="reset()">Cancel</button>
-
-    </div>
-
-</ion-content>
+    </ion-content>
 </ion-view>

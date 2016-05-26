@@ -7,3 +7,5 @@ plugins/
 www/lib/
 www/js/users.json
 www/secret/
+
+.idea
