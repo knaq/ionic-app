@@ -17,7 +17,7 @@
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="gig in gigs.allGigList | orderBy:'-when'" type="item-text-wrap" href="#/tab/discover-gigs/{{gig.$id}}" ng-show="gig.acceptedCandidate==null">
 
-        <img src="../img/dollar2.png" alt="">
+        <img ng-src="img/dollar2.png" alt="">
         <h2>{{gig.title}}</h2>
         <p>{{gig.firstname}} {{gig.lastname}}</p>
         <span class="badge badge-positive" ng-show="gig.mypost">My post</span>

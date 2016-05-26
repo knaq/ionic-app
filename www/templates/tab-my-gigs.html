@@ -26,7 +26,7 @@
 
 				<div class="list" ng-show="myGigs.gigsInProgress.length > 0">
 					<a class="item item-avatar" ng-repeat="gigInProgress in myGigs.gigsInProgress | orderBy:'-when'" ng-click="myGigs.viewDetail('inprogress',gigInProgress)" ng-show="gigInProgress.completed=='false'">
-						<img src="../img/dollar2.png" alt="">
+						<img ng-src="img/dollar2.png" alt="">
 						<h2>{{gigInProgress.title}}</h2>
 						<p>{{gigInProgress.description}}</p>
 					</a>
@@ -44,7 +44,7 @@
 				
 				<div class="list" ng-show="myGigs.myAppliedGigs.length > 0">
 					<a class="item item-avatar" ng-repeat="myAppliedGig in myGigs.myAppliedGigs | orderBy:'-when'" ng-click="myGigs.viewDetail('applied',myAppliedGig)">
-						<img src="../img/dollar2.png" alt="">
+						<img ng-src="img/dollar2.png" alt="">
 						<h2>{{myAppliedGig.title}}</h2>
 						<p>{{myAppliedGig.description}}</p>
 					</a>
@@ -62,7 +62,7 @@
 
 				<div class="list" ng-show="myGigs.myPosts.length > 0">
 					<a class="item item-avatar" ng-repeat="myPost in myGigs.myPosts | orderBy:'-when'" ng-click="myGigs.viewDetail('myposts',myPost)">
-						<img src="../img/dollar2.png" alt="">
+						<img ng-src="img/dollar2.png" alt="">
 						<h2>{{myPost.title}}</h2>
 						<p>{{myPost.description}}</p>
 					</a>
