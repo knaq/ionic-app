@@ -127,6 +127,11 @@ text-align: center;
   background-color: transparent;
   display: inline-block;
 }
+.myProfile  .jk-rating-stars-container{
+  padding: 20px 0px 0px;
+  margin-left: -15px;
+  text-align: left;
+}
 .portfolio-works a.item{
   height: 150px;
   background-repeat: no-repeat;
