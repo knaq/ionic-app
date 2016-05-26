@@ -324,7 +324,11 @@ angular.module('knaq.myGigsControllers', [])
 		}
 
 		$scope.workReview.submitReview = function() {
-			Data.postReview(Auth.getUser(), $scope.workReview.applicantId, $scope.workReview.gigId, $scope.workReview.reviewInput, $scope.workReview.rating).then(
+			console.log($scope.workReview.applicantId)
+			console.log($scope.workReview.gigId)
+			console.log($scope.workReview.reviewInput)
+			console.log($scope.workReview.rating)
+			Data.postReview(Auth.getUser(), $scope.workReview.applicantId, $scope.workReview.gigId, $scope.workReview.title, $scope.workReview.text, $scope.workReview.rating).then(
 				function(successData) {
 					console.log(successData)
 					$state.go('tab.my-gigs')
