@@ -51,7 +51,7 @@
             Worker:
           </div>
           <a class="item item-avatar" ng-click="myGigDetail.reviewHire()">
-            <img src="../img/adam.jpg">
+            <img ng-src={{myGigDetail.hire.image}}>
             <h2>{{myGigDetail.hire.firstname}} {{myGigDetail.hire.lastname}}</h2>
             <p>{{myGigDetail.hire.email}}</p>
           </a>
