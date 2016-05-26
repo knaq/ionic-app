@@ -1,40 +1,40 @@
 angular.module('knaq.myGigsControllers', [])
-	.controller('MyGigsCtrl', function($scope, $state, Data, Auth, MyGigsServices, GigFirebaseConnection) {
+	.controller('MyGigsCtrl', function ($scope, $state, Data, Auth, MyGigsServices, GigFirebaseConnection) {
 		$scope.myGigs = {};
 		$scope.myGigs.tabSelection = 'tab-inprogress';
 		$scope.myGigs.loadingData = true;
 
-		var defaultTabAction = function(arguments) {
-			MyGigsServices.getInProgress().then(function(gigsInProgress) {
+		var defaultTabAction = function (arguments) {
+			MyGigsServices.getInProgress().then(function (gigsInProgress) {
 
 				$scope.myGigs.gigsInProgress = gigsInProgress
 				$scope.myGigs.loadingData = false;
-			}, function(error) {
+			}, function (error) {
 				console.error(error)
 				$scope.myGigs.loadingData = false;
 			})
 		}
-		var myPostsTabAction = function(arguments) {
-			MyGigsServices.getPosts().then(function(myPosts) {
+		var myPostsTabAction = function (arguments) {
+			MyGigsServices.getPosts().then(function (myPosts) {
 				$scope.myGigs.loadingData = false;
 				$scope.myGigs.myPosts = myPosts
-			}, function(error) {
+			}, function (error) {
 				$scope.myGigs.loadingData = false;
 				console.error(error)
 			})
 		}
-		var appliedTabAction = function(arguments) {
-			MyGigsServices.getApplied().then(function(myAppliedGigs) {
+		var appliedTabAction = function (arguments) {
+			MyGigsServices.getApplied().then(function (myAppliedGigs) {
 				$scope.myGigs.loadingData = false;
 				$scope.myGigs.myAppliedGigs = myAppliedGigs
-			}, function(error) {
+			}, function (error) {
 				$scope.myGigs.loadingData = false;
 				console.error(error)
 			})
 		}
 		defaultTabAction();
 
-		$scope.myGigs.tabClick = function(selection) {
+		$scope.myGigs.tabClick = function (selection) {
 			console.log("tab change")
 
 			$scope.myGigs.tabSelection = selection;
@@ -42,24 +42,24 @@ angular.module('knaq.myGigsControllers', [])
 			switch ($scope.myGigs.tabSelection) {
 				case "tab-myposts":
 					myPostsTabAction()
-					GigFirebaseConnection.getAll().then(function(result) {
+					GigFirebaseConnection.getAll().then(function (result) {
 						result.$watch(myPostsTabAction)
 					});
 					break;
 				case "tab-applied":
 					appliedTabAction()
-					GigFirebaseConnection.getAll().then(function(result) {
+					GigFirebaseConnection.getAll().then(function (result) {
 						result.$watch(appliedTabAction)
 					})
 					break;
 				default:
 					defaultTabAction();
-					GigFirebaseConnection.getAll().then(function(result) {
+					GigFirebaseConnection.getAll().then(function (result) {
 						result.$watch(defaultTabAction)
 					})
 			}
 		}
-		$scope.myGigs.viewDetail = function(parentState, gigData) {
+		$scope.myGigs.viewDetail = function (parentState, gigData) {
 			$state.go('tab.my-gig-detail', {
 				myParentState: parentState,
 				myGigData: gigData
@@ -67,7 +67,7 @@ angular.module('knaq.myGigsControllers', [])
 		}
 
 	})
-	.controller('MyGigDetailCtrl', function($scope, $q, $ionicActionSheet, GigFirebaseConnection, $state, Auth, Data) {
+	.controller('MyGigDetailCtrl', function ($scope, $q, $ionicActionSheet, GigFirebaseConnection, $state, Auth, Data) {
 
 		$scope.myGigDetail = {};
 		$scope.myGigDetail.loadingData = true;
@@ -81,30 +81,30 @@ angular.module('knaq.myGigsControllers', [])
 		console.log($scope.myGigDetail.myGigData)
 
 
-		var acceptedCandidateExist = function(acceptedCandidateId) {
+		var acceptedCandidateExist = function (acceptedCandidateId) {
 
 			console.log(acceptedCandidateId)
 
 			$scope.myGigDetail.candidateAccepted = true;
 
-			Data.getUser(acceptedCandidateId).then(function(hire) {
+			Data.getUser(acceptedCandidateId).then(function (hire) {
 
 				$scope.myGigDetail.hire = hire
 				console.log($scope.myGigDetail.hire)
 
-			}, function(error) {
+			}, function (error) {
 				console.log(error)
 			});
 
 		}
 
-		GigFirebaseConnection.get(gigID).then(function(gig) {
+		GigFirebaseConnection.get(gigID).then(function (gig) {
 			if (gig.acceptedCandidate != null) {
 
 				acceptedCandidateExist(gig.acceptedCandidate);
 
 			}
-			gig.$watch(function() {
+			gig.$watch(function () {
 				if (gig.acceptedCandidate != null) {
 					acceptedCandidateExist(gig.acceptedCandidate);
 				}
@@ -112,60 +112,60 @@ angular.module('knaq.myGigsControllers', [])
 		});
 
 
-		angular.forEach($scope.myGigDetail.myGigData.applicants, function(value, userId) {
+		angular.forEach($scope.myGigDetail.myGigData.applicants, function (value, userId) {
 
 			applicants.push(Data.getUser(userId))
 
 		})
 
-		$q.all(applicants).then(function(allApplicants) {
+		$q.all(applicants).then(function (allApplicants) {
 			console.log("received all applicants")
 			console.log(allApplicants)
 			$scope.myGigDetail.allApplicants = allApplicants;
 			$scope.myGigDetail.loadingData = false;
-		}, function(error) {
+		}, function (error) {
 			console.error(error)
 		})
 
 
 		//Button Activities
-		$scope.myGigDetail.notifyCompletion = function() {
+		$scope.myGigDetail.notifyCompletion = function () {
 			console.log("Trying to notify employer about the completion of the gig");
 			$ionicBackdrop.release()
 
 		}
-		$scope.myGigDetail.drop = function() {
+		$scope.myGigDetail.drop = function () {
 			console.log("Trying to drop gig in progress")
-			GigFirebaseConnection.removeAcceptedApplicant(gigID).then(function() {
+			GigFirebaseConnection.removeAcceptedApplicant(gigID).then(function () {
 				console.log("successful drop of gig")
 
 				$state.go('tab.my-gigs')
-			}, function(error) {
+			}, function (error) {
 				console.error(error)
 			})
 		}
-		$scope.myGigDetail.unapply = function() {
+		$scope.myGigDetail.unapply = function () {
 			console.log("Trying to unapply")
 			GigFirebaseConnection.removeApplicant(gigID, userId);
 			$state.go('tab.my-gigs')
 		}
-		$scope.myGigDetail.delete = function() {
+		$scope.myGigDetail.delete = function () {
 			console.log("Trying to delete a post")
-			GigFirebaseConnection.delete(gigID).then(function() {
+			GigFirebaseConnection.delete(gigID).then(function () {
 				console.log("successful deletion of gig")
 				$state.go('tab.my-gigs')
-			}, function(error) {
+			}, function (error) {
 				console.error(error)
 			})
 		}
-		$scope.myGigDetail.completed = function() {
+		$scope.myGigDetail.completed = function () {
 			console.log("Trying to complete a project")
 
-			GigFirebaseConnection.get(gigID).then(function(gig) {
+			GigFirebaseConnection.get(gigID).then(function (gig) {
 
 				console.log(gig)
 				gig.completed = "true"
-				gig.$save().then(function() {
+				gig.$save().then(function () {
 					var hideSheet = $ionicActionSheet.show({
 						buttons: [{
 							text: 'Okay'
@@ -173,11 +173,11 @@ angular.module('knaq.myGigsControllers', [])
 
 						titleText: 'Give the worker your review',
 						cancelText: 'Cancel',
-						cancel: function() {
+						cancel: function () {
 							$state.go('tab.my-gigs')
-								// add cancel code..
+							// add cancel code..
 						},
-						buttonClicked: function(index) {
+						buttonClicked: function (index) {
 							if (index == 0) {
 
 								$state.go('tab.work-review', {
@@ -192,22 +192,22 @@ angular.module('knaq.myGigsControllers', [])
 				})
 
 
-			}, function(error) {
+			}, function (error) {
 				console.error(error)
 			});
 
 
 		}
-		$scope.myGigDetail.removeAcceptedApplicant = function() {
-			GigFirebaseConnection.removeAcceptedApplicant(gigID).then(function() {
+		$scope.myGigDetail.removeAcceptedApplicant = function () {
+			GigFirebaseConnection.removeAcceptedApplicant(gigID).then(function () {
 				console.log("successfully removed accepted candidate")
 				$scope.myGigDetail.delete()
 				$state.go('tab.my-gigs')
-			}, function(error) {
+			}, function (error) {
 				console.error(error)
 			})
 		}
-		$scope.myGigDetail.reviewApplicant = function(applicant) {
+		$scope.myGigDetail.reviewApplicant = function (applicant) {
 
 			$state.go('tab.review-applicant', {
 				applicantType: "Applicant",
@@ -216,7 +216,7 @@ angular.module('knaq.myGigsControllers', [])
 			});
 			//$state.go('tab.review-applicant');
 		}
-		$scope.myGigDetail.reviewHire = function() {
+		$scope.myGigDetail.reviewHire = function () {
 
 			//trying to review hire
 			$state.go('tab.review-applicant', {
@@ -230,13 +230,13 @@ angular.module('knaq.myGigsControllers', [])
 
 
 	})
-	.controller('ReviewApplicant', function($ionicHistory, $scope, GigFirebaseConnection, $state, Auth, Data) {
+	.controller('ReviewApplicant', function ($ionicHistory, $scope, GigFirebaseConnection, $state, Auth, Data) {
 
 
 		$scope.reviewApplicant = {};
 		$scope.reviewApplicant.selection = 'reviews';
 
-		$scope.reviewApplicant.click = function(view) {
+		$scope.reviewApplicant.click = function (view) {
 			$scope.reviewApplicant.selection = view;
 		}
 		$scope.reviewApplicant.loadingData = true;
@@ -245,44 +245,44 @@ angular.module('knaq.myGigsControllers', [])
 		$scope.reviewApplicant.gigId = $state.params.gigId
 		$scope.reviewApplicant.hired = false;
 
-		Data.getUser($scope.reviewApplicant.applicantId).then(function(applicant) {
+		Data.getUser($scope.reviewApplicant.applicantId).then(function (applicant) {
 
 			$scope.reviewApplicant.applicantData = applicant
 			console.log($scope.reviewApplicant.applicantData)
 			$scope.reviewApplicant.loadingData = false
 
 
-		}, function(error) {
+		}, function (error) {
 			console.log(error)
 		});
 
-		$scope.reviewApplicant.hire = function() {
+		$scope.reviewApplicant.hire = function () {
 			console.log("Hiring")
 			console.log($scope.reviewApplicant.gigId)
 			console.log($scope.reviewApplicant.applicantId)
-			GigFirebaseConnection.hireFromApplicants($scope.reviewApplicant.gigId, $scope.reviewApplicant.applicantId).then(function() {
+			GigFirebaseConnection.hireFromApplicants($scope.reviewApplicant.gigId, $scope.reviewApplicant.applicantId).then(function () {
 				console.log("successful hiring")
-				GigFirebaseConnection.removeAllApplicants($scope.reviewApplicant.gigId).then(function() {
+				GigFirebaseConnection.removeAllApplicants($scope.reviewApplicant.gigId).then(function () {
 					console.log("removed all applied candidates")
 					$ionicHistory.goBack();
 				});
-			}, function(error) {
+			}, function (error) {
 				console.error(error)
 			})
 		}
-		$scope.reviewApplicant.fire = function() {
+		$scope.reviewApplicant.fire = function () {
 			console.log("Firing")
 			console.log($scope.reviewApplicant.gigId)
 			console.log($scope.reviewApplicant.applicantId)
-			GigFirebaseConnection.removeAcceptedApplicant($scope.reviewApplicant.gigId).then(function() {
+			GigFirebaseConnection.removeAcceptedApplicant($scope.reviewApplicant.gigId).then(function () {
 				console.log("successfully removed accepted candidate")
-				GigFirebaseConnection.delete($scope.reviewApplicant.gigId).then(function() {
+				GigFirebaseConnection.delete($scope.reviewApplicant.gigId).then(function () {
 					console.log("successful deletion of gig")
 					$state.go('tab.my-gigs')
-				}, function(error) {
+				}, function (error) {
 					console.error(error)
 				})
-			}, function(error) {
+			}, function (error) {
 				console.error(error)
 			})
 		}
@@ -290,13 +290,13 @@ angular.module('knaq.myGigsControllers', [])
 
 
 	})
-	.controller('WorkReview', function($ionicHistory, $scope, GigFirebaseConnection, $state, Auth, Data) {
+	.controller('WorkReview', function ($ionicHistory, $scope, GigFirebaseConnection, $state, Auth, Data) {
 		$scope.workReview = {};
 
 		$scope.workReview.applicantId = $state.params.applicantId
 		$scope.workReview.gigId = $state.params.gigId
 
-		$scope.workReview.worker =null 
+		$scope.workReview.worker = null
 
 		Data.getUser($scope.workReview.applicantId).then(function (workerData) {
 			console.log(workerData)
@@ -311,18 +311,18 @@ angular.module('knaq.myGigsControllers', [])
 		console.log($scope.workReview.gigId)
 
 
-		$scope.workReview.onRating = function() {
+		$scope.workReview.onRating = function () {
 			console.log($scope.workReview.rating)
 		}
-		$scope.workReview.submitReview = function() {
-			Data.postReview(Auth.getUser(), $scope.workReview.applicantId,$scope.workReview.gigId, $scope.workReview.reviewInput, $scope.workReview.rating).then(
-			function  (successData) {
-				console.log(successData)
-				$state.go('tab.my-gigs')
-			},function  (error) {
-				console.error("error")
-				$state.go('tab.my-gigs')
-			})
+		$scope.workReview.submitReview = function () {
+			Data.postReview(Auth.getUser(), $scope.workReview.applicantId, $scope.workReview.gigId, $scope.workReview.title, $scope.workReview.text, $scope.workReview.rating).then(
+				function (successData) {
+					console.log(successData)
+					$state.go('tab.my-gigs')
+				}, function (error) {
+					console.error("error")
+					$state.go('tab.my-gigs')
+				})
 		}
 
 	})
