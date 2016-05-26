@@ -9,9 +9,18 @@
     <ion-nav-back-button></ion-nav-back-button>
   </ion-nav-bar>
   <ion-content class="padding">
-    <img ng-src="{{gigDetail.gig.photo}}" style="width: 64px; height: 64px">
+    <img ng-src="{{gigDetail.gig.userData.image}}" style="width: 64px; height: 64px">
+    <h4>
+      {{gigDetail.gig.title}}
+    </h4>
+    <h5>
+      Poster: {{gigDetail.gig.userData.firstname}} {{gigDetail.gig.userData.lastname}}
+    </h5>
     <p>
-      {{gigDetail.gig.description}}
+      Location: {{gigDetail.gig.location}}
+    </p>
+    <p>
+      Description: {{gigDetail.gig.description}}
     </p>
     <div ng-hide="gigDetail.isMyOwnPost">
       <button class="button button-block button-positive" ng-hide="gigDetail.applied" ng-click="gigDetail.apply()">

@@ -49,7 +49,7 @@ angular.module('knaq.discoverGigsControllers',[])
 })
 
 
-.controller('GigDetailCtrl', function($scope, GigFirebaseConnection, $stateParams, $state, Auth) {
+.controller('GigDetailCtrl', function($scope, GigFirebaseConnection, $stateParams, $state, Auth, Data) {
 
   
   var userId = Auth.getUser();
@@ -58,6 +58,9 @@ angular.module('knaq.discoverGigsControllers',[])
 
   $scope.gigDetail = {}
   $scope.gigDetail.isMyOwnPost = false;
+  $scope.gigDetail.owner = null;
+
+
 
   var isAppliedPromise = GigFirebaseConnection.isApplied(paramGigId, userId)
 
@@ -81,6 +84,13 @@ angular.module('knaq.discoverGigsControllers',[])
     if($scope.gigDetail.gig.userId==Auth.getUser()){
       $scope.gigDetail.isMyOwnPost = true;
     }
+    
+    Data.getUser($scope.gigDetail.gig.userId).then(function (data) {
+      console.log(data)
+      $scope.gigDetail.gig.userData = data
+    }); 
+
+
     console.log("Gig detail:")
     console.log($scope.gigDetail.gig);
   })
