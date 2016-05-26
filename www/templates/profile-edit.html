@@ -1,0 +1,71 @@
+<ion-view view-title="Edit Profile">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content class="">
+
+        <div class="profile">
+            <div class="profile-wrapper">
+
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col col-50 profile-img">
+                        <div class="profile-img-wrapper" style="background-image:url({{profileEditInfo.image}})" ng-click="changeProfilePicture()">
+
+                        </div>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col col-50">
+                        <h5 class="title">
+                            <button class="button button-positive" ng-click="changeProfilePicture()">
+                                Edit Profile Pic
+                            </button>
+                        </h5>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="padding">
+            
+            <h4 class="padding">Profile Info</h4>
+            
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">First Name</span>
+                    <input type="text" ng-model="profileEditInfo.firstName">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Last Name</span>
+                    <input type="text" ng-model="profileEditInfo.lastName">
+                </label>
+            </div>
+            
+            <button class="button button-block button-positive" ng-click="profileEditInfo.apply()">Apply Changes</button>
+            
+        </div>
+        <div class="padding">
+            
+            <h4 class="padding"> Skills </h4>
+            <div class="list">
+                <div ng-show="signedInUser.skills === null || signedInUser.skills === undefined || signedInUser.skills.length">
+                    You currently have no skills added
+                </div>
+                <div class="item item-icon-right" ng-repeat="skill in signedInUser.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
+                    <h2>{{skill.name}}</h2>
+                    <button class="button" ng-click="removeSkill({{skill}})"><i class="ion-close-round"></i></button>
+                    <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
+                </div>
+            </div>
+            <button class="button button-block button-positive" ng-click="showPopup()">
+              Add Skill
+            </button>
+
+        </div>
+    </ion-content>
+</ion-view>
