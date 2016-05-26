@@ -5,7 +5,7 @@
 	<div class="tabs-striped tabs-top tabs-background-positive tabs-color-light">
 		<div class="tabs">
 			<a class="tab-item active"  ng-click="myGigs.tabClick('tab-inprogress')" ng-class="{'active': myGigs.tabSelection =='tab-inprogress'}">
-				In Progress
+				My Work
 			</a>
 			<a class="tab-item" ng-click="myGigs.tabClick('tab-applied')" ng-class="{'active': myGigs.tabSelection =='tab-applied'}">
 				Applied
@@ -32,12 +32,13 @@
 						<p>{{gigInProgress.location}}</p>
 						
 						<span class="badge badge-balanced" ng-show="gigInProgress.completed=='false'">Completed</span>
+						<span class="badge badge-royal" ng-show="gigInProgress.completed!='false'">In progress</span>
 					</a>
 				</div>
 
 				<div class="padding message" ng-show="myGigs.gigsInProgress.length == 0 || myGigs.gigsInProgress == null">
 					<p>
-						You don't have any gigs in progress at this moment.
+						You don't have any gigs works at this moment.
 					</p>
 				</div>
 

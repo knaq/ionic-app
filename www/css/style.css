@@ -46,7 +46,11 @@
     right: 40px;
     font-weight: 300;
 }
-
+.badge.badge-royal {
+    top: 27px;
+    right: 40px;
+    font-weight: 300;
+}
 .button-bar > .button:first-child {
     border-radius: 0;
 }
