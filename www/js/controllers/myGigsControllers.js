@@ -6,7 +6,7 @@ angular.module('knaq.myGigsControllers', [])
 
 		var defaultTabAction = function (arguments) {
 			MyGigsServices.getInProgress().then(function (gigsInProgress) {
-
+				console.log(gigsInProgress)
 				$scope.myGigs.gigsInProgress = gigsInProgress
 				$scope.myGigs.loadingData = false;
 			}, function (error) {
