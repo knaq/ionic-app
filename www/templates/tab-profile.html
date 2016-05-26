@@ -58,8 +58,8 @@
             <h2>{{review.title}}</h2><br/>
             <p>{{review.text}}
             </p>
-            <rating ng-model="review.rating" max="rating.max" readonly="readOnly"></rating>
-
+            <jk-rating-stars max-rating="5" rating="review.rating" read-only="true">
+            </jk-rating-stars>
           </a>
         </div>
 
