@@ -259,6 +259,6 @@ angular.module('knaq', [
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/signin');
     
-    // android bottom bar
+    // Forces tab bar to display at the bottom of the app for all platforms. Achieves a consistent look.
     $ionicConfigProvider.tabs.position('bottom');
   });
