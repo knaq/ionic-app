@@ -29,7 +29,8 @@ angular.module('knaq.gigServices', [])
           description: description,
           userId: userId,
           when: Firebase.ServerValue.TIMESTAMP,
-          posted: "true"
+          posted: "true",
+          completed: "false"
         });
       },
       addApplicant: function(gigId, userId) {

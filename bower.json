@@ -8,6 +8,7 @@
     "ionic-rating": "^0.3.0",
     "ngCordova": "^0.1.26-alpha",
     "firebase": "2.2.4",
-    "angularfire": "^1.2.0"
+    "angularfire": "^1.2.0",
+    "angular-jk-rating-stars": "^1.0.3"
   }
 }
