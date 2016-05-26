@@ -134,7 +134,8 @@ angular.module('knaq', [
         url: '/my-gigs/my-gig-detail',
         params: {
           myParentState: null,
-          myGigData: null
+          myGigData: null,
+          gigPosterData: null
         },
         views: {
           'tab-my-gigs': {

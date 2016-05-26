@@ -66,9 +66,11 @@ angular.module('knaq.myGigsControllers', [])
 			});
 		}
 
+
+
 	})
 	.controller('MyGigDetailCtrl', function($scope, $q, $ionicActionSheet, GigFirebaseConnection, $state, Auth, Data) {
-
+		'use strict';
 		$scope.myGigDetail = {};
 		$scope.myGigDetail.loadingData = true;
 		var applicants = []
@@ -76,10 +78,12 @@ angular.module('knaq.myGigsControllers', [])
 		var gigID = $state.params.myGigData.$id;
 		$scope.myGigDetail.myParentState = $state.params.myParentState
 		$scope.myGigDetail.myGigData = $state.params.myGigData;
+
+
+
 		$scope.myGigDetail.candidateAccepted = false;
 
-		console.log($scope.myGigDetail.myGigData)
-
+		//getting data of the gig poster
 
 		var acceptedCandidateExist = function(acceptedCandidateId) {
 
@@ -90,7 +94,7 @@ angular.module('knaq.myGigsControllers', [])
 			Data.getUser(acceptedCandidateId).then(function(hire) {
 
 				$scope.myGigDetail.hire = hire
-				console.log($scope.myGigDetail.hire)
+					//console.log($scope.myGigDetail.hire)
 
 			}, function(error) {
 				console.log(error)
@@ -123,6 +127,8 @@ angular.module('knaq.myGigsControllers', [])
 			console.log(allApplicants)
 			$scope.myGigDetail.allApplicants = allApplicants;
 			$scope.myGigDetail.loadingData = false;
+
+
 		}, function(error) {
 			console.error(error)
 		})
@@ -296,9 +302,9 @@ angular.module('knaq.myGigsControllers', [])
 		$scope.workReview.applicantId = $state.params.applicantId
 		$scope.workReview.gigId = $state.params.gigId
 
-		$scope.workReview.worker =null 
+		$scope.workReview.worker = null
 
-		Data.getUser($scope.workReview.applicantId).then(function (workerData) {
+		Data.getUser($scope.workReview.applicantId).then(function(workerData) {
 			console.log(workerData)
 			$scope.workReview.worker = workerData
 		})
@@ -315,14 +321,15 @@ angular.module('knaq.myGigsControllers', [])
 			console.log($scope.workReview.rating)
 		}
 		$scope.workReview.submitReview = function() {
-			Data.postReview(Auth.getUser(), $scope.workReview.applicantId,$scope.workReview.gigId, $scope.workReview.reviewInput, $scope.workReview.rating).then(
-			function  (successData) {
-				console.log(successData)
-				$state.go('tab.my-gigs')
-			},function  (error) {
-				console.error("error")
-				$state.go('tab.my-gigs')
-			})
+			Data.postReview(Auth.getUser(), $scope.workReview.applicantId, $scope.workReview.gigId, $scope.workReview.reviewInput, $scope.workReview.rating).then(
+				function(successData) {
+					console.log(successData)
+					$state.go('tab.my-gigs')
+				},
+				function(error) {
+					console.error("error")
+					$state.go('tab.my-gigs')
+				})
 		}
 
 	})

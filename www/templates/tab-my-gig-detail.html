@@ -13,10 +13,16 @@
 
 
     <div class="padding gig-detail-information">
-      <img ng-src="{{myGigDetail.myGigData.photo}}" style="width: 64px; height: 64px">
-      <p>Completed: {{myGigDetail.myGigData.completed}}</p>
+      
+      <h4>
+        {{myGigDetail.myGigData.title}}
+      </h4>
+      
       <p>
-        {{myGigDetail.myGigData.description}}
+        Location: {{myGigDetail.myGigData.location}}
+      </p>
+      <p>
+        Description: {{myGigDetail.myGigData.description}}
       </p>
     </div>
 
