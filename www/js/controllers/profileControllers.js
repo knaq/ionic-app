@@ -21,6 +21,15 @@ angular.module('knaq.profileControllers', [])
 
         Data.getUser(Auth.getUser()).then(function (data) {
             $scope.signedInUser = data;
+            
+           for (var reviewId in $scope.signedInUser.reviews) {
+                var reviewerData = $scope.signedInUser.reviews[reviewId]
+                Data.getUser(reviewerData.reviewer).then(function (userData) {
+                    if (userData.image != null || userData.image != undefined) {
+                        $scope.signedInUser.reviews[reviewId].image = userData.image   
+                    }
+                })
+            }
 
             $scope.profileEditInfo.firstName = $scope.signedInUser.firstname;
             $scope.profileEditInfo.lastName = $scope.signedInUser.lastname;
