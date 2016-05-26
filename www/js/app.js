@@ -44,7 +44,7 @@ angular.module('knaq', [
     });
   })
 
-  .config(function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider, $ionicConfigProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -258,5 +258,7 @@ angular.module('knaq', [
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/signin');
-
+    
+    // android bottom bar
+    $ionicConfigProvider.tabs.position('bottom');
   });
