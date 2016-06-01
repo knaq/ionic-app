@@ -1,0 +1,115 @@
+<ion-view view-title="{{reviewApplicant.applicantType}}">
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-content>
+
+    <div class="profile">
+      <div class="profile-wrapper">
+
+        <div class="row">
+          <div class="col"></div>
+          <div class="col col-50 profile-img">
+            <div class="profile-img-wrapper" style="background-image:url({{reviewApplicant.applicantData.image}})">
+
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col col-50">
+            <h5 class="title">{{reviewApplicant.applicantData.firstname}} {{reviewApplicant.applicantData.lastname}}</h5>
+            <p class="contact">
+              <span>
+                <i class="ion-ios-email"></i>
+                {{reviewApplicant.applicantData.email}}
+              </span>
+
+            </p>
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="padding data-loader" ng-show="reviewApplicant.loadingData==true">
+      <ion-spinner icon="ripple"></ion-spinner>
+    </div>
+    
+    <div class="under-profile-button" ng-show="reviewApplicant.applicantType=='Applicant'">
+      <button class="button button-block button-positive" ng-click="reviewApplicant.hire()">
+        Hire
+      </button>
+    </div>
+    <div class="under-profile-button" ng-show="reviewApplicant.applicantType=='Worker'">
+      <button class="button button-block button-positive" ng-click="reviewApplicant.fire()">
+        Fire
+      </button>
+    </div>
+
+    <div class="button-bar">
+      <a class="button" ng-click="reviewApplicant.click('reviews')" ng-class="{'button-positive':reviewApplicant.selection=='reviews'}" value="reviews">Reviews</a>
+      <a class="button" ng-click="reviewApplicant.click('portfolio')" ng-class="{'button-positive':reviewApplicant.selection=='portfolio'}" value="portfolio">Portfolio</a>
+      <a class="button" ng-click="reviewApplicant.click('skills')" ng-class="{'button-positive':reviewApplicant.selection=='skills'}" value="skills">Skills</a>
+    </div>
+
+
+    <div ng-switch on="reviewApplicant.selection">
+      <div href="#" ng-switch-default>
+
+        <div class="list" >
+          <a class="item item-avatar" ng-repeat="review in reviewApplicant.applicantData.reviews">
+            <img ng-src="{{review.image}}">
+            <h2>{{review.title}}</h2>
+            <p>{{review.text}}
+            </p>
+            <rating ng-model="review.rating" max="rating.max" readonly="readOnly"></rating>
+
+          </a>
+        </div>
+
+        <div class="padding message" ng-show="reviewApplicant.applicantData.reviews.length == 0 || reviewApplicant.applicantData.reviews == null">
+          <p>
+            {{reviewApplicant.applicantData.firstname}} {{reviewApplicant.applicantData.lastname}} hasn't received any reviews at&nbsp;this&nbsp;moment.
+          </p>
+        </div>
+
+      </div>
+      <div href="#" ng-switch-when="portfolio">
+
+        <div class="list" >
+          <a class="item" href="#" ng-repeat="portfolioItem in reviewApplicant.applicantData.portfolio">
+            <h2>{{portfolioItem.title}}</h2>
+            <p>{{portfolioItem.text}}</p>
+          </a>
+        </div>
+
+        <div class="padding message" ng-show="reviewApplicant.applicantData.portfolio.length == 0 || reviewApplicant.applicantData.portfolio == null">
+          <p>
+            {{reviewApplicant.applicantData.firstname}} {{reviewApplicant.applicantData.lastname}} doesn't have any works at&nbsp;this&nbsp;moment.
+          </p>
+        </div>
+
+      </div>
+      <div href="#" ng-switch-when="skills">
+
+        <div class="list">
+          <div class="item item-icon-right" ng-repeat="skill in reviewApplicant.applicantData.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
+            <h2>{{skill.name}}</h2>
+            <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
+          </div>
+        </div>
+
+        <div class="padding message" ng-show="reviewApplicant.applicantData.skills.length == 0 || reviewApplicant.applicantData.skills == null">
+          <p>
+            {{reviewApplicant.applicantData.firstname}} {{reviewApplicant.applicantData.lastname}} hasn't included any skills  at&nbsp;this&nbsp;moment.
+          </p>
+        </div>
+
+      </div>
+    </div>
+    
+  </ion-content>
+</ion-view>

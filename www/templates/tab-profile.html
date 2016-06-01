@@ -1,0 +1,112 @@
+<ion-view view-title="My Profile" class="myProfile">
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar>
+  <!--   <ion-header-bar class="bar bar-subheader">
+    <h1 class="title">{{signedInUser.firstname}} {{signedInUser.lastname}}</h1>
+  </ion-header-bar> -->
+
+  <ion-nav-buttons side="secondary">
+    <a class="button light" ng-click="editProfile()">Edit</a>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+    <div class="profile">
+      <div class="profile-wrapper">
+
+        <div class="row">
+          <div class="col"></div>
+          <div class="col col-50 profile-img">
+            <div class="profile-img-wrapper" style="background-image:url({{signedInUser.image}})">
+
+            </div>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col col-50">
+            <h5 class="title">{{signedInUser.firstname}} {{signedInUser.lastname}}</h5>
+            <p class="contact">
+              <span>
+                <i class="ion-ios-email"></i>
+                {{signedInUser.email}}
+              </span>
+
+            </p>
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-bar">
+      <a class="button" ng-click="click('reviews')" ng-class="{'button-positive':selection=='reviews'}" value="reviews">Reviews</a>
+      <a class="button" ng-click="click('portfolio')" ng-class="{'button-positive':selection=='portfolio'}" value="portfolio">Portfolio</a>
+      <a class="button" ng-click="click('skills')" ng-class="{'button-positive':selection=='skills'}" value="skills">Skills</a>
+    </div>
+
+
+    <div ng-switch on="selection">
+      <div href="#" ng-switch-default>
+
+        <div class="list">
+          <a class="item item-avatar" ng-repeat="review in signedInUser.reviews">
+            <img ng-src="{{review.image}}">
+            <h2>{{review.title}}</h2><br/>
+            <p>{{review.text}}
+            </p>
+            <jk-rating-stars max-rating="5" rating="review.rating" read-only="true">
+            </jk-rating-stars>
+          </a>
+        </div>
+
+        <div class="padding message" ng-show="signedInUser.reviews.length == 0 || signedInUser.reviews == null">
+          <p>
+            You haven't received any reviews at this moment.
+          </p>
+        </div>
+
+      </div>
+      <div href="#" ng-switch-when="portfolio" class="portfolio-works">
+
+        <div class="list">
+          <a class="item" href="#" style="background-image:url('https://d13yacurqjgara.cloudfront.net/users/464226/screenshots/2739781/redis_migrate_dribbble.png')">
+            <h2>Video Game UI</h2><br/>
+            <p>HTML5 game ui/ux</p>
+          </a>
+          <a class="item" href="#" style="background-image:url('https://d13yacurqjgara.cloudfront.net/users/107759/screenshots/859316/mobile-portfolio.png')">
+            <h2>MAQ Mobile App</h2><br/>
+            <p>User Testing</p>
+          </a>
+          <a class="item" href="#" style="background-image:url('https://d13yacurqjgara.cloudfront.net/users/37585/screenshots/2739253/helm_shot329.jpg')">
+            <h2>Seattle City Web UI</h2><br/>
+            <p>Graphic UI/UX works</p>
+          </a>
+        </div>
+
+
+
+      </div>
+      <div href="#" ng-switch-when="skills">
+
+        <div class="list">
+          <div class="item item-icon-right" ng-repeat="skill in signedInUser.skills" type="item-text-wrap" ng-href="#/tab/profile/skill/{{skill.name}}">
+            <h2>{{skill.name}}</h2>
+            <span class="badge badge-assertive">{{skill.endorsements.length}}</span>
+          </div>
+        </div>
+
+        <div class="padding message" ng-show="signedInUser.skills.length == 0 || signedInUser.skills == null">
+          <p>
+            You haven't included your skills in your profile.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

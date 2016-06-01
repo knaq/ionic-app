@@ -1,0 +1,90 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{myGigDetail.myGigData.title}}">
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+
+
+
+    <div class="padding gig-detail-information">
+      
+      <h4>
+        {{myGigDetail.myGigData.title}}
+      </h4>
+      
+      <p>
+        Location: {{myGigDetail.myGigData.location}}
+      </p>
+      <p>
+        Description: {{myGigDetail.myGigData.description}}
+      </p>
+    </div>
+
+    <div ng-show="myGigDetail.myParentState=='myposts'">
+
+      <div class="padding data-loader" ng-show="myGigDetail.loadingData==true">
+        <ion-spinner icon="ripple"></ion-spinner>
+      </div>
+
+      <div class="padding message" ng-show="myGigDetail.candidateAccepted==false && (myGigDetail.allApplicants.length == 0) || (myGigDetail.allApplicants == null)">
+        <p>
+          There is no applicant for this position at this moment.
+        </p>
+      </div>
+      
+      <div class="list">
+        <div ng-hide="myGigDetail.candidateAccepted">
+          <div class="item item-divider" ng-show="myGigDetail.allApplicants.length>0">
+            Applicants
+          </div> 
+          <a class="item item-avatar" ng-repeat="applicant in myGigDetail.allApplicants" ng-click="myGigDetail.reviewApplicant(applicant.$id)">
+            <img ng-src={{applicant.image}}>
+            <h2>{{applicant.firstname}} {{applicant.lastname}}</h2>
+            <p>{{applicant.email}}</p>
+          </a>
+        </div>
+      </div>
+
+      <div ng-show="myGigDetail.candidateAccepted==true">
+        <div class="list">
+          <div class="item item-divider">
+            Worker:
+          </div>
+          <a class="item item-avatar" ng-click="myGigDetail.reviewHire()">
+            <img ng-src={{myGigDetail.hire.image}}>
+            <h2>{{myGigDetail.hire.firstname}} {{myGigDetail.hire.lastname}}</h2>
+            <p>{{myGigDetail.hire.email}}</p>
+          </a>
+
+
+        </div>
+        
+      </div>
+
+    </div>
+
+
+    
+    <div class="padding">
+      <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='inprogress'" ng-click="myGigDetail.drop()">
+        Drop
+      </button>
+      <button class="button button-block button-assertive" ng-show="myGigDetail.myParentState=='applied'" ng-click="myGigDetail.unapply()">
+        Withdraw Application
+      </button>
+      <button class="button button-block button-calm" ng-show="myGigDetail.myGigData.completed == 'false' && myGigDetail.candidateAccepted && myGigDetail.myParentState=='myposts'" ng-click="myGigDetail.completed()">
+        Work Completed
+      </button>
+      <button class="button button-block button-assertive" ng-show="myGigDetail.myGigData.completed == 'false' && myGigDetail.myParentState=='myposts'" ng-click="myGigDetail.delete()">
+        Delete Post
+      </button>
+    </div>
+    
+  </ion-content>
+</ion-view>

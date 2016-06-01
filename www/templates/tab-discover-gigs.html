@@ -1,0 +1,36 @@
+<ion-view view-title="Gigs" class="discoverGigsTab">
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-nav-buttons side="secondary">
+    <a class="button" href="#/tab/new-gig">
+      <h3><i class="ion-plus-round light"></i></h3>
+    </a>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+    <div class="padding data-loader" ng-show="gigs.loadingData==true">
+      <ion-spinner icon="ripple"></ion-spinner>
+    </div>
+    
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="gig in gigs.allGigList | orderBy:'-when'" type="item-text-wrap" href="#/tab/discover-gigs/{{gig.$id}}" ng-show="gig.acceptedCandidate==null">
+
+        <img ng-src="img/dollar2.png" alt="">
+        <h2>{{gig.title}}</h2>
+        <p>{{gig.firstname}} {{gig.lastname}}</p>
+        <span class="badge badge-positive" ng-show="gig.mypost">My post</span>
+        <span class="badge badge-balanced" ng-show="gig.applied">Applied</span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+        
+      </ion-item>
+
+    </ion-list>
+    <div class="padding message" ng-show="gigs.allGigList.length == 0 || gigs.allGigList == null">
+      <p>
+        There is no gigs at this moment.
+      </p>
+    </div>
+  </ion-content>
+</ion-view>

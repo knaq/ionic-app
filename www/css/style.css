@@ -1,1 +1,159 @@
-/* Empty. Add your own CSS if you like */
+.under-profile-button .button.button-block, .button.button-full{
+  margin: 0;
+  border-radius: 0;
+  background-color: #3A83FF;
+
+}
+.list .item:first-child {
+    border-top: none;
+}
+
+.list .item:first-child.item-divider {
+    border-top: solid 1px #ddd;
+}
+
+.message {
+    padding: 20px 0px;
+    color: #999;
+    text-align: center;
+}
+
+.data-loader {
+    padding: 50px;
+    text-align: center;
+}
+
+.myGigsTab .item-avatar > img {
+    border-radius: 0;
+    margin-top: 2px;
+    transform: scale(0.75);
+}
+
+.discoverGigsTab .item-avatar .item-content > img {
+    border-radius: 0;
+    margin-top: 1px;
+    transform: scale(0.75);
+}
+
+.discoverGigsTab .item-avatar .item-content > span.badge {
+    top: 27px;
+    right: 40px;
+    font-weight: 300;
+}
+
+.badge.badge-balanced {
+    top: 27px;
+    right: 40px;
+    font-weight: 300;
+}
+.badge.badge-royal {
+    top: 27px;
+    right: 40px;
+    font-weight: 300;
+}
+.button-bar > .button:first-child {
+    border-radius: 0;
+}
+
+.button-bar > .button:last-child {
+    border-radius: 0;
+}
+
+.profile {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background-image: url('../img/profile_bg3.jpg');
+    background-size: cover;
+
+}
+.profile .profile-wrapper{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0px -100px 100px 0px rgba(0,0,0,0.5);
+}
+
+
+.profile .profile-wrapper .profile-img{
+  margin-top: 15px;
+  text-align: center;
+}
+.profile .profile-wrapper .profile-img-wrapper{
+  width: 110px;
+  height: 110px;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  border: 5px solid rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+  background-image:url('../img/profile-image-ph.jpg');
+  background-color: #333;
+}
+
+.profile .profile-wrapper .title{
+  color: #fff;
+text-align: center;
+}
+.profile .profile-wrapper .contact{
+    margin-top: -5px;
+    text-align: center;
+    color: #fff;
+    font-size: 90%;
+
+}
+.work-review h3{
+  text-align: center;
+  margin-top: 50px;
+  font-weight: 300;
+  color: #555;
+}
+.work-review h3 .worker-name{
+  display: block;
+  padding: 15px 0px 10px;
+  font-size: 90%;
+  font-weight: 500;
+}
+
+.jk-rating-stars-container{
+  text-align: center;
+}
+.jk-rating-stars-container a{
+  text-shadow: none;
+  background-color: transparent;
+  display: none;
+}
+.jk-rating-stars-container .star-button{
+  text-shadow: none;
+  background-color: transparent;
+  display: inline-block;
+}
+.myProfile  .jk-rating-stars-container{
+  padding: 20px 0px 0px;
+  margin-left: -15px;
+  text-align: left;
+}
+.portfolio-works a.item{
+  height: 150px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+
+}
+.portfolio-works a.item h2{
+  color: #fff;
+  background-color: #000;
+  display: inline-block;
+  padding: 4px 8px;
+}
+.portfolio-works a.item p{
+  color: #fff;
+  background-color: #000;
+  display: inline-block;
+  padding: 4px 8px;
+
+}

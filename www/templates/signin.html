@@ -1,0 +1,36 @@
+<ion-view view-title="Sign In">
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button></ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-content>
+
+
+    <div class="list">
+
+      <label class="item item-input item-floating-label" >
+        <span class="input-label">Email</span>
+        <input type="text" placeholder="Email" ng-model="signin.email">
+      </label>
+      <label class="item item-input item-floating-label" >
+        <span class="input-label">Password</span>
+        <input type="password" placeholder="Password" ng-model="signin.password">
+      </label>
+
+    </div>
+
+    <div class="padding">
+     <button class="button button-block button-positive" ng-model="signin.submitButton" ng-disabled="!signin.email || !signin.password" ng-click="signIn()">
+      Sign In
+    </button>
+    <button class="button button-block button-stable" ng-model="signin.cancelButton" ng-click="reset()">Reset</button>
+  </div>
+
+
+
+
+</ion-content>
+<div class="bar bar-footer bar-dark" ng-model="signin.goToSignUp" ng-click="signup()">
+  <div class="title">Sign Up</div>
+</div>
+</ion-view>

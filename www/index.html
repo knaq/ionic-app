@@ -1,41 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>KNAQ</title>
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+  <access origin="https://fonts.googleapis.com/icon?family=Material%20Icons" />
+  <access origin="https://knaqapp.firebaseio.com" />
+
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="lib/angular-jk-rating-stars/dist/jk-rating-stars.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/icon?family=Material%20Icons" rel="stylesheet">
+
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+  <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
 
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/services.js"></script>
-  </head>
-  <body ng-app="starter">
-    <!--
+  <!-- Firebase -->
+  <!--<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>-->
+  <script src="lib/firebase/firebase.js"></script>
+
+  <!-- AngularFire -->
+  <!--<script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>-->
+  <script src="lib/angularfire/dist/angularfire.min.js"></script>
+
+  <!--additional components-->
+  <script src="lib/ionic-rating/ionic-rating.min.js"></script>
+
+  <script src="lib/angular-jk-rating-stars/dist/jk-rating-stars.min.js"></script>
+
+  <!-- your app's js -->
+  <script src="js/app.js"></script>
+
+  <!--Config file-->
+  <script src="secret/config.js"></script>
+  
+  <script src="js/services/authServices.js"></script>
+  <script src="js/services/base64Services.js"></script>
+  <script src="js/services/dataServices.js"></script>
+  <script src="js/services/imageGalleryServices.js"></script>
+  <script src="js/services/imgurServices.js"></script>
+  <script src="js/services/profileServices.js"></script>
+  <script src="js/services/discoverGigServices.js"></script>
+  <script src="js/services/myGigsServices.js"></script>
+  
+  <script src="js/controllers/authControllers.js"></script>
+  <script src="js/controllers/profileControllers.js"></script>
+  <script src="js/controllers/accountControllers.js"></script>
+  <script src="js/controllers/discoverGigControllers.js"></script>
+  <script src="js/controllers/myGigsControllers.js"></script>
+  
+</head>
+
+<body ng-app="knaq">
+  <!--
       The nav bar that will be updated as we navigate between views.
     -->
-    <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
-    </ion-nav-bar>
-    <!--
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <!--
       The views will be rendered in the <ion-nav-view> directive below
       Templates are in the /templates folder (but you could also
       have templates inline in this html file if you'd like).
     -->
-    <ion-nav-view></ion-nav-view>
-  </body>
+  <ion-nav-view></ion-nav-view>
+</body>
+
 </html>
